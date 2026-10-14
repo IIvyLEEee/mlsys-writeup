@@ -1,0 +1,116 @@
+{
+  "source_head": "11d9ddb6da0087ba9404850033646a43cf8045c2",
+  "source_status": " M coexecution/README.md\n M coexecution/groot_fusion.py\n?? tests/gpu/test_groot_fusion_modes_gpu.py\n",
+  "checkpoint": "/home/ther-nullptr/data-tf/zjm24/models/GR00T-N1.7-LIBERO/libero_spatial",
+  "checkpoint_config_sha256": "ce763f74ad1cda2ca9e67491229cbc5810d83cae675cb4dad839a69a9731fd97",
+  "torch": "2.8.0",
+  "cuda": "12.6",
+  "device": "Orin",
+  "capability": [
+    8,
+    7
+  ],
+  "power_mode": "NV Power Mode: MODE_15W\n1",
+  "hardware_start": {
+    "cur_freq": "306000000",
+    "min_freq": "306000000",
+    "max_freq": "408000000",
+    "governor": "nvhost_podgov",
+    "mem_free_total": [
+      37006475264,
+      65893466112
+    ]
+  },
+  "attention": "flash_attention_2",
+  "reference_parameters": {
+    "torch.bfloat16": 1030
+  },
+  "protocol": "Fixed real Spatial observations; complete serial VLM1 + Flow4 request, incl. preprocessing/state normalization/action decoding. No socket RPC, controller or closed loop.",
+  "timing": "reset/seed, loading, compilation, installation, packing, warmup and output checks excluded. Whole request wall and CUDA-event elapsed reported separately. Output snapshots, Graph counters and lifecycle checks are outside timing.",
+  "auxiliary": {
+    "fusion": true,
+    "graph": false,
+    "vision_channels_last": false,
+    "norm_modulation_quant": false,
+    "group_conditioning": false
+  },
+  "quantization": "All 476 candidates are W8A8 or W4A4 according to the cumulative explicit precision map; noncandidates stay BF16.",
+  "profile_process": false,
+  "task_ids": [
+    0,
+    3,
+    7
+  ],
+  "rounds_per_pass": 2,
+  "passes": 2,
+  "default_tactic": 0,
+  "limits": "No AGX preset or quality acceptance assumed. Full integer Linear uses existing native CUDA dispatch.",
+  "experiment_modes": [
+    {
+      "id": "progressive",
+      "balance_alpha": 0.5,
+      "prepare_route": "register",
+      "config": {
+        "precision": "w4a4",
+        "dit_graph": true,
+        "shape_tactics": "/home/ther-nullptr/data-tf/zjm24/profiles/int4-round2-20261013/gemm-tuning/shape-tactics.json"
+      },
+      "vlm_execution": "vision_graph",
+      "vision_rope": "installed",
+      "goal_gate": "/home/ther-nullptr/data-tf/zjm24/profiles/int4-vision-graph-20261013/ab/summary.json",
+      "goal_state": "w4_vision_graph",
+      "allow_unmet_target": true,
+      "sweep_authorization": "User explicitly requested: \u5148\u7528\u8fd9\u4e00\u7248\u626b\u63cf\u4e00\u904d\u5427; use measured whole-vision Graph with default256 packing, even though reverse paired median is below2.3."
+    }
+  ],
+  "progressive_execution": "vision_graph",
+  "persistent_packing": true,
+  "warmup_requests_per_input_per_tier": 3,
+  "retained_check_schedule": "warmups and configuration boundaries; no large retained-KV probes between stable samples",
+  "pre_sweep_goal_check": {
+    "samples": 18,
+    "wall_median_ms": 428.8433,
+    "gpu_elapsed_median_ms": 428.5513000488281,
+    "p25_ms": 407.633239,
+    "p75_ms": 449.8874555,
+    "wall_samples_ms": [
+      411.294886,
+      392.908988,
+      389.887432,
+      470.433346,
+      395.734788,
+      384.594836,
+      458.866323,
+      406.41269,
+      423.29106,
+      432.591099,
+      428.85025,
+      452.635075,
+      414.691281,
+      490.420358,
+      441.644597,
+      428.83635,
+      438.888143,
+      473.296562
+    ],
+    "by_task": {
+      "0": 420.07256800000005,
+      "3": 428.167939,
+      "7": 433.86224649999997
+    },
+    "by_pass": {
+      "0": 406.41269,
+      "1": 438.888143
+    },
+    "max_action_relative_l2": 0.7437403665111175,
+    "speedup_original": 2.295281583039772,
+    "paired_speedup_median": 2.3418114764001623,
+    "paired_speedup_by_pass": {
+      "0": 2.4735887055752097,
+      "1": 2.293536151611759
+    },
+    "target_2_3_met": false
+  },
+  "allow_unmet_target": true,
+  "sweep_authorization": "User explicitly requested: \u5148\u7528\u8fd9\u4e00\u7248\u626b\u63cf\u4e00\u904d\u5427; use measured whole-vision Graph with default256 packing, even though reverse paired median is below2.3."
+}

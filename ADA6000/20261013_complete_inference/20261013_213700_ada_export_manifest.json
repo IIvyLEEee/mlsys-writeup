@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "measured",
+  "measurement_source_sha256": "75c57572440abb6f9f0480c52a6e6b95c4fba8516ff46cce1c4e894753e2d202",
+  "exporter_sha256": "1f745292d1f4d7cb938a09560d9fcbbc766c900bb5927e331aae292f3564dcbf",
+  "profile_summarizer_sha256": "d20d323d4e9eded98f4bbec1c1411e9952d17d2a3d5b2ecd5d7e50eb9ccaf70b",
+  "files": {
+    "20261013_213700_ada-complete-gpu_profile_breakdown.manifest.json": "46105f8960a2ea826180ad5bbed171a4c4e71e18cbb111dbc19a789f5414642e",
+    "20261013_213700_ada-complete-gpu_profile_breakdown.md": "0d0c2ce133ad8e53a88aa8f3d61974421a8323127355797f201829b31a31578c",
+    "20261013_213700_ada-complete-gpu_profile_breakdown.png": "41968c56eb281a35ed7699baff473bdf5b1a82e98a0ee064cd9326fce2d791da",
+    "20261013_213700_ada-complete-gpu_profile_breakdown.svg": "6086ced706d15c1ccc1ded494f2a48e90440141269852a60a80f2c925c660c4f",
+    "20261013_213700_ada-complete_optimization_history.manifest.json": "c18902505a8d1135a18899b4927da4bc14a8f48e370e83030f55bdebaaef6016",
+    "20261013_213700_ada-complete_optimization_history.md": "cd8973eb75078118a4a29def909f31aaee2a44a4160ff58193c8e19b4a618b07",
+    "20261013_213700_ada-complete_optimization_history_p01.png": "1aa85b99d78240199e874e9a12854cf0caae6d3b5a279e1e2a251bdca0543528",
+    "20261013_213700_ada-complete_optimization_history_p01.svg": "1f064dd47f052415e0e8f50c50a40378bd37283e3c422006698988b074e77ad4",
+    "20261013_213700_ada-complete_optimization_history_p02.png": "b84d0a340243f3af726f6fe9843644ca7bc525ef64ce16ed0d9bca2ad3746690",
+    "20261013_213700_ada-complete_optimization_history_p02.svg": "9dd63bc23295183d5b904e6840f9f3f65f6d02126e6faecde6ce88c37ccd179c",
+    "20261013_213700_ada-complete_optimization_history_p03.png": "1024d280e2f073ca451bc09bd23209f2ce63cb43ef542b459c3bd11fbcd2befe",
+    "20261013_213700_ada-complete_optimization_history_p03.svg": "3afbc3c7ebb741de7d6d9852d744c7f5f4a464ebb3be89304ae94d3fedf6baaa",
+    "20261013_213700_ada_completed_results.txt": "01d0db7e046fc5445d18e06b71e5230b99423337810aac213c2cd6c38763696e",
+    "20261013_213700_ada_complete_curve.png": "bb947578e5055f96ff7025e527733d3f2a642e788813c1628be86345ad64019d",
+    "20261013_213700_ada_complete_curve.svg": "cc0bb5a20cea8a6b586ab8e39d6759515ab14bc0835a4feae40f04b3403e5d4f",
+    "20261013_213700_ada_environment_diagnostic.json": "604f543fa81afcc58d54399ee0f1e02ecc467d9a327704066692026e70a81682",
+    "20261013_213700_ada_environment_diagnostic.txt": "fed8ab0cfa01cd711df958c22e912f539380bbe1af94bbab7fcdb93b75476de3",
+    "20261013_213700_ada_gpu_breakdown_input.json": "ee3674684f2bbbb3ded1cf85a99854f027ba1e61be70cfc1a9094b5f171ec537",
+    "20261013_213700_ada_ledger.json": "393821b199bc7476d9de50db514501d1c3a3eef86ed8bc7e6731c7256a3c9050",
+    "20261013_213700_ada_measurement_summary.json": "f5f07d86aa40ab22a9933d055c52dc40879a5f1931217f6d67d6402c831f15e3",
+    "20261013_213700_ada_provenance.json": "ac87f2bcfbb59cb51f9c51220946ce95419a4d21deaa2d69d205108cac65c628",
+    "20261013_213700_ada_raw_samples.csv": "ef04366465a9c6ff1faf7e75ab2549f1011896360180659af9fe44b38fe6b6ed",
+    "20261013_213700_ada_tiers.csv": "7b31d4049a66ca0cd1843486ba5104210804d0eac683cdd280c40df96251a66b",
+    "20261013_213700_bf16_breakdown_input.json": "07d4a5e65e5a00ab8873ea011ec0a18ed8f47d674e1e23f4101ca12777440fae",
+    "20261013_213700_bf16_profile_summary.json": "acc03679b5b318d1f6aecc6acaf5b896a3bed0e9d0c52eabd57d1943508fe7bb",
+    "20261013_213700_original_bf16_breakdown_input.json": "008be1abc02f5d3bd8167bd751f7bf6fd3008b2db34d823797d81ae2a8e7d0b5",
+    "20261013_213700_original_bf16_profile_summary.json": "b49d1fa19b99dbd03a3ce231966152d25fc4500fd64122a420d07f1d47c770a1",
+    "20261013_213700_tier00_breakdown_input.json": "129ec21269faf5eafad6395dfff572b8b18e3fcb24067b5e449dacc8d20bddac",
+    "20261013_213700_tier00_profile_summary.json": "33ed436cb53a03f67b757556deba33e0a9e429cd45b0f13ef227bdc93241ad46",
+    "20261013_213700_tier01_breakdown_input.json": "6807c21683eac8c1131a09798446f3c998083ccdece4ba3bba97ce47eb42259a",
+    "20261013_213700_tier01_profile_summary.json": "e0e83edc3013142866dad619ecec4420c2c1a975dad9469fd3f69f261c017d33",
+    "20261013_213700_tier02_breakdown_input.json": "2f8e6ed12f8c03e21071576fdf3993fa59fa907df56f41ad223107731f5d061d",
+    "20261013_213700_tier02_profile_summary.json": "8fc37b91b3b70a2e1dbba0b2750585f4962abc3f4989955488305472ae4edaef",
+    "20261013_213700_tier03_breakdown_input.json": "61746a94d4b7a71fecc2fdb81c6af6f579ad26323d161e86ad4f0ceefc6c54a9",
+    "20261013_213700_tier03_profile_summary.json": "879a51d9a452db25d4e793a28c6b53a5f00c2fd19de4b553c7029e7350384e5b",
+    "20261013_213700_tier04_breakdown_input.json": "ead16b7a9bdb0ee867a16d4cd318cba2f2b5478d5be443c29e062f8ad25a7b84",
+    "20261013_213700_tier04_profile_summary.json": "7e9dc0209756095d8709643702716318618fa1b504717bb847548c9da1517dce",
+    "20261013_213700_tier05_breakdown_input.json": "31fd814abf6f31a1319d0b062734653c90d765b466cd3d8cd1b27e7a2ec8a4a1",
+    "20261013_213700_tier05_profile_summary.json": "c2217f38a81e166d319941007087f5094ffcd81020677e2af278407c690ea6af",
+    "20261013_213700_tier06_breakdown_input.json": "6f891a98004cd4d9cb94748a2eab7de78305743f54b663c507c4f41576f57370",
+    "20261013_213700_tier06_profile_summary.json": "ba05c0d50add9a19a0bc7bc8534618354424f4dfa40d92e0035f2b7a284e2700",
+    "20261013_213700_tier07_breakdown_input.json": "e0baf3f0956064064ac9323768b860411170c39af3db73ff0384571aa0790ccb",
+    "20261013_213700_tier07_profile_summary.json": "d028e0a04ad32eebe8efce24ce6a1749400f62ed19f95a160abdae6198d48817",
+    "20261013_213700_tier08_breakdown_input.json": "2765e994183e9deb6f2c1fd4c88df0ca206fa614ea15fd8c5681ac084e7523fb",
+    "20261013_213700_tier08_profile_summary.json": "a59e529e1706c4b1a39c3845492449753369c31c97b7ee9a574f4245de8b28f6",
+    "20261013_213700_tier09_breakdown_input.json": "f95341610d6ddeba7c7297f71c66b679838d2e32b127a2d54ed8860ced46a5b5",
+    "20261013_213700_tier09_profile_summary.json": "2ca13bfcafa1e7d0310b188e1f65246b8322323cc8150ec8b8f6cb13072186de",
+    "20261013_213700_tier10_breakdown_input.json": "9bc02312f4b0bdd3e4ad5ebe24aeef84de23d83d154067b11673f46a01fd7375",
+    "20261013_213700_tier10_profile_summary.json": "966cc294b485bf2fb8d73e5c45334d1489a693d8043fbe37d8d1b76aa1b448b9"
+  },
+  "image_checks": {
+    "20261013_213700_ada-complete-gpu_profile_breakdown.png": {
+      "width": 2400,
+      "height": 2448
+    },
+    "20261013_213700_ada-complete_optimization_history_p01.png": {
+      "width": 2400,
+      "height": 3980
+    },
+    "20261013_213700_ada-complete_optimization_history_p02.png": {
+      "width": 2400,
+      "height": 4310
+    },
+    "20261013_213700_ada-complete_optimization_history_p03.png": {
+      "width": 2400,
+      "height": 2074
+    },
+    "20261013_213700_ada_complete_curve.png": {
+      "width": 3079,
+      "height": 1023
+    }
+  },
+  "sanitization": "Private machine paths/addresses/identifiers removed; revision/hash/numeric evidence retained",
+  "visual_layout_review": "Required before delivery; dimension/nonblank checks alone are not visual review"
+}

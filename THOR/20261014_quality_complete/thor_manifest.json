@@ -1,0 +1,109 @@
+{
+  "export_at_cst": "2026-10-14T08:16:50+08:00",
+  "status": "complete_planned_pilot",
+  "quality_completed_at_cst": "2026-10-14T02:05:19+08:00",
+  "files": {
+    "thor_brief_report.txt": {
+      "bytes": 4562,
+      "sha256": "ba75cfa86a3384792dd9048a87aea0b0b7cd7d59453b6cfdfe6c0df21a8c605c"
+    },
+    "thor_clean_samples_360.csv": {
+      "bytes": 61201,
+      "sha256": "8f5e2297dd1106d474e2f2cf90154d067be65055a0c50df68c3629ff69d83a33"
+    },
+    "thor_configurations.json": {
+      "bytes": 13236,
+      "sha256": "6dc64f502da2fe0174bb4da189990795ef1f2fe1bc542ab99c95317e00632217"
+    },
+    "thor_dummy_profiles_36_excluded.csv": {
+      "bytes": 19844,
+      "sha256": "cfcc3f9e2fd8121363e4aa8d97104e892deac6140e3ebf0f22fd9cda6162e672"
+    },
+    "thor_figure.tex": {
+      "bytes": 1801,
+      "sha256": "fae17140aaabf0b0ac7852d067ad85ca6867b8b88b951f3371ced5a7abcabca7"
+    },
+    "thor_measured_precision_map_2112.csv": {
+      "bytes": 209231,
+      "sha256": "d572faf102bfa0d70718288a2e6ebfacae9227188ccc060d5d9ccdc40598a4ea"
+    },
+    "thor_observed3200_summary.csv": {
+      "bytes": 4466,
+      "sha256": "fd4883a26bcc444a0513af3b552dd0b1c03ef569e4bdaf775fd6facae45975d3"
+    },
+    "thor_performance_quality_complete.csv": {
+      "bytes": 6612,
+      "sha256": "c7f629e4d5d2c64100554699337ee4ad6b1c2e93a05d1d86c3276db5f9015b51"
+    },
+    "thor_profiles_180.csv": {
+      "bytes": 94632,
+      "sha256": "6622a0556f694fc96ce2714866f51a884330b13ae84b5b89053fd434b6897f72"
+    },
+    "thor_progressive_complete.pdf": {
+      "bytes": 244404,
+      "sha256": "908db2b428f156b4dc43624039c74bcad19e1675c21ca196da51229c4a8c9364"
+    },
+    "thor_progressive_complete.png": {
+      "bytes": 404599,
+      "sha256": "67b13706cc5e2502cdc2ab2eec4824d8055e3a57d0d2a04d9ffda6d524c1e2aa"
+    },
+    "thor_progressive_latency_zh.png": {
+      "bytes": 296497,
+      "sha256": "ec0d29a3812ea02f727e01f4b35bd487304685a9d9730559078f31460ba1cb0c"
+    },
+    "thor_progressive_performance.pdf": {
+      "bytes": 75330,
+      "sha256": "c3c7d5e211106cb7b8d8e82ae22aea55d82fd7496f2a0ebfdfb9b82057cbf8ed"
+    },
+    "thor_progressive_performance.png": {
+      "bytes": 177889,
+      "sha256": "e397a128e629d5ff48c5129642fd047a213f9fa7a4e92bcfbfe33d694bf7e5a3"
+    },
+    "thor_progressive_performance.svg": {
+      "bytes": 98463,
+      "sha256": "1ca95ab0de26670a0e6944b198b9315d3d3e9ae74b7d235bfc89d9b9d627c3a3"
+    },
+    "thor_provenance.json": {
+      "bytes": 16644,
+      "sha256": "dc4f853f3419fb398a0f354f22f90c7805d99364cffd13b68162bd7fe5a9d89d"
+    },
+    "thor_quality_complete.pdf": {
+      "bytes": 162424,
+      "sha256": "91ae8e23c56c5c565d3385daad07e1f7d91552685a268fce02a99ab0374bb4e7"
+    },
+    "thor_quality_complete.png": {
+      "bytes": 268810,
+      "sha256": "2581685e3aca6cc13e92df9da53d474964d524f71e376aed4275d462ec2d90e9"
+    },
+    "thor_quality_episodes_360.csv": {
+      "bytes": 305404,
+      "sha256": "283a89d2caddc018c97780b3e0a326f2060db96eb1d3433a0d589e23c44e143d"
+    },
+    "thor_quality_modes_12.csv": {
+      "bytes": 2169,
+      "sha256": "589c75ace72b9b2d37bfc45031dd29c99d8ebe9bfcbf1663d78a3bd42e40efbc"
+    },
+    "thor_quality_tasks_120.csv": {
+      "bytes": 14227,
+      "sha256": "9d46289e358fd621d4e942792f215ba39e4d005508c24eaa6ebea630980614e2"
+    },
+    "thor_README.txt": {
+      "bytes": 2271,
+      "sha256": "5e0b7601e93fbb64a71518b446241be46a7e2325b7476805b342b874b9227490"
+    }
+  },
+  "validation": {
+    "quality_episode_rows": 360,
+    "quality_task_rows": 120,
+    "quality_mode_rows": 12,
+    "all_quality_summaries_match_ledgers": true,
+    "all_30_initial_state_pairs_match_bf16": true,
+    "independent_quality_audit": "passed",
+    "performance_rechecked_against_repeat_audit": true,
+    "previous_performance_files_byte_identical": true,
+    "private_path_scan": "passed",
+    "quality_acceptance": "not_assessed",
+    "png_dimensions_and_nonblank": "passed",
+    "visual_review": "passed: both newly rendered PNGs inspected for text, axes, labels, layout and nonblank content"
+  }
+}

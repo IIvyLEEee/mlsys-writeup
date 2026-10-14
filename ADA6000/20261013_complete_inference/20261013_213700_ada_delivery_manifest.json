@@ -1,0 +1,22 @@
+{
+  "archive_entries": 77,
+  "files": {
+    "20261013_213700_ada_evidence.zip": {
+      "sha256": "53c4e079e65bdea40224653618a9eaca888b6be69ef50b82b663ba8190d05012",
+      "bytes": 2633388
+    },
+    "20261013_213700_ada_independent_audit.json": {
+      "sha256": "61a1a71952849f92cd133d68bf4e82f0721deb30e79177ca6503f788a5795c33",
+      "bytes": 11109
+    },
+    "20261013_213700_ada_independent_audit.txt": {
+      "sha256": "179f2d23a1598ae77c512775b8def221edef4977bd9d56839532f3553fe7792c",
+      "bytes": 4260
+    },
+    "20261013_213700_ada_README.txt": {
+      "sha256": "23802b714979da2c38869ba093d83bb3a032bf5e93c8aff5c0c89329b8720540",
+      "bytes": 1205
+    }
+  },
+  "export_manifest": "20261013_213700_ada_export_manifest.json"
+}

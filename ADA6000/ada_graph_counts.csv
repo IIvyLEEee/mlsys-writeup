@@ -1,0 +1,51 @@
+mode,scope,category,mean_gpu_event_count,profile_plan_count
+bf16,dit_graph,Activation quantize / pack,0,6
+bf16,dit_graph,Attention core,32.0,6
+bf16,dit_graph,Copy / layout,2.0,6
+bf16,dit_graph,Floating GEMM / reduction,391.0,6
+bf16,dit_graph,INT4 GEMM,0,6
+bf16,dit_graph,INT8 GEMM,0,6
+bf16,dit_graph,LN + modulation + pack,0,6
+bf16,dit_graph,Other GPU work,240.0,6
+bf16,dit_graph,Residual + LN + pack,0,6
+bf16,dit_graph,TOTAL,633,6
+t0,dit_graph,Activation quantize / pack,116.0,6
+t0,dit_graph,Attention core,32.0,6
+t0,dit_graph,Copy / layout,66.0,6
+t0,dit_graph,Floating GEMM / reduction,0,6
+t0,dit_graph,INT4 GEMM,0,6
+t0,dit_graph,INT8 GEMM,180.0,6
+t0,dit_graph,LN + modulation + pack,32.0,6
+t0,dit_graph,Other GPU work,48.0,6
+t0,dit_graph,Residual + LN + pack,32.0,6
+t0,dit_graph,TOTAL,506,6
+t7,dit_graph,Activation quantize / pack,116.0,6
+t7,dit_graph,Attention core,32.0,6
+t7,dit_graph,Copy / layout,66.0,6
+t7,dit_graph,Floating GEMM / reduction,0,6
+t7,dit_graph,INT4 GEMM,80.0,6
+t7,dit_graph,INT8 GEMM,100.0,6
+t7,dit_graph,LN + modulation + pack,32.0,6
+t7,dit_graph,Other GPU work,48.0,6
+t7,dit_graph,Residual + LN + pack,32.0,6
+t7,dit_graph,TOTAL,506,6
+t8,dit_graph,Activation quantize / pack,116.0,6
+t8,dit_graph,Attention core,32.0,6
+t8,dit_graph,Copy / layout,98.0,6
+t8,dit_graph,Floating GEMM / reduction,0,6
+t8,dit_graph,INT4 GEMM,112.0,6
+t8,dit_graph,INT8 GEMM,84.0,6
+t8,dit_graph,LN + modulation + pack,48.0,6
+t8,dit_graph,Other GPU work,48.0,6
+t8,dit_graph,Residual + LN + pack,32.0,6
+t8,dit_graph,TOTAL,570,6
+t9,dit_graph,Activation quantize / pack,116.0,6
+t9,dit_graph,Attention core,32.0,6
+t9,dit_graph,Copy / layout,66.0,6
+t9,dit_graph,Floating GEMM / reduction,0,6
+t9,dit_graph,INT4 GEMM,128.0,6
+t9,dit_graph,INT8 GEMM,52.0,6
+t9,dit_graph,LN + modulation + pack,32.0,6
+t9,dit_graph,Other GPU work,48.0,6
+t9,dit_graph,Residual + LN + pack,32.0,6
+t9,dit_graph,TOTAL,506,6

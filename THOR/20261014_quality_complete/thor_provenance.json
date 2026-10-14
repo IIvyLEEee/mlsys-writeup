@@ -1,0 +1,327 @@
+{
+  "export_at_cst": "2026-10-14T08:16:49+08:00",
+  "purpose": "Completed 360-episode fixed-delay pilot plus unchanged measured performance; no new performance experiment or PR update",
+  "repository": "https://github.com/Ther-nullptr/piR2",
+  "base_revision": "fe06d7e8afc8d1793ab2eb418c4effa5422fe0d3",
+  "source_state": "main base plus local progressive quantization adaptation; not a pristine main run",
+  "reference_url": "https://github.com/thu-ee-acts-lab/robotics-the-speedup-paradox/blob/239b4a3ef2268048571c9f508ad5700f98398c2f/src/robotics_bench/optimizations/progressive.py",
+  "source_manifest_sha256": "4c9872968cc11d63a9059430a18f64fc7c26d95b2ffc0e21f32bbf38a30f6869",
+  "source_hashes": {
+    "source/coexecution/optimization/__init__.py": "33072bab441b01814cf0a6f41f6e00fd6ca503687950cd6f06a9af7067057820",
+    "source/coexecution/optimization/backends/__init__.py": "54d03818b5dea934a242d36577263bfef069c2ff4d3e90b6c2d02a64ebfbdfe3",
+    "source/coexecution/optimization/backends/integer/__init__.py": "abe6bdbfeb7dbba12d49966b068c610342ae6cfa1d15d2c9b99b0f3f949c3a54",
+    "source/coexecution/optimization/backends/integer/linear.py": "dc1a2745a864a1e9c00997eed28af3170c926a5e77cfab209841b949c818a1da",
+    "source/coexecution/optimization/backends/thor/__init__.py": "46526bb02cf828d3e6fd49102617331d1a37d53720768b4c68c2533526b80e9c",
+    "source/coexecution/optimization/backends/thor/linear.py": "c39799dd0dbdb4a95105f1b53a550a36bc3ed0ecf993b2b1b9cb1dbff46d2897",
+    "source/coexecution/optimization/backends/thor/packing.py": "343e987183dfb828ef029c17cc584c9be96a1148419ee0440753465a03aad416",
+    "source/coexecution/optimization/capabilities.py": "8105a92d8e85f8951440afea946946e11042197333fbdd57e482d8be91a0c2cf",
+    "source/coexecution/optimization/config.py": "8241b7e850ddaddf40eb250ae87d173087f079590e60434097fccc0f0a01e93b",
+    "source/coexecution/optimization/execution/__init__.py": "8234ced1a83c2bbdaa0db694c2045e2aebcce88f0e8c2cbdfd89f9d249b53377",
+    "source/coexecution/optimization/execution/cache.py": "92321a88e6cb1014ae6858c068aafd6abe036598ae1dcab87de0011614850feb",
+    "source/coexecution/optimization/execution/graph.py": "4c38a3b16ec4125315b38ad79375058c67d10f2ff21e3c98d53185ecd81cb648",
+    "source/coexecution/optimization/groot/__init__.py": "d0f5ae8ef98ee9c762c6b0fad7838750c5209ab196bafbfbe2c583dad90c6377",
+    "source/coexecution/optimization/groot/floating.py": "3ecdfde26af79c4234f2d015cd4ff7e5f51ffdbe294cfeac9d3c20f02b65d3a0",
+    "source/coexecution/optimization/groot/floating_connections.py": "59b5db049e11642ec4c3ad780356617f9426cdc1e264ca4690ed60e37bfcaf25",
+    "source/coexecution/optimization/groot/group_outputs.py": "151e93d5f851fee6d23a9921a3bfc817fb7b74ab8fea2999b7f0f2cbbd8026a5",
+    "source/coexecution/optimization/groot/integer.py": "69247bcfa16054f6c578896bf3d36947a6a179b152a5f6c339b9e78f40f1ce5c",
+    "source/coexecution/optimization/groot/integer_candidates.py": "65458118ccba697e443ac73ad86412f8415134daf33375c513ed36b8e7fabf91",
+    "source/coexecution/optimization/groot/integer_connections.py": "b16212e022b6d1b27502c0b93f8bb54be6e4307ffd48ee7039e6614bafd1655f",
+    "source/coexecution/optimization/groot/producers.py": "122dcfa798bdb4e6fb24b3ee855c1eb8085b88391b88fa7b8a5062788b5a68ac",
+    "source/coexecution/optimization/groot/projections.py": "190916967f507f884d02b57bacdf10bec498bb42015db787fd185496e00f1e0f",
+    "source/coexecution/optimization/groot/residual.py": "44912ec4f6a2eebad6a0ce4db91d665ce958005e51641e42d06d520d172e0d4b",
+    "source/coexecution/optimization/installation.py": "f9a63850201b9efe5d02fc1de780b1a9a7ed327bc6594bf437289bbb3a216978",
+    "source/coexecution/optimization/operators.py": "729033c4243079f0d6556429933e762553b30f1596a673f48c800a9b6148ad39",
+    "source/coexecution/optimization/progressive.py": "7bf204c23ea3cd47593ca0ab0346217dd0c55b975748ef8800a793bb857a2a03",
+    "source/coexecution/optimization/session.py": "aca8eec2db98877791367f765c917e0e830e37f4847ec5aa5beee3312e9be560",
+    "source/coexecution/optimization/tactics.py": "bddcb83e45b04a435120ab45211e8416663a933b3e1140f4c3a196427bd7868c",
+    "scripts/measure_progressive.py": "d413cfc5c192cb3ce2ab0c6ea64164ff5bd37304537e0dd9a929d0fad697b4c9",
+    "scripts/quality_scan.py": "ce15fe70954b264c9f168226c7d392eccf09d8b4715d28f311bf73a9c010bed1",
+    "scripts/quality_scan_test.py": "e56e20d56dbc0bde6f913e2d7dfb2bddab646aa7ce177a7b8944ed32eb992d7c",
+    "scripts/render_progressive.py": "a7e9a35f9a397e4c2c7c912018e86c3582445f2b1531dd06dd11f6a68f1a8ff2",
+    "scripts/replay_spatial_checkpoint.py": "21ff168d66103f327c911eafda199ba98a2a94d69d33e5439eaab428c2f601c0",
+    "scripts/summarize_profiles.py": "0d6202a0e449af21d3e39385fb704a5e77b8e8d2cc1fa47f87f0e7e01dcff9b6",
+    "scripts/measure_progressive_repeated.py": "9885205b1f8963950958c6dab8263401b4e7fd331fae21f069ca216c0f694b54"
+  },
+  "model_id": "GR00T-N1.7-LIBERO Spatial piR2 checkpoint-500",
+  "checkpoint_file_sha256": {
+    "model-00001-of-00003.safetensors": "72d81b70745c24cee97b16fb663d5b7f9af0d314cfe41ad9f2677f9b13c48fda",
+    "model-00002-of-00003.safetensors": "abacf6848dbd1c799a9750525430bd8cd0da25c58b49914d9d5551c78cf0d78c",
+    "model-00003-of-00003.safetensors": "51ee4da92e62793b9d4a60ffe10f35c0d5c990e515c036da85e8eb85ceb060a9",
+    "config.json": "99a8827e8cec0c228d868603257e150586d5dc195448ed1cab670389e3fcfd69",
+    "processor_config.json": "ffaf5227069b70776675f34fbe3905a0081c7ff50738724424168623ffe01913",
+    "statistics.json": "830773f62b760ef7c36fa3ffb2eec45e358b24cb983d30f6e10aba3633a6a407",
+    "embodiment_id.json": "6f01100d50c52602f0c7c68304eea48f79a1f8c2426a960c04824c0ed4557869"
+  },
+  "input_array_hashes": {
+    "committed": {
+      "shape": [
+        1,
+        7
+      ],
+      "dtype": "float32",
+      "sha256": "63c9d0c184b239d43efe9a9624cabd2221cfc433d5522eb54ecc19cc64d8ac46"
+    },
+    "video.image": {
+      "shape": [
+        1,
+        1,
+        256,
+        256,
+        3
+      ],
+      "dtype": "uint8",
+      "sha256": "15c6a1efa836ec4e6d6a849126bd1143a9bc23e9fd53c93eb627fa64f519f38b"
+    },
+    "video.wrist_image": {
+      "shape": [
+        1,
+        1,
+        256,
+        256,
+        3
+      ],
+      "dtype": "uint8",
+      "sha256": "58b0fb8f8c29048d95180b8cbf4988ce7ef753ce0d67da708ec294b86649c791"
+    },
+    "state.x": {
+      "shape": [
+        1,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "sha256": "00df161a7989de875dde20e09dce0552fbfbb3c48b2155f67e136655c5dd03cf"
+    },
+    "state.y": {
+      "shape": [
+        1,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "sha256": "7494ed0522069bdecff79037c8405de6d37e8e675b61c976be896f177e0aae8b"
+    },
+    "state.z": {
+      "shape": [
+        1,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "sha256": "bb1e49ea678e9f7882422308a7c332231b3df6a74f70b5af47f098cc421d6280"
+    },
+    "state.roll": {
+      "shape": [
+        1,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "sha256": "ece2172a5c3ee0598295e857b562fc0d0e5bc82e56e567023408d440e34afd50"
+    },
+    "state.pitch": {
+      "shape": [
+        1,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "sha256": "00ed01fbac30b59f740b6ce9ca19a5beb0029217652e6997a95ca25adc87ca16"
+    },
+    "state.yaw": {
+      "shape": [
+        1,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "sha256": "35db12f6d67550ce2da55b640a5c61da653b855c8d3033c79789a4cb1b2f2dcd"
+    },
+    "state.gripper": {
+      "shape": [
+        1,
+        1,
+        2
+      ],
+      "dtype": "float32",
+      "sha256": "97e02e9586baadab8933dc37c1983d486c608b585cc6c667584f22c3ba036dd0"
+    },
+    "language.annotation.human.action.task_description": {
+      "shape": [
+        1,
+        1
+      ],
+      "dtype": "<U71",
+      "sha256": "2a33becb7233d8c6504842ded5eb9925e8a86a82939aaea535f0866ea99db722"
+    }
+  },
+  "input_protocol": "Spatial episode 0 frame 20; fresh visual; action delay1 image age0 fixed demo prefix",
+  "environment": {
+    "torch": "2.10.0+cu130",
+    "cuda": "13.0",
+    "device": "NVIDIA Thor",
+    "capability": [
+      11,
+      0
+    ],
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "threads": 2
+  },
+  "configs_file": "thor_configurations.json",
+  "scan_identity_hash": "d9eccdb260f8bba1c48ef8a9771a5e6a49c1f5ecd7c596f4fa8b08de07d62dad",
+  "repeat_audit_sha256": "be1b11344daafb779f08006bb80413ec8a16b0ffe55b974fdc5d1919aefb3a24",
+  "repeat_summary_sha256": "ebc9a5686c9c6bb463c3af319d6ccfea103c917859dd17167474dd7dbeec186f",
+  "original_measurement_summary_sha256": "29c5c575a2a59b0c0713e6cc1a82d4761bccf33fb0d7a3da30096fa40681bc47",
+  "quality_snapshot_sha256": "627befe33de74fedf1e40da3b9f6c66bc511f7fc6a977dc4717c31ef5613d584",
+  "quality_snapshot_at_cst": "2026-10-14T08:06:07.235230+08:00",
+  "quality_scope": "3 fixed initial states per task; preliminary task success, not full-suite acceptance or wall-clock deployment quality",
+  "performance_sample_window_cst": [
+    "2026-10-13T21:34:40+08:00",
+    "2026-10-13T22:00:49+08:00"
+  ],
+  "cohort": {
+    "modes": 12,
+    "random_rounds": 3,
+    "clean_calls": 360,
+    "formal_profiles": 180,
+    "excluded_dummy_profiles": 36,
+    "observed3200_clean_calls": 247,
+    "observed3200_formal_profiles": 122,
+    "other_frequency_and_missing_clock_samples": "Retained in full CSV, excluded from main curve",
+    "ABBA": "Separate diagnostic cohort, not pooled"
+  },
+  "protocol": {
+    "name": "GR00T DiT FP8-to-FP4 adaptation of reference progressive protocol",
+    "reference_revision": "239b4a3ef2268048571c9f508ad5700f98398c2f",
+    "model_base_revision": "fe06d7e8afc8d1793ab2eb418c4effa5422fe0d3",
+    "timing": "prepared CPU observation -> Backend.plan -> CPU action; 1 VLM + 1 streaming DiT",
+    "includes": [
+      "online activation packing",
+      "pre/postprocessing",
+      "request JSONL write"
+    ],
+    "excludes": [
+      "model load",
+      "weight packing",
+      "compile",
+      "CUDA Graph capture",
+      "warmup",
+      "bootstrap 1 VLM + 4 DiT",
+      "state reset",
+      "profiling"
+    ],
+    "state_reset": "per-config bootstrap snapshot; clone buffers/cache and restore all RNG outside timing",
+    "validation": "full 40x7 decoded continuous CPU action chunk and projected commands; per-config bootstrap error propagates; finite only guard",
+    "input": "Spatial episode 0 frame 20; fresh visual; action delay1 image age0 fixed demo prefix",
+    "coverage": "192 structurally selected DiT Linear sites; not dynamic GEMM-call coverage",
+    "quality": "not measured by this profiler campaign",
+    "repeated_profile": "one dummy and five independent single-policy profiles per visit by default",
+    "dummy": "retained for CUPTI startup diagnosis, excluded from principal statistics",
+    "warming": "minimum calls AND cumulative active policy time; state reset excluded",
+    "clock_policy": "observe only; no clock, power or system configuration changes"
+  },
+  "warmup": {
+    "warmup_calls": 20,
+    "warmup_seconds": 2.0,
+    "profile_warmup_calls": 5,
+    "profile_warmup_seconds": 0.5
+  },
+  "statistic": "median of per-visit medians; min-max of those medians is spread, not confidence interval",
+  "clock_assignment": "At least one in-window read and all reads agree; observations do not prove a constant clock between reads; no clock writes",
+  "gemm_definition": "GEMM/GEMV including BMM; implicit-GEMM convolution classified as Convolution; denominator=sum of CUDA kernel durations, not wall latency",
+  "precision_mapping": "Measured per-site mapping across all 3 visits, not a rules-only reconstruction; structural site count is not dynamic GEMM call coverage",
+  "privacy": "No credentials, personal paths, host addresses, model weights, prepared inputs or raw large traces included",
+  "quality_completed_at_cst": "2026-10-14T02:05:19+08:00",
+  "quality_status": "complete",
+  "quality_episodes": 360,
+  "quality_pilot": true,
+  "quality_acceptance": "not_assessed",
+  "quality_protocol": "LIBERO-Spatial fixed-delay algorithm, 20 Hz, visual 3 / action 1 ticks",
+  "quality_ledger_hashes": {
+    "bf16/evaluation/episodes.jsonl": {
+      "bytes": 41392,
+      "sha256": "c863b8af0faf5db3c1510d3f941bd3fc249d693a3c54bdf41972caafc2dcc573"
+    },
+    "tier00/evaluation/episodes.jsonl": {
+      "bytes": 41329,
+      "sha256": "a875985ca07426536b01d66096854a1bf036caf666dd75dbfeb83dc62213782a"
+    },
+    "tier01/evaluation/episodes.jsonl": {
+      "bytes": 41334,
+      "sha256": "7b9584811cb19f21018e534690b5bf9e3d7637d745a448bdf78022bcd1f5634f"
+    },
+    "tier02/evaluation/episodes.jsonl": {
+      "bytes": 41368,
+      "sha256": "befcfbc8c1b0369fd168d20f74cab21f9cc1e247edb5736cd6a8b6c629cd2166"
+    },
+    "tier03/evaluation/episodes.jsonl": {
+      "bytes": 41331,
+      "sha256": "38cd11dce8ae2d1987b3a0f7b6aa6c7cd6e3ad27729fd43e0887c883563c106c"
+    },
+    "tier04/evaluation/episodes.jsonl": {
+      "bytes": 41348,
+      "sha256": "919593f03529821932fe8fec5c05d0bf51a8a63532bac266228a37aaffb00bd6"
+    },
+    "tier05/evaluation/episodes.jsonl": {
+      "bytes": 41325,
+      "sha256": "267da92b25c2b8f04e417a9714fdfbb8b683f5facf9b27461c09667a3a524431"
+    },
+    "tier06/evaluation/episodes.jsonl": {
+      "bytes": 41369,
+      "sha256": "9ce34c20cb28db60cce3dfd7d4e2509b1e59a28347bf10bb13ce35abfe39073f"
+    },
+    "tier07/evaluation/episodes.jsonl": {
+      "bytes": 41378,
+      "sha256": "47b050c36008e5be09e62000f91e2a1e06da986c312e8d5369dc31a428a6fa51"
+    },
+    "tier08/evaluation/episodes.jsonl": {
+      "bytes": 41357,
+      "sha256": "8e9f2acb44bd11da042c6af3bc5231fbf40acc3a63238c5d1f5327b3fc6cc2af"
+    },
+    "tier09/evaluation/episodes.jsonl": {
+      "bytes": 41369,
+      "sha256": "4fc1e982a928890e3fca9bc37a45cd2cfd412ff1c2606c0df55936539ceeaecc"
+    },
+    "tier10/evaluation/episodes.jsonl": {
+      "bytes": 41368,
+      "sha256": "46bb854a12086c5a4186b98feb3cf6bb8cb2efe7b52f6d3f8d1b3714f0cfae2f"
+    }
+  },
+  "quality_pair_fields": [
+    "task",
+    "seed",
+    "initial_state_sha256",
+    "fixture_model_sha256",
+    "settled_sim_state_sha256",
+    "initial_rgb_sha256",
+    "property_sampler_count"
+  ],
+  "quality_ledger_validation": [
+    "14 snapshot payload sizes and SHA-256 verified",
+    "Original measurement digest, checkpoint, source manifest and all 12 configs match performance scan",
+    "360 unique mode/task/state rows; 30 expected pairs per mode; all summary counts and per-task counts match",
+    "All episode numeric fields finite; positive recorded timing; 20 Hz control and <=720 steps; visual/action delay 3/1 verified",
+    "All seven initialization fields match BF16 for each of 30 task/state pairs in all 12 modes",
+    "Every attempt checkpoint and config match; all observed quantized Linear precision mappings match measured performance",
+    "All modes have a completed final attempt; campaign and snapshot completion timestamps agree"
+  ],
+  "quality_verification_sha256": "e1b7610641d1d3b32ff4d76d4ad16df30a079edd88d720a6c16ae569240833c3",
+  "quality_summary_versus_performance": "All 12 configs, original measurement digest, source manifest and checkpoint matched; seven initialization fields matched to BF16 for every pair",
+  "quality_record_sha256_encoding": "SHA256 of original record as UTF-8 JSON, sorted keys, no ASCII escaping, separators comma and colon without spaces",
+  "quality_statistics": "Descriptive proportions for 3 fixed states per task, clustered by task; no inferential CI or quality-equivalence test",
+  "quality_episode_wall_seconds": "Whole success-terminated rollout diagnostic only, not performance latency or throughput",
+  "quality_completion_notes": "Historical interrupted attempts were resumed; final attempts and all expected 360 episode records complete",
+  "performance_reused_byte_identical_files": [
+    "thor_progressive_performance.png",
+    "thor_progressive_performance.svg",
+    "thor_progressive_performance.pdf",
+    "thor_progressive_latency_zh.png",
+    "thor_observed3200_summary.csv",
+    "thor_clean_samples_360.csv",
+    "thor_profiles_180.csv",
+    "thor_dummy_profiles_36_excluded.csv",
+    "thor_measured_precision_map_2112.csv",
+    "thor_configurations.json"
+  ],
+  "exporter_sha256": "970a3a18890818aee6b4186b6fff6ee63db0e18ff1768150287175d0287c8fb2"
+}

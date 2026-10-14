@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "weight_loading": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "checkpoint_replay": {
+    "status": "complete",
+    "restored_bf16_exact": true,
+    "per_mode": {
+      "bf16": {
+        "all_captured_outputs_finite": true,
+        "times_and_cuda_rng_match_bf16_exactly": true,
+        "all_captured_outputs_match_bf16_exactly": true,
+        "integer_kernel_counts_full_profile_replay": {
+          "8": 0,
+          "4": 0
+        },
+        "action_mae_native": 0.0,
+        "action_rmse_native": 0.0,
+        "action_max_abs_native": 0.0
+      },
+      "t0": {
+        "all_captured_outputs_finite": true,
+        "times_and_cuda_rng_match_bf16_exactly": true,
+        "all_captured_outputs_match_bf16_exactly": false,
+        "integer_kernel_counts_full_profile_replay": {
+          "8": 3159,
+          "4": 0
+        },
+        "action_mae_native": 0.002186592228734674,
+        "action_rmse_native": 0.0038588665011202133,
+        "action_max_abs_native": 0.018258213996887207
+      },
+      "t1": {
+        "all_captured_outputs_finite": true,
+        "times_and_cuda_rng_match_bf16_exactly": true,
+        "all_captured_outputs_match_bf16_exactly": false,
+        "integer_kernel_counts_full_profile_replay": {
+          "8": 3099,
+          "4": 60
+        },
+        "action_mae_native": 0.00255546064461611,
+        "action_rmse_native": 0.004158709582441061,
+        "action_max_abs_native": 0.014606595039367676
+      },
+      "t2": {
+        "all_captured_outputs_finite": true,
+        "times_and_cuda_rng_match_bf16_exactly": true,
+        "all_captured_outputs_match_bf16_exactly": false,
+        "integer_kernel_counts_full_profile_replay": {
+          "8": 2999,
+          "4": 160
+        },
+        "action_mae_native": 0.041675558623764014,
+        "action_rmse_native": 0.07910008191190254,
+        "action_max_abs_native": 0.48833340406417847
+      },
+      "t3": {
+        "all_captured_outputs_finite": true,
+        "times_and_cuda_rng_match_bf16_exactly": true,
+        "all_captured_outputs_match_bf16_exactly": false,
+        "integer_kernel_counts_full_profile_replay": {
+          "8": 2949,
+          "4": 210
+        },
+        "action_mae_native": 0.047365940474322535,
+        "action_rmse_native": 0.09694662059610304,
+        "action_max_abs_native": 0.5209985375404358
+      },
+      "t4": {
+        "all_captured_outputs_finite": true,
+        "times_and_cuda_rng_match_bf16_exactly": true,
+        "all_captured_outputs_match_bf16_exactly": false,
+        "integer_kernel_counts_full_profile_replay": {
+          "8": 2829,
+          "4": 330
+        },
+        "action_mae_native": 0.05902639290763459,
+        "action_rmse_native": 0.14534725031367374,
+        "action_max_abs_native": 1.0
+      },
+      "t5": {
+        "all_captured_outputs_finite": true,
+        "times_and_cuda_rng_match_bf16_exactly": true,
+        "all_captured_outputs_match_bf16_exactly": false,
+        "integer_kernel_counts_full_profile_replay": {
+          "8": 2729,
+          "4": 430
+        },
+        "action_mae_native": 0.0452171780835049,
+        "action_rmse_native": 0.09548859292995142,
+        "action_max_abs_native": 0.517711479216814
+      },
+      "t6": {
+        "all_captured_outputs_finite": true,
+        "times_and_cuda_rng_match_bf16_exactly": true,
+        "all_captured_outputs_match_bf16_exactly": false,
+        "integer_kernel_counts_full_profile_replay": {
+          "8": 2679,
+          "4": 480
+        },
+        "action_mae_native": 0.04689195946914316,
+        "action_rmse_native": 0.09728213790732401,
+        "action_max_abs_native": 0.5497602857649326
+      },
+      "t7": {
+        "all_captured_outputs_finite": true,
+        "times_and_cuda_rng_match_bf16_exactly": true,
+        "all_captured_outputs_match_bf16_exactly": false,
+        "integer_kernel_counts_full_profile_replay": {
+          "8": 2359,
+          "4": 800
+        },
+        "action_mae_native": 0.04279105542457454,
+        "action_rmse_native": 0.08085307812297403,
+        "action_max_abs_native": 0.49120958149433136
+      },
+      "t8": {
+        "all_captured_outputs_finite": true,
+        "times_and_cuda_rng_match_bf16_exactly": true,
+        "all_captured_outputs_match_bf16_exactly": false,
+        "integer_kernel_counts_full_profile_replay": {
+          "8": 2199,
+          "4": 1120
+        },
+        "action_mae_native": 0.052575475285497275,
+        "action_rmse_native": 0.09464018743650844,
+        "action_max_abs_native": 0.37636804580688477
+      },
+      "t9": {
+        "all_captured_outputs_finite": true,
+        "times_and_cuda_rng_match_bf16_exactly": true,
+        "all_captured_outputs_match_bf16_exactly": false,
+        "integer_kernel_counts_full_profile_replay": {
+          "8": 1879,
+          "4": 1280
+        },
+        "action_mae_native": 0.04562014713583122,
+        "action_rmse_native": 0.08287038954768061,
+        "action_max_abs_native": 0.3985556662082672
+      },
+      "t10": {
+        "all_captured_outputs_finite": true,
+        "times_and_cuda_rng_match_bf16_exactly": true,
+        "all_captured_outputs_match_bf16_exactly": false,
+        "integer_kernel_counts_full_profile_replay": {
+          "8": 1719,
+          "4": 1440
+        },
+        "action_mae_native": 0.0765901129195718,
+        "action_rmse_native": 0.15432237596586326,
+        "action_max_abs_native": 0.7215090384706855
+      }
+    },
+    "repeatability": "A separate captured evidence replay at each configuration selection was asserted bitwise exact across three rounds. The 90 timing calls per mode were not all individually captured and compared.",
+    "kernel_assertions": "Profiler contains INT8 GEMMs for all quantized modes; INT4 GEMMs for T1-T10 only; no integer GEMMs for the full BF16 reference. Counts cover the whole profiled replay, not just one plan."
+  },
+  "tests": {
+    "python_lightweight": {
+      "passed": 248,
+      "failed": 0,
+      "log": "evidence/full-contracts.log"
+    },
+    "node": {
+      "passed": 59,
+      "failed": 0,
+      "log": "evidence/node-tests.log"
+    },
+    "gpu_suite": {
+      "passed": 19,
+      "failed": 3,
+      "log": "evidence/gpu-tests.log",
+      "new_progressive_cases_passed": [
+        0,
+        2,
+        8,
+        10
+      ],
+      "failed_cases": [
+        "tests/gpu/test_groot_streaming_gpu.py::test_real_streaming_head_fusion_state_reset_and_integer_kernels[dit_graph-bf16]",
+        "tests/gpu/test_groot_streaming_gpu.py::test_real_streaming_head_fusion_state_reset_and_integer_kernels[dit_graph-w8a8]",
+        "tests/gpu/test_groot_streaming_gpu.py::test_real_streaming_head_fusion_state_reset_and_integer_kernels[dit_graph-w4a4]"
+      ],
+      "failure_message": "RuntimeError: Optimized policy requires serial submissions"
+    },
+    "pristine_base_reproduction": {
+      "tested_case": "dit_graph-bf16 only",
+      "failed": 1,
+      "deselected": 5,
+      "log": "evidence/base-gpu-test.log",
+      "scope": "Only BF16 was rerun on pristine base; no claim that all three parameters were independently reproduced there."
+    }
+  },
+  "attachment_audit": {
+    "raw_replay_records": 180,
+    "exported_plan_samples": 1080,
+    "all_exported_medians_equal_original_summary": true,
+    "diagnosis_trace_hashes_match": true,
+    "no_new_gpu_benchmark_performed_for_report": true
+  }
+}

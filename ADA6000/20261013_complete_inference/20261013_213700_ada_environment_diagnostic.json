@@ -1,0 +1,1882 @@
+{
+  "schema_version": 1,
+  "status": "available",
+  "scope": "Environment diagnostic; excluded from all formal curve samples/comparison edges",
+  "records": {
+    "torch29_profile_diagnostic": {
+      "sha256": "31ff47cad95e12b49f0c5262813e451376368f16b9322bdbffb888101e33f256",
+      "value": {
+        "schema_version": 1,
+        "evidence_kind": "measured_environment_diagnostic",
+        "recorded_at": "2026-10-13T13:30:50.282940+00:00",
+        "status": "diagnostic_only_excluded_from_formal_curve",
+        "source": {
+          "summary": {
+            "path": "diagnostics/summary-torch29.json",
+            "sha256": "e280fe314038057e255234627d35b64ee5495186332a96a175569e281c56ec54"
+          },
+          "trace": {
+            "path": "measurements-torch29-diagnostic/original_bf16/trace.json",
+            "sha256": "91bdb6519a30a2cc79e28d896ef2d2c2b2ec199e03651e447a7c8528ca90de64",
+            "bytes": 1179209737
+          }
+        },
+        "mode": "original_bf16",
+        "environment": {
+          "torch": "2.9.0+cu128",
+          "cuda": "12.8",
+          "device": "NVIDIA RTX 6000 Ada Generation",
+          "capability": [
+            8,
+            9
+          ],
+          "python": "3.12.15 (main, Oct  3 2026, 01:03:07) [Clang 22.1.3 ]",
+          "threads": 2,
+          "interop_threads": 1,
+          "cuda_visible_devices": "0"
+        },
+        "source_revision": "3c96deed507daa2878dc7e78b0deee9431ceec32",
+        "clean_wall": {
+          "metric": "Unprofiled complete local plan latency",
+          "unit": "ms",
+          "samples_ms": [
+            2902.8584146872163,
+            2873.7520575523376,
+            2874.754403717816,
+            2891.4763890206814,
+            2870.9179013967514,
+            2873.62839281559,
+            2881.637797690928,
+            2878.2187160104513,
+            2870.931618846953,
+            2856.860928237438
+          ],
+          "sample_count": 10,
+          "median_ms": 2874.2532306350768,
+          "last_audit_vlm_seconds": 2.838668647222221,
+          "last_audit_vlm_scope": "One last unprofiled sample; not the median of all VLM calls",
+          "forward_counts": {
+            "vlm": 1,
+            "dit": 1
+          }
+        },
+        "profile": {
+          "time_unit": "ms; Chrome dur microseconds divided by 1000",
+          "boundary": "Separate instrumented call; CPU inclusive durations can overlap and contain profiler overhead",
+          "event_counts_by_category_phase": {
+            "/M": 58,
+            "/i": 2,
+            "Trace/X": 1,
+            "ac2g/f": 528942,
+            "ac2g/s": 528623,
+            "cpu_op/X": 3162251,
+            "cuda_driver/X": 329,
+            "cuda_runtime/X": 528847,
+            "gpu_memcpy/X": 524450,
+            "gpu_memset/X": 72,
+            "gpu_user_annotation/X": 1,
+            "kernel/X": 3867,
+            "overhead/X": 75,
+            "user_annotation/X": 1
+          },
+          "cpu_events": {
+            "aten::_convolution": {
+              "count": 1,
+              "inclusive_duration_ms": 7530.365727
+            },
+            "aten::conv3d": {
+              "count": 1,
+              "inclusive_duration_ms": 7530.386875
+            },
+            "aten::convolution": {
+              "count": 1,
+              "inclusive_duration_ms": 7530.378409
+            },
+            "aten::copy_": {
+              "count": 524806,
+              "inclusive_duration_ms": 3450.950696999791
+            },
+            "aten::cudnn_convolution": {
+              "count": 0,
+              "inclusive_duration_ms": 0.0
+            },
+            "aten::fill_": {
+              "count": 524347,
+              "inclusive_duration_ms": 4446.874133000006
+            },
+            "aten::select": {
+              "count": 1049752,
+              "inclusive_duration_ms": 1810.6346699993592
+            },
+            "aten::slow_conv_dilated3d": {
+              "count": 1,
+              "inclusive_duration_ms": 7530.3410269999995
+            }
+          },
+          "gpu_memcpy_dtod": {
+            "count": 524299,
+            "duration_sum_ms": 1087.6302789920198
+          },
+          "gpu_memcpy_by_name": {
+            "Memcpy DtoD (Device -> Device)": {
+              "count": 524299,
+              "duration_sum_ms": 1087.6302789920198
+            },
+            "Memcpy DtoH (Device -> Pageable)": {
+              "count": 75,
+              "duration_sum_ms": 0.07894599999999993
+            },
+            "Memcpy DtoH (Device -> Pinned)": {
+              "count": 52,
+              "duration_sum_ms": 0.05548999999999999
+            },
+            "Memcpy HtoD (Pageable -> Device)": {
+              "count": 24,
+              "duration_sum_ms": 0.145058
+            }
+          },
+          "vol2col_kernels": {
+            "count": 512,
+            "duration_sum_ms": 25.00112199999997,
+            "by_name": {
+              "void at::native::vol2col_kernel<c10::BFloat16>(long, c10::BFloat16 const*, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, c10::BFloat16*)": {
+                "count": 512,
+                "duration_sum_ms": 25.00112199999997
+              }
+            }
+          },
+          "request_markers": {
+            "progressive::single_policy": {
+              "count": 2,
+              "inclusive_duration_ms": 15228.509017
+            }
+          },
+          "complete_event_extent_ms": 7620.470083984375
+        },
+        "findings": {
+          "slow_conv_dilated3d_observed": true,
+          "cudnn_convolution_observed": false,
+          "vol2col_observed": true,
+          "dtod_observed": true
+        },
+        "notes": [
+          "These counts refer to all complete events in this single supplied trace, not to all repeated unprofiled samples.",
+          "CPU durations are inclusive; nested aten operations must not be added into a total.",
+          "Do not divide profiled CPU duration by clean wall latency or call that ratio a speedup.",
+          "DtoD and vol2col observations are counted, not inferred from source. The summary alone does not isolate their causal contribution to clean latency.",
+          "PyTorch 2.9's contiguous BF16/FP16 Conv3D cuDNN guard is absent from the corresponding 2.10 selection code; compare actual runtime/call metadata before causal attribution.",
+          "The formal 13-mode Torch 2.10 cohort must be remeasured independently with no vision-layout change."
+        ],
+        "upstream_sources": {
+          "torch29_guard": "https://github.com/pytorch/pytorch/blob/v2.9.0/aten/src/ATen/native/Convolution.cpp#L386-L406",
+          "torch210_selection": "https://github.com/pytorch/pytorch/blob/v2.10.0/aten/src/ATen/native/Convolution.cpp#L382-L409",
+          "torch29_fallback_fill": "https://github.com/pytorch/pytorch/blob/v2.9.0/aten/src/ATen/native/cuda/NaiveDilatedConvolution.cu#L249-L275"
+        }
+      }
+    },
+    "torch29_measurement_summary": {
+      "sha256": "e280fe314038057e255234627d35b64ee5495186332a96a175569e281c56ec54",
+      "value": {
+        "schema_version": 1,
+        "status": "running",
+        "started_at": "2026-10-13T20:58:57.181996+08:00",
+        "identity": {
+          "source_sha256": "a2f3483287be72d7004bf72daa9c2b70bb28dc1e81145ff314af67f0bb305627",
+          "checkpoint": {
+            "checkpoint": "outputs/libero-pir2-seed1000/libero-pir2-seed1000/checkpoint-500",
+            "sha256": {
+              "model-00001-of-00003.safetensors": "72d81b70745c24cee97b16fb663d5b7f9af0d314cfe41ad9f2677f9b13c48fda",
+              "model-00002-of-00003.safetensors": "abacf6848dbd1c799a9750525430bd8cd0da25c58b49914d9d5551c78cf0d78c",
+              "model-00003-of-00003.safetensors": "51ee4da92e62793b9d4a60ffe10f35c0d5c990e515c036da85e8eb85ceb060a9",
+              "config.json": "99a8827e8cec0c228d868603257e150586d5dc195448ed1cab670389e3fcfd69",
+              "processor_config.json": "ffaf5227069b70776675f34fbe3905a0081c7ff50738724424168623ffe01913",
+              "statistics.json": "830773f62b760ef7c36fa3ffb2eec45e358b24cb983d30f6e10aba3633a6a407",
+              "embodiment_id.json": "6f01100d50c52602f0c7c68304eea48f79a1f8c2426a960c04824c0ed4557869"
+            }
+          },
+          "configs": {
+            "original_bf16": {
+              "precision": "bf16",
+              "fusion": false,
+              "dit_graph": false,
+              "scope": "transformer",
+              "category_id": null,
+              "coverage": null,
+              "tactics": null,
+              "group_tactics": null,
+              "shape_tactics": null,
+              "group_conditioning": false,
+              "vision_channels_last": false,
+              "norm_modulation_quant": false,
+              "residual_norm_quant": false,
+              "fp8_fast_quant": false,
+              "fp4_swap_ab": false,
+              "fp_shared_inputs": false,
+              "fp_grouped": false,
+              "fp_swiglu": false,
+              "component": "dit",
+              "fusion_mode": "all",
+              "operator_profile": null,
+              "quant_tier": null
+            },
+            "bf16": {
+              "precision": "bf16",
+              "fusion": true,
+              "dit_graph": true,
+              "scope": "transformer",
+              "category_id": null,
+              "coverage": null,
+              "tactics": null,
+              "group_tactics": null,
+              "shape_tactics": null,
+              "group_conditioning": false,
+              "vision_channels_last": false,
+              "norm_modulation_quant": false,
+              "residual_norm_quant": false,
+              "fp8_fast_quant": false,
+              "fp4_swap_ab": false,
+              "fp_shared_inputs": false,
+              "fp_grouped": false,
+              "fp_swiglu": false,
+              "component": "dit",
+              "fusion_mode": "all",
+              "operator_profile": null,
+              "quant_tier": null
+            },
+            "tier00": {
+              "precision": "w8a8",
+              "fusion": true,
+              "dit_graph": true,
+              "scope": "transformer",
+              "category_id": null,
+              "coverage": null,
+              "tactics": null,
+              "group_tactics": null,
+              "shape_tactics": null,
+              "group_conditioning": false,
+              "vision_channels_last": false,
+              "norm_modulation_quant": true,
+              "residual_norm_quant": true,
+              "fp8_fast_quant": false,
+              "fp4_swap_ab": false,
+              "fp_shared_inputs": false,
+              "fp_grouped": false,
+              "fp_swiglu": false,
+              "component": "dit",
+              "fusion_mode": "all",
+              "operator_profile": null,
+              "quant_tier": 0
+            },
+            "tier01": {
+              "precision": "w8a8",
+              "fusion": true,
+              "dit_graph": true,
+              "scope": "transformer",
+              "category_id": null,
+              "coverage": null,
+              "tactics": null,
+              "group_tactics": null,
+              "shape_tactics": null,
+              "group_conditioning": false,
+              "vision_channels_last": false,
+              "norm_modulation_quant": true,
+              "residual_norm_quant": true,
+              "fp8_fast_quant": false,
+              "fp4_swap_ab": false,
+              "fp_shared_inputs": false,
+              "fp_grouped": false,
+              "fp_swiglu": false,
+              "component": "dit",
+              "fusion_mode": "all",
+              "operator_profile": null,
+              "quant_tier": 1
+            },
+            "tier02": {
+              "precision": "w8a8",
+              "fusion": true,
+              "dit_graph": true,
+              "scope": "transformer",
+              "category_id": null,
+              "coverage": null,
+              "tactics": null,
+              "group_tactics": null,
+              "shape_tactics": null,
+              "group_conditioning": false,
+              "vision_channels_last": false,
+              "norm_modulation_quant": true,
+              "residual_norm_quant": true,
+              "fp8_fast_quant": false,
+              "fp4_swap_ab": false,
+              "fp_shared_inputs": false,
+              "fp_grouped": false,
+              "fp_swiglu": false,
+              "component": "dit",
+              "fusion_mode": "all",
+              "operator_profile": null,
+              "quant_tier": 2
+            },
+            "tier03": {
+              "precision": "w8a8",
+              "fusion": true,
+              "dit_graph": true,
+              "scope": "transformer",
+              "category_id": null,
+              "coverage": null,
+              "tactics": null,
+              "group_tactics": null,
+              "shape_tactics": null,
+              "group_conditioning": false,
+              "vision_channels_last": false,
+              "norm_modulation_quant": true,
+              "residual_norm_quant": true,
+              "fp8_fast_quant": false,
+              "fp4_swap_ab": false,
+              "fp_shared_inputs": false,
+              "fp_grouped": false,
+              "fp_swiglu": false,
+              "component": "dit",
+              "fusion_mode": "all",
+              "operator_profile": null,
+              "quant_tier": 3
+            },
+            "tier04": {
+              "precision": "w8a8",
+              "fusion": true,
+              "dit_graph": true,
+              "scope": "transformer",
+              "category_id": null,
+              "coverage": null,
+              "tactics": null,
+              "group_tactics": null,
+              "shape_tactics": null,
+              "group_conditioning": false,
+              "vision_channels_last": false,
+              "norm_modulation_quant": true,
+              "residual_norm_quant": true,
+              "fp8_fast_quant": false,
+              "fp4_swap_ab": false,
+              "fp_shared_inputs": false,
+              "fp_grouped": false,
+              "fp_swiglu": false,
+              "component": "dit",
+              "fusion_mode": "all",
+              "operator_profile": null,
+              "quant_tier": 4
+            },
+            "tier05": {
+              "precision": "w8a8",
+              "fusion": true,
+              "dit_graph": true,
+              "scope": "transformer",
+              "category_id": null,
+              "coverage": null,
+              "tactics": null,
+              "group_tactics": null,
+              "shape_tactics": null,
+              "group_conditioning": false,
+              "vision_channels_last": false,
+              "norm_modulation_quant": true,
+              "residual_norm_quant": true,
+              "fp8_fast_quant": false,
+              "fp4_swap_ab": false,
+              "fp_shared_inputs": false,
+              "fp_grouped": false,
+              "fp_swiglu": false,
+              "component": "dit",
+              "fusion_mode": "all",
+              "operator_profile": null,
+              "quant_tier": 5
+            },
+            "tier06": {
+              "precision": "w8a8",
+              "fusion": true,
+              "dit_graph": true,
+              "scope": "transformer",
+              "category_id": null,
+              "coverage": null,
+              "tactics": null,
+              "group_tactics": null,
+              "shape_tactics": null,
+              "group_conditioning": false,
+              "vision_channels_last": false,
+              "norm_modulation_quant": true,
+              "residual_norm_quant": true,
+              "fp8_fast_quant": false,
+              "fp4_swap_ab": false,
+              "fp_shared_inputs": false,
+              "fp_grouped": false,
+              "fp_swiglu": false,
+              "component": "dit",
+              "fusion_mode": "all",
+              "operator_profile": null,
+              "quant_tier": 6
+            },
+            "tier07": {
+              "precision": "w8a8",
+              "fusion": true,
+              "dit_graph": true,
+              "scope": "transformer",
+              "category_id": null,
+              "coverage": null,
+              "tactics": null,
+              "group_tactics": null,
+              "shape_tactics": null,
+              "group_conditioning": false,
+              "vision_channels_last": false,
+              "norm_modulation_quant": true,
+              "residual_norm_quant": true,
+              "fp8_fast_quant": false,
+              "fp4_swap_ab": false,
+              "fp_shared_inputs": false,
+              "fp_grouped": false,
+              "fp_swiglu": false,
+              "component": "dit",
+              "fusion_mode": "all",
+              "operator_profile": null,
+              "quant_tier": 7
+            },
+            "tier08": {
+              "precision": "w8a8",
+              "fusion": true,
+              "dit_graph": true,
+              "scope": "transformer",
+              "category_id": null,
+              "coverage": null,
+              "tactics": null,
+              "group_tactics": null,
+              "shape_tactics": null,
+              "group_conditioning": false,
+              "vision_channels_last": false,
+              "norm_modulation_quant": true,
+              "residual_norm_quant": true,
+              "fp8_fast_quant": false,
+              "fp4_swap_ab": false,
+              "fp_shared_inputs": false,
+              "fp_grouped": false,
+              "fp_swiglu": false,
+              "component": "dit",
+              "fusion_mode": "all",
+              "operator_profile": null,
+              "quant_tier": 8
+            },
+            "tier09": {
+              "precision": "w8a8",
+              "fusion": true,
+              "dit_graph": true,
+              "scope": "transformer",
+              "category_id": null,
+              "coverage": null,
+              "tactics": null,
+              "group_tactics": null,
+              "shape_tactics": null,
+              "group_conditioning": false,
+              "vision_channels_last": false,
+              "norm_modulation_quant": true,
+              "residual_norm_quant": true,
+              "fp8_fast_quant": false,
+              "fp4_swap_ab": false,
+              "fp_shared_inputs": false,
+              "fp_grouped": false,
+              "fp_swiglu": false,
+              "component": "dit",
+              "fusion_mode": "all",
+              "operator_profile": null,
+              "quant_tier": 9
+            },
+            "tier10": {
+              "precision": "w8a8",
+              "fusion": true,
+              "dit_graph": true,
+              "scope": "transformer",
+              "category_id": null,
+              "coverage": null,
+              "tactics": null,
+              "group_tactics": null,
+              "shape_tactics": null,
+              "group_conditioning": false,
+              "vision_channels_last": false,
+              "norm_modulation_quant": true,
+              "residual_norm_quant": true,
+              "fp8_fast_quant": false,
+              "fp4_swap_ab": false,
+              "fp_shared_inputs": false,
+              "fp_grouped": false,
+              "fp_swiglu": false,
+              "component": "dit",
+              "fusion_mode": "all",
+              "operator_profile": null,
+              "quant_tier": 10
+            }
+          },
+          "harness_sha256": "8ebd7d9917319f60f807042ac7f0882913259689b4244d53c419428979138110",
+          "support_sha256": "60627812dd0fb7386d6f8e7d042fbc5c007d01f9b082864948c26c8bb4489445",
+          "thor_reference_sha256": "10727af75d40f9e529cd489f2cb359d63a0c9cdd11394eeefc2cb08a6d598666",
+          "input_array_hashes": {
+            "committed": {
+              "shape": [
+                1,
+                7
+              ],
+              "dtype": "float32",
+              "sha256": "63c9d0c184b239d43efe9a9624cabd2221cfc433d5522eb54ecc19cc64d8ac46"
+            },
+            "video.image": {
+              "shape": [
+                1,
+                1,
+                256,
+                256,
+                3
+              ],
+              "dtype": "uint8",
+              "sha256": "15c6a1efa836ec4e6d6a849126bd1143a9bc23e9fd53c93eb627fa64f519f38b"
+            },
+            "video.wrist_image": {
+              "shape": [
+                1,
+                1,
+                256,
+                256,
+                3
+              ],
+              "dtype": "uint8",
+              "sha256": "58b0fb8f8c29048d95180b8cbf4988ce7ef753ce0d67da708ec294b86649c791"
+            },
+            "state.x": {
+              "shape": [
+                1,
+                1,
+                1
+              ],
+              "dtype": "float32",
+              "sha256": "00df161a7989de875dde20e09dce0552fbfbb3c48b2155f67e136655c5dd03cf"
+            },
+            "state.y": {
+              "shape": [
+                1,
+                1,
+                1
+              ],
+              "dtype": "float32",
+              "sha256": "7494ed0522069bdecff79037c8405de6d37e8e675b61c976be896f177e0aae8b"
+            },
+            "state.z": {
+              "shape": [
+                1,
+                1,
+                1
+              ],
+              "dtype": "float32",
+              "sha256": "bb1e49ea678e9f7882422308a7c332231b3df6a74f70b5af47f098cc421d6280"
+            },
+            "state.roll": {
+              "shape": [
+                1,
+                1,
+                1
+              ],
+              "dtype": "float32",
+              "sha256": "ece2172a5c3ee0598295e857b562fc0d0e5bc82e56e567023408d440e34afd50"
+            },
+            "state.pitch": {
+              "shape": [
+                1,
+                1,
+                1
+              ],
+              "dtype": "float32",
+              "sha256": "00ed01fbac30b59f740b6ce9ca19a5beb0029217652e6997a95ca25adc87ca16"
+            },
+            "state.yaw": {
+              "shape": [
+                1,
+                1,
+                1
+              ],
+              "dtype": "float32",
+              "sha256": "35db12f6d67550ce2da55b640a5c61da653b855c8d3033c79789a4cb1b2f2dcd"
+            },
+            "state.gripper": {
+              "shape": [
+                1,
+                1,
+                2
+              ],
+              "dtype": "float32",
+              "sha256": "97e02e9586baadab8933dc37c1983d486c608b585cc6c667584f22c3ba036dd0"
+            },
+            "language.annotation.human.action.task_description": {
+              "shape": [
+                1,
+                1
+              ],
+              "dtype": "<U71",
+              "sha256": "2a33becb7233d8c6504842ded5eb9925e8a86a82939aaea535f0866ea99db722"
+            }
+          },
+          "constructor_options": {
+            "use_flash_attention": false,
+            "transformers_loading_kwargs": {
+              "trust_remote_code": true,
+              "attn_implementation": "sdpa"
+            }
+          },
+          "seed": 42,
+          "warmup": 3,
+          "repeats": 10,
+          "validation_seeds": [
+            42,
+            0,
+            195
+          ]
+        },
+        "identity_hash": "94b13b0a094c54d346e5e14a6e7e35f83a482fff3386a3dbd7672188675a8cff",
+        "modes": {
+          "original_bf16": {
+            "status": "complete",
+            "config": {
+              "precision": "bf16",
+              "fusion": false,
+              "dit_graph": false,
+              "scope": "transformer",
+              "category_id": null,
+              "coverage": null,
+              "tactics": null,
+              "group_tactics": null,
+              "shape_tactics": null,
+              "group_conditioning": false,
+              "vision_channels_last": false,
+              "norm_modulation_quant": false,
+              "residual_norm_quant": false,
+              "fp8_fast_quant": false,
+              "fp4_swap_ab": false,
+              "fp_shared_inputs": false,
+              "fp_grouped": false,
+              "fp_swiglu": false,
+              "component": "dit",
+              "fusion_mode": "all",
+              "operator_profile": null,
+              "quant_tier": null
+            },
+            "started_at": "2026-10-13T21:06:07.267263+08:00",
+            "optimization": {
+              "config": {
+                "precision": "bf16",
+                "fusion": false,
+                "dit_graph": false,
+                "scope": "transformer",
+                "category_id": null,
+                "coverage": null,
+                "tactics": null,
+                "group_tactics": null,
+                "shape_tactics": null,
+                "group_conditioning": false,
+                "vision_channels_last": false,
+                "norm_modulation_quant": false,
+                "residual_norm_quant": false,
+                "fp8_fast_quant": false,
+                "fp4_swap_ab": false,
+                "fp_shared_inputs": false,
+                "fp_grouped": false,
+                "fp_swiglu": false,
+                "component": "dit",
+                "fusion_mode": "all",
+                "operator_profile": null,
+                "quant_tier": null
+              },
+              "coverage": {},
+              "backend": {},
+              "operator_selection": null,
+              "scope": "Experimental serial inference; replay checks do not establish task quality"
+            },
+            "validation": {
+              "42": {
+                "original_bf16": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "original_bf16_decoded": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "repeat": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "repeat_decoded": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                }
+              },
+              "0": {
+                "original_bf16": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "original_bf16_decoded": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "repeat": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "repeat_decoded": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                }
+              },
+              "195": {
+                "original_bf16": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "original_bf16_decoded": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "repeat": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "repeat_decoded": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                }
+              }
+            },
+            "preparation_seconds": 37.94866130594164,
+            "graph_before_timing": {
+              "captures": 0,
+              "replays": 0,
+              "signatures": []
+            },
+            "samples_ms": [
+              2902.8584146872163,
+              2873.7520575523376,
+              2874.754403717816,
+              2891.4763890206814,
+              2870.9179013967514,
+              2873.62839281559,
+              2881.637797690928,
+              2878.2187160104513,
+              2870.931618846953,
+              2856.860928237438
+            ],
+            "last_audit": {
+              "request_tick": 0,
+              "d_request": 1,
+              "valid_start_tick": 1,
+              "valid_end_tick": 2,
+              "buffer_origin_after": 1,
+              "extra_buffer_shift": 0,
+              "buffer_restarted": false,
+              "state_capture_s": 1000.0,
+              "cache": {
+                "capture_s": 1000.0,
+                "source_tick": 0,
+                "requested_tick": 0,
+                "frame_hashes": {
+                  "image": "15c6a1efa836ec4e6d6a849126bd1143a9bc23e9fd53c93eb627fa64f519f38b",
+                  "wrist_image": "58b0fb8f8c29048d95180b8cbf4988ce7ef753ce0d67da708ec294b86649c791"
+                },
+                "vlm_seconds": 2.838668647222221,
+                "vlm_forward_calls": 1
+              },
+              "image_delay_ticks": 0,
+              "image_delay_ms": 0.0,
+              "server_seconds": 2.856684859842062,
+              "forward_counts": {
+                "vlm": 1,
+                "dit": 1
+              }
+            },
+            "graph_after_timing": {
+              "captures": 0,
+              "replays": 0,
+              "signatures": []
+            },
+            "median_ms": 2874.2532306350768,
+            "min_ms": 2856.860928237438,
+            "max_ms": 2902.8584146872163,
+            "profile": "measurements/original_bf16/trace.json",
+            "restoration": {
+              "shape": [
+                40,
+                7
+              ],
+              "finite": true,
+              "exact": true,
+              "max_abs": 0.0,
+              "mean_abs": 0.0,
+              "rmse": 0.0,
+              "relative_l2": 0.0
+            },
+            "restoration_decoded": {
+              "shape": [
+                40,
+                7
+              ],
+              "finite": true,
+              "exact": true,
+              "max_abs": 0.0,
+              "mean_abs": 0.0,
+              "rmse": 0.0,
+              "relative_l2": 0.0
+            },
+            "completed_at": "2026-10-13T21:07:58.701730+08:00",
+            "speedup_vs_original_bf16": 1.0
+          },
+          "bf16": {
+            "status": "profiling",
+            "config": {
+              "precision": "bf16",
+              "fusion": true,
+              "dit_graph": true,
+              "scope": "transformer",
+              "category_id": null,
+              "coverage": null,
+              "tactics": null,
+              "group_tactics": null,
+              "shape_tactics": null,
+              "group_conditioning": false,
+              "vision_channels_last": false,
+              "norm_modulation_quant": false,
+              "residual_norm_quant": false,
+              "fp8_fast_quant": false,
+              "fp4_swap_ab": false,
+              "fp_shared_inputs": false,
+              "fp_grouped": false,
+              "fp_swiglu": false,
+              "component": "dit",
+              "fusion_mode": "all",
+              "operator_profile": null,
+              "quant_tier": null
+            },
+            "started_at": "2026-10-13T21:07:58.884647+08:00",
+            "optimization": {
+              "config": {
+                "precision": "bf16",
+                "fusion": true,
+                "dit_graph": true,
+                "scope": "transformer",
+                "category_id": null,
+                "coverage": null,
+                "tactics": null,
+                "group_tactics": null,
+                "shape_tactics": null,
+                "group_conditioning": false,
+                "vision_channels_last": false,
+                "norm_modulation_quant": false,
+                "residual_norm_quant": false,
+                "fp8_fast_quant": false,
+                "fp4_swap_ab": false,
+                "fp_shared_inputs": false,
+                "fp_grouped": false,
+                "fp_swiglu": false,
+                "component": "dit",
+                "fusion_mode": "all",
+                "operator_profile": null,
+                "quant_tier": null
+              },
+              "coverage": {},
+              "backend": {
+                "backend_id": "torch",
+                "backend_revision": "2.9.0+cu128",
+                "device_arch": "sm_89",
+                "quant_format": "bf16",
+                "runtime": {
+                  "torch": "2.9.0+cu128",
+                  "cuda": "12.8",
+                  "triton": "3.5.0",
+                  "device": "cuda:0",
+                  "device_name": "NVIDIA RTX 6000 Ada Generation"
+                }
+              },
+              "operator_selection": null,
+              "scope": "Experimental serial inference; replay checks do not establish task quality"
+            },
+            "validation": {
+              "42": {
+                "original_bf16": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "original_bf16_decoded": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "bf16": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "bf16_decoded": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "repeat": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "repeat_decoded": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                }
+              },
+              "0": {
+                "original_bf16": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "original_bf16_decoded": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "bf16": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "bf16_decoded": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "repeat": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "repeat_decoded": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                }
+              },
+              "195": {
+                "original_bf16": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "original_bf16_decoded": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "bf16": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "bf16_decoded": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "repeat": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                },
+                "repeat_decoded": {
+                  "shape": [
+                    40,
+                    7
+                  ],
+                  "finite": true,
+                  "exact": true,
+                  "max_abs": 0.0,
+                  "mean_abs": 0.0,
+                  "rmse": 0.0,
+                  "relative_l2": 0.0
+                }
+              }
+            },
+            "preparation_seconds": 52.052394601516426,
+            "graph_before_timing": {
+              "captures": 1,
+              "replays": 25,
+              "signatures": [
+                "(((1, 41, 1536), torch.bfloat16, device(type='cuda', index=0), (62976, 1536, 1)), ((1, 153, 2048), torch.bfloat16, device(type='cuda', index=0), (313344, 2048, 1)), ((1, 41), torch.int64, device(type='cuda', index=0), (41, 1)), ((1, 153), torch.bool, device(type='cuda', index=0), (153, 1)), ((1, 153), torch.bool, device(type='cuda', index=0), (153, 1)))"
+              ]
+            },
+            "samples_ms": [
+              3777.647813782096,
+              3810.522778891027,
+              3802.763693034649,
+              3792.6569441333413,
+              4092.9686818271875,
+              3824.2681650444865,
+              3812.797710299492,
+              3807.3718901723623,
+              3801.332578063011,
+              3784.1006917878985
+            ],
+            "last_audit": {
+              "request_tick": 0,
+              "d_request": 1,
+              "valid_start_tick": 1,
+              "valid_end_tick": 2,
+              "buffer_origin_after": 1,
+              "extra_buffer_shift": 0,
+              "buffer_restarted": false,
+              "state_capture_s": 1000.0,
+              "cache": {
+                "capture_s": 1000.0,
+                "source_tick": 0,
+                "requested_tick": 0,
+                "frame_hashes": {
+                  "image": "15c6a1efa836ec4e6d6a849126bd1143a9bc23e9fd53c93eb627fa64f519f38b",
+                  "wrist_image": "58b0fb8f8c29048d95180b8cbf4988ce7ef753ce0d67da708ec294b86649c791"
+                },
+                "vlm_seconds": 3.7726846635341644,
+                "vlm_forward_calls": 1
+              },
+              "image_delay_ticks": 0,
+              "image_delay_ms": 0.0,
+              "server_seconds": 3.78392759244889,
+              "forward_counts": {
+                "vlm": 1,
+                "dit": 1
+              }
+            },
+            "graph_after_timing": {
+              "captures": 1,
+              "replays": 35,
+              "signatures": [
+                "(((1, 41, 1536), torch.bfloat16, device(type='cuda', index=0), (62976, 1536, 1)), ((1, 153, 2048), torch.bfloat16, device(type='cuda', index=0), (313344, 2048, 1)), ((1, 41), torch.int64, device(type='cuda', index=0), (41, 1)), ((1, 153), torch.bool, device(type='cuda', index=0), (153, 1)), ((1, 153), torch.bool, device(type='cuda', index=0), (153, 1)))"
+              ]
+            },
+            "median_ms": 3805.0677916035056,
+            "min_ms": 3777.647813782096,
+            "max_ms": 4092.9686818271875
+          }
+        },
+        "quality_modes": [],
+        "protocol": {
+          "name": "GR00T DiT W8A8-to-W4A4 adaptation of reference progressive protocol; full fresh-vision plan",
+          "reference_revision": "239b4a3ef2268048571c9f508ad5700f98398c2f",
+          "model_base_revision": "3c96deed507daa2878dc7e78b0deee9431ceec32",
+          "timing": "prepared CPU observation -> Backend.plan -> CPU action; 1 VLM + 1 streaming DiT",
+          "includes": [
+            "online activation packing",
+            "pre/postprocessing",
+            "request JSONL write"
+          ],
+          "excludes": [
+            "model load",
+            "weight packing",
+            "compile",
+            "CUDA Graph capture",
+            "warmup",
+            "bootstrap 1 VLM + 4 DiT",
+            "state reset",
+            "profiling"
+          ],
+          "state_reset": "per-config bootstrap snapshot; clone buffers/cache and restore all RNG outside timing",
+          "validation": "full 40x7 decoded continuous CPU action chunk and projected commands; per-config bootstrap error propagates; finite only guard",
+          "input": "Spatial episode 0 frame 20; fresh visual; action delay1 image age0 fixed demo prefix",
+          "coverage": "192 structurally selected DiT Linear sites; not dynamic GEMM-call coverage",
+          "quantization_scope": "192 candidate DiT Linears only; VLM and noncandidate DiT remain BF16",
+          "optimization_bundle": "Shared fusion=all and DiT Graph; integer tiers also use norm/modulation and residual/norm quantization fusion",
+          "quality": "fixed-input replay diagnostics only; no closed-loop runs requested or performed"
+        },
+        "environment": {
+          "torch": "2.9.0+cu128",
+          "cuda": "12.8",
+          "device": "NVIDIA RTX 6000 Ada Generation",
+          "capability": [
+            8,
+            9
+          ],
+          "python": "3.12.15 (main, Oct  3 2026, 01:03:07) [Clang 22.1.3 ]",
+          "threads": 2,
+          "interop_threads": 1,
+          "cuda_visible_devices": "0"
+        },
+        "error": "Traceback (most recent call last):\n  File \"hub.py\", line 479, in cached_files\n    hf_hub_download(\n  File \"_validators.py\", line 114, in _inner_fn\n    return fn(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^\n  File \"file_download.py\", line 1014, in hf_hub_download\n    return _hf_hub_download_to_cache_dir(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"file_download.py\", line 1121, in _hf_hub_download_to_cache_dir\n    _raise_on_head_call_error(head_call_error, force_download, local_files_only)\n  File \"file_download.py\", line 1653, in _raise_on_head_call_error\n    raise LocalEntryNotFoundError(\nhuggingface_hub.errors.LocalEntryNotFoundError: Cannot find the requested files in the disk cache and outgoing traffic has been disabled. To enable hf.co look-ups and downloads online, set 'local_files_only' to False.\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"scripts/measure_progressive.py\", line 238, in main\n    core = load_core(checkpoint, output, 'cuda:0')\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"coexecution/libero/service.py\", line 47, in load_core\n    core = DecoupledGr00tPolicy(\"LIBERO_PANDA\", str(checkpoint), device=device)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"decoupled_policy.py\", line 47, in __init__\n    super().__init__(*args, **kwargs)\n  File \"gr00t_policy.py\", line 100, in __init__\n    model = AutoModel.from_pretrained(model_dir)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"coexecution/libero/service.py\", line 30, in checked\n    model, info = original(*pos, **kwargs, output_loading_info=True)\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"scripts/measurement_support.py\", line 104, in configured\n    return original(*pos, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"auto_factory.py\", line 604, in from_pretrained\n    return model_class.from_pretrained(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"__init__.py\", line 67, in patched\n    return orig.__func__(klass, resolved, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"modeling_utils.py\", line 277, in _wrapper\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"modeling_utils.py\", line 4971, in from_pretrained\n    model = cls(config, *model_args, **model_kwargs)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"gr00t_n1d7.py\", line 1015, in __init__\n    self.backbone = backbone_cls(\n                    ^^^^^^^^^^^^^\n  File \"qwen3_backbone.py\", line 80, in __init__\n    self.model = Qwen3VLForConditionalGeneration.from_pretrained(\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"coexecution/libero/loading.py\", line 20, in from_config\n    config = Qwen3VLConfig.from_pretrained(model_name, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"__init__.py\", line 67, in patched\n    return orig.__func__(klass, resolved, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"configuration_utils.py\", line 622, in from_pretrained\n    config_dict, kwargs = cls.get_config_dict(pretrained_model_name_or_path, **kwargs)\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"configuration_utils.py\", line 662, in get_config_dict\n    config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"configuration_utils.py\", line 721, in _get_config_dict\n    resolved_config_file = cached_file(\n                           ^^^^^^^^^^^^\n  File \"hub.py\", line 322, in cached_file\n    file = cached_files(path_or_repo_id=path_or_repo_id, filenames=[filename], **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"hub.py\", line 553, in cached_files\n    raise OSError(\nOSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\n",
+        "failed_at": "2026-10-13T20:59:00.223921+08:00",
+        "model_load_seconds": 9.72828295826912,
+        "input_metadata": {
+          "episode_index": 0,
+          "tasks": [
+            "pick up the black bowl next to the cookie box and place it on the plate"
+          ],
+          "length": 110,
+          "dataset_fps": 20
+        },
+        "input_hashes": {
+          "image": "15c6a1efa836ec4e6d6a849126bd1143a9bc23e9fd53c93eb627fa64f519f38b",
+          "wrist_image": "58b0fb8f8c29048d95180b8cbf4988ce7ef753ce0d67da708ec294b86649c791"
+        },
+        "prepared_input_sha256": "9934a1a0f432f1e4408cbd47fa92b5187129d10b2efaa7cbe2fbc3c34e821116",
+        "source_prepared_input_sha256": "9934a1a0f432f1e4408cbd47fa92b5187129d10b2efaa7cbe2fbc3c34e821116",
+        "input_array_hashes": {
+          "committed": {
+            "shape": [
+              1,
+              7
+            ],
+            "dtype": "float32",
+            "sha256": "63c9d0c184b239d43efe9a9624cabd2221cfc433d5522eb54ecc19cc64d8ac46"
+          },
+          "video.image": {
+            "shape": [
+              1,
+              1,
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8",
+            "sha256": "15c6a1efa836ec4e6d6a849126bd1143a9bc23e9fd53c93eb627fa64f519f38b"
+          },
+          "video.wrist_image": {
+            "shape": [
+              1,
+              1,
+              256,
+              256,
+              3
+            ],
+            "dtype": "uint8",
+            "sha256": "58b0fb8f8c29048d95180b8cbf4988ce7ef753ce0d67da708ec294b86649c791"
+          },
+          "state.x": {
+            "shape": [
+              1,
+              1,
+              1
+            ],
+            "dtype": "float32",
+            "sha256": "00df161a7989de875dde20e09dce0552fbfbb3c48b2155f67e136655c5dd03cf"
+          },
+          "state.y": {
+            "shape": [
+              1,
+              1,
+              1
+            ],
+            "dtype": "float32",
+            "sha256": "7494ed0522069bdecff79037c8405de6d37e8e675b61c976be896f177e0aae8b"
+          },
+          "state.z": {
+            "shape": [
+              1,
+              1,
+              1
+            ],
+            "dtype": "float32",
+            "sha256": "bb1e49ea678e9f7882422308a7c332231b3df6a74f70b5af47f098cc421d6280"
+          },
+          "state.roll": {
+            "shape": [
+              1,
+              1,
+              1
+            ],
+            "dtype": "float32",
+            "sha256": "ece2172a5c3ee0598295e857b562fc0d0e5bc82e56e567023408d440e34afd50"
+          },
+          "state.pitch": {
+            "shape": [
+              1,
+              1,
+              1
+            ],
+            "dtype": "float32",
+            "sha256": "00ed01fbac30b59f740b6ce9ca19a5beb0029217652e6997a95ca25adc87ca16"
+          },
+          "state.yaw": {
+            "shape": [
+              1,
+              1,
+              1
+            ],
+            "dtype": "float32",
+            "sha256": "35db12f6d67550ce2da55b640a5c61da653b855c8d3033c79789a4cb1b2f2dcd"
+          },
+          "state.gripper": {
+            "shape": [
+              1,
+              1,
+              2
+            ],
+            "dtype": "float32",
+            "sha256": "97e02e9586baadab8933dc37c1983d486c608b585cc6c667584f22c3ba036dd0"
+          },
+          "language.annotation.human.action.task_description": {
+            "shape": [
+              1,
+              1
+            ],
+            "dtype": "<U71",
+            "sha256": "2a33becb7233d8c6504842ded5eb9925e8a86a82939aaea535f0866ea99db722"
+          }
+        },
+        "attention_runtime": {
+          "backbone": {
+            "main": "sdpa",
+            "text": "sdpa",
+            "vision": "sdpa"
+          },
+          "action_head_processors": {
+            "AttnProcessor2_0": 32
+          }
+        },
+        "loaded_model_source": {
+          "gr00t.model.modules.dit": {
+            "file": "dit.py",
+            "sha256": "4c2f940265fce390a9703b39dcb2c6c1c1c8eae1f0776d723aa37ea1296d4d8c"
+          },
+          "gr00t.model.gr00t_n1d7.gr00t_n1d7": {
+            "file": "gr00t_n1d7.py",
+            "sha256": "776c60602a835c8156b2c336793c569daf2cb4291f706f3562fb144774a91434"
+          },
+          "gr00t.policy.decoupled_policy": {
+            "file": "decoupled_policy.py",
+            "sha256": "15534a522786612e66bc2e921c81bb28bb8f1897c9921f0b3463ed832b88475d"
+          },
+          "gr00t.model.modules.qwen3_backbone": {
+            "file": "qwen3_backbone.py",
+            "sha256": "c73316c2f2b17739fbea9f302d6dd190ac12b03e9f11f254681fbc13eecb2eb2"
+          }
+        }
+      }
+    }
+  },
+  "formal_environment": {
+    "torch": "2.10.0+cu128",
+    "cuda": "12.8",
+    "cudnn": 91002,
+    "cudnn_enabled": true,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "package_versions": {
+      "torch": "2.10.0+cu128",
+      "torchvision": "0.25.0+cu128",
+      "triton": "3.6.0",
+      "transformers": "4.57.3",
+      "numpy": "1.26.4",
+      "Pillow": "12.2.0",
+      "safetensors": "0.7.0",
+      "tokenizers": "0.22.2",
+      "nvidia-cudnn-cu12": "9.10.2.21"
+    },
+    "device": "NVIDIA RTX 6000 Ada Generation",
+    "capability": [
+      8,
+      9
+    ],
+    "python": "3.12.15 (main, Oct  3 2026, 01:03:07) [Clang 22.1.3 ]",
+    "threads": 2,
+    "interop_threads": 1,
+    "cuda_visible_devices": "0"
+  },
+  "thor_reference": {
+    "status": "reference_only",
+    "sha256": "29c5c575a2a59b0c0713e6cc1a82d4761bccf33fb0d7a3da30096fa40681bc47",
+    "environment": {
+      "torch": "2.10.0+cu130",
+      "cuda": "13.0",
+      "device": "NVIDIA Thor",
+      "capability": [
+        11,
+        0
+      ],
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "threads": 2
+    },
+    "environment_status": "recorded",
+    "note": "Ada INT8/INT4 vs Thor FP8/FP4; Torch CUDA builds differ. Not a hardware-only comparison."
+  },
+  "formal_convolution_profiles": {
+    "original_bf16": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 160.14199999999983
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 155.38999999999942
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 150.19700000000012
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 110.07200000000012
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "bf16": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 141.4380000000001
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 139.0010000000002
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 135.71199999999953
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 102.34300000000076
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "tier00": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 127.13999999999942
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 124.33699999999953
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 120.7489999999998
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 87.83399999999892
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "tier01": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 133.53399999999965
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 130.862000000001
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 127.4260000000013
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 94.41200000000026
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "tier02": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 135.65999999999985
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 132.63600000000042
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 129.15599999999904
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 95.10499999999956
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "tier03": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 147.45499999999993
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 144.41100000000006
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 139.90399999999863
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 100.56800000000112
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "tier04": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 153.7009999999991
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 150.11199999999917
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 146.27200000000084
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 109.28600000000006
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "tier05": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 137.5689999999995
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 134.3700000000008
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 130.77700000000004
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 97.01699999999983
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "tier06": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 184.12900000000081
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 180.20900000000074
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 175.25900000000001
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 133.9380000000001
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "tier07": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 131.67100000000028
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 128.47500000000036
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 124.875
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 89.66400000000067
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "tier08": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 131.52399999999943
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 128.8859999999986
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 125.39699999999903
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 91.47999999999956
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "tier09": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 134.83100000000013
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 131.58300000000054
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 127.92300000000068
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 91.8090000000011
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "tier10": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 131.4390000000003
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 128.64699999999903
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 125.27399999999943
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 90.59199999999873
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    }
+  },
+  "upstream_sources": {
+    "torch29_guard": "https://github.com/pytorch/pytorch/blob/v2.9.0/aten/src/ATen/native/Convolution.cpp#L386-L406",
+    "torch210_selection": "https://github.com/pytorch/pytorch/blob/v2.10.0/aten/src/ATen/native/Convolution.cpp#L382-L409",
+    "torch29_fallback_fill": "https://github.com/pytorch/pytorch/blob/v2.9.0/aten/src/ATen/native/cuda/NaiveDilatedConvolution.cu#L249-L275"
+  },
+  "interpretation": [
+    "PyTorch 2.9's cuDNN selection rejects contiguous BF16/FP16 Conv3D with a non-unit spatial kernel when its cuDNN version check is >=9.8.",
+    "The corresponding PyTorch 2.10 source no longer contains that guard. Logged fallback events are consistent with this source-level cause.",
+    "All formal configurations use the isolated Torch 2.10.0+cu128 environment and retain the original vision layout; no diagnostic samples are reused.",
+    "The measured per-mode profile must observe aten::cudnn_convolution and no aten::slow_conv_dilated3d. A small operator probe alone is not a full-policy validation.",
+    "Profiled CPU duration and clean unprofiled wall latency have different instrumentation boundaries; do not use their ratio as a speedup."
+  ]
+}

@@ -1,0 +1,12 @@
+Ada 完整推理中间结果（2026-10-13）
+最新数据目录：ADA6000/20261013_complete_inference。
+先看 20261013_213700_ada_complete_curve.png、ada_tiers.csv 和 ada_completed_results.txt（同一时间戳前缀）。
+本轮使用维护者 piR2 main 3c96deed 加所附渐进协议补丁，owned CUDA/C++ 算子源码未改。
+输入与 Thor 完全一致；计时含新 VLM＋一次 streaming DiT＋CPU 前后处理；VLM/非候选保持 BF16。
+13 配置、每档3 warmup和10次计时，共130条；没有闭环或成功率测量。
+完整源码补丁、逐档 profile 汇总、位宽映射、环境、哈希与检查日志在配套 evidence.zip：
+  results/ = 全部50个图表及数据文件；reproduction/ = 26个源码与复核附件。
+独立审计TXT提供W8A8及T6/T8起伏的实测证据和边界。可直接引用为中间结果，不能称闭环质量通过。
+依赖限制：环境提供的CUTLASS记录了header SHA，Git revision未知且不同于推荐pin；二进制归属限制见审计。
+旧Ada约10–11ms曲线的计时与量化范围不同，不能与本轮直接拼成同一曲线。
+不含论文、PDF、模型权重、prepared-input.npz或原始大trace。

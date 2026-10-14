@@ -1,0 +1,50 @@
+[
+  {
+    "task": 0,
+    "episode": 0,
+    "seed": 1000,
+    "array_sha256": {
+      "video__image": "93a80dc6fa52782245a2ed3e3b73c54a8bb556eb784f4c35193fb9479f6295b8",
+      "video__wrist_image": "8aa87c15f44af465d6782c99f3c4b3611f876a586938e185c6ec0a22177cd5ee",
+      "state__x": "14fb5f182f220b38c6652b7523529b098245459cd42370a6fd4a3a17c1994862",
+      "state__y": "6a582f3f8375b2fe8a0bc35bf72a034362e56287979d9a06534c5279fd951d55",
+      "state__z": "9ca76f24cd0c4ebd2f21a920abff2d69f25cb7b0418cace2630759e7f7b0c988",
+      "state__roll": "c54f57ed5d010731be349db0f30839fe5aea32add1b7fe0f2a383dac1ffe5703",
+      "state__pitch": "4142f6d844fae11a8571770c43ae4bf8ec0d6079288038100d0a7d564f50da5c",
+      "state__yaw": "99020ccc6c2307600ed5c51678bda1da271bf460fb25ce6543504d280f9f7d85",
+      "state__gripper": "a8dc43c3f36a56f05fea88bf37fb7e1bb169cfa06cdcb6af33f505ba4a48c0c3"
+    }
+  },
+  {
+    "task": 3,
+    "episode": 0,
+    "seed": 4000,
+    "array_sha256": {
+      "video__image": "a3e9a0bb6bd58f00b0c41937af16aa0b281270b35051b70f0ec1516cfcbca68f",
+      "video__wrist_image": "e895854d3284786c08aa469cfc06e0bb2966753a58a8525eff9aa94f767a51b6",
+      "state__x": "cc07aa17b63ddee46304959060e39260ff4c3a8ae2b73d0ce659936da86eb0d0",
+      "state__y": "d9f83f921e7aaca2f2d28cfee90cdf8a7a2d34b29e50062d999f5012657fb053",
+      "state__z": "a50b88c1ddc3acb5f1b4b02e5cfbc2f1552a26cff761efb2b8b3ef58416c9683",
+      "state__roll": "fc75cc472a87088a5b66229e7bdb398fdb06252d0c027df54dcd7a6d7f4fb38d",
+      "state__pitch": "8eebc8a37d5137f679eb2df6dac3defaa9c6c14673424e10fb1d4112c9b5bd5b",
+      "state__yaw": "849be0b6a80cf5d499fc175f740f588f9567d7a467eaa780cc9652b8151aa6fc",
+      "state__gripper": "7079e0e8ebd4b6600a6e1955b3a9d81670fc9a2b12b43f12b008ccf21d9a50e5"
+    }
+  },
+  {
+    "task": 7,
+    "episode": 0,
+    "seed": 8000,
+    "array_sha256": {
+      "video__image": "ff3eb228676c35565d80e75a68120cdd591292fc923489a5dd98c29dea0c9a4f",
+      "video__wrist_image": "7a78d913358081bb08193cd8b25bc0e937ff05deb8b22fa2cf5bd69e669a70bf",
+      "state__x": "2a4ce91ae0a626f2c69d1484ccbc3bd9daf6049051cbf23126b829dfeb2d421b",
+      "state__y": "553427ed6f0871105bc80299a76808a5a6f44d4500733dea9b6b1d4531b5f77c",
+      "state__z": "e9923be34f1d82f0dca3e1d45f609da11d85ed5026974cc158be8422c1709860",
+      "state__roll": "1d59255acb4bb5d2a63c4f283cbe446a3b29d5710f751f6d63f6a762a51f3423",
+      "state__pitch": "98bf58c4afa482870f339f943b3015e63d950d7c01001564d5935fddf33fff21",
+      "state__yaw": "e3c33369f7eec5941e83f6d503a51b51a298bfc9e5db308f739f5616277acda7",
+      "state__gripper": "dac5994be2a1e19cecd5914f7eced4c83dd409f8cccbe9cae468987ce0156a1c"
+    }
+  }
+]

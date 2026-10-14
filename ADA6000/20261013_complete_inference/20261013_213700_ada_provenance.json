@@ -1,0 +1,1209 @@
+{
+  "measurement_summary_sha256": "75c57572440abb6f9f0480c52a6e6b95c4fba8516ff46cce1c4e894753e2d202",
+  "measurement_harness_sha256": "b8c487b18c32b2e5bbbb5803d64b007441496052be44823771c1ed03c46aaed9",
+  "source_manifest_sha256": "ccb028e362f3aa6db8eddc9f38735b0564599f9c5e1456c2d52e42293d741165",
+  "protocol": {
+    "name": "GR00T DiT W8A8-to-W4A4 adaptation of reference progressive protocol; full fresh-vision plan",
+    "reference_revision": "239b4a3ef2268048571c9f508ad5700f98398c2f",
+    "model_base_revision": "3c96deed507daa2878dc7e78b0deee9431ceec32",
+    "timing": "prepared CPU observation -> Backend.plan -> CPU action; 1 VLM + 1 streaming DiT",
+    "includes": [
+      "online activation packing",
+      "pre/postprocessing",
+      "request JSONL write"
+    ],
+    "excludes": [
+      "model load",
+      "weight packing",
+      "compile",
+      "CUDA Graph capture",
+      "warmup",
+      "bootstrap 1 VLM + 4 DiT",
+      "state reset",
+      "profiling"
+    ],
+    "state_reset": "per-config bootstrap snapshot; clone buffers/cache and restore all RNG outside timing",
+    "validation": "full 40x7 decoded continuous CPU action chunk and projected commands; per-config bootstrap error propagates; finite only guard",
+    "input": "Spatial episode 0 frame 20; fresh visual; action delay1 image age0 fixed demo prefix",
+    "coverage": "192 structurally selected DiT Linear sites; not dynamic GEMM-call coverage",
+    "quantization_scope": "192 candidate DiT Linears only; VLM and noncandidate DiT remain BF16",
+    "optimization_bundle": "Shared fusion=all and DiT Graph; integer tiers also use norm/modulation and residual/norm quantization fusion",
+    "quality": "fixed-input replay diagnostics only; no closed-loop runs requested or performed"
+  },
+  "checkpoint": {
+    "checkpoint": "outputs/libero-pir2-seed1000/libero-pir2-seed1000/checkpoint-500",
+    "sha256": {
+      "model-00001-of-00003.safetensors": "72d81b70745c24cee97b16fb663d5b7f9af0d314cfe41ad9f2677f9b13c48fda",
+      "model-00002-of-00003.safetensors": "abacf6848dbd1c799a9750525430bd8cd0da25c58b49914d9d5551c78cf0d78c",
+      "model-00003-of-00003.safetensors": "51ee4da92e62793b9d4a60ffe10f35c0d5c990e515c036da85e8eb85ceb060a9",
+      "config.json": "99a8827e8cec0c228d868603257e150586d5dc195448ed1cab670389e3fcfd69",
+      "processor_config.json": "ffaf5227069b70776675f34fbe3905a0081c7ff50738724424168623ffe01913",
+      "statistics.json": "830773f62b760ef7c36fa3ffb2eec45e358b24cb983d30f6e10aba3633a6a407",
+      "embodiment_id.json": "6f01100d50c52602f0c7c68304eea48f79a1f8c2426a960c04824c0ed4557869"
+    }
+  },
+  "input_array_hashes": {
+    "committed": {
+      "shape": [
+        1,
+        7
+      ],
+      "dtype": "float32",
+      "sha256": "63c9d0c184b239d43efe9a9624cabd2221cfc433d5522eb54ecc19cc64d8ac46"
+    },
+    "video.image": {
+      "shape": [
+        1,
+        1,
+        256,
+        256,
+        3
+      ],
+      "dtype": "uint8",
+      "sha256": "15c6a1efa836ec4e6d6a849126bd1143a9bc23e9fd53c93eb627fa64f519f38b"
+    },
+    "video.wrist_image": {
+      "shape": [
+        1,
+        1,
+        256,
+        256,
+        3
+      ],
+      "dtype": "uint8",
+      "sha256": "58b0fb8f8c29048d95180b8cbf4988ce7ef753ce0d67da708ec294b86649c791"
+    },
+    "state.x": {
+      "shape": [
+        1,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "sha256": "00df161a7989de875dde20e09dce0552fbfbb3c48b2155f67e136655c5dd03cf"
+    },
+    "state.y": {
+      "shape": [
+        1,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "sha256": "7494ed0522069bdecff79037c8405de6d37e8e675b61c976be896f177e0aae8b"
+    },
+    "state.z": {
+      "shape": [
+        1,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "sha256": "bb1e49ea678e9f7882422308a7c332231b3df6a74f70b5af47f098cc421d6280"
+    },
+    "state.roll": {
+      "shape": [
+        1,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "sha256": "ece2172a5c3ee0598295e857b562fc0d0e5bc82e56e567023408d440e34afd50"
+    },
+    "state.pitch": {
+      "shape": [
+        1,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "sha256": "00ed01fbac30b59f740b6ce9ca19a5beb0029217652e6997a95ca25adc87ca16"
+    },
+    "state.yaw": {
+      "shape": [
+        1,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "sha256": "35db12f6d67550ce2da55b640a5c61da653b855c8d3033c79789a4cb1b2f2dcd"
+    },
+    "state.gripper": {
+      "shape": [
+        1,
+        1,
+        2
+      ],
+      "dtype": "float32",
+      "sha256": "97e02e9586baadab8933dc37c1983d486c608b585cc6c667584f22c3ba036dd0"
+    },
+    "language.annotation.human.action.task_description": {
+      "shape": [
+        1,
+        1
+      ],
+      "dtype": "<U71",
+      "sha256": "2a33becb7233d8c6504842ded5eb9925e8a86a82939aaea535f0866ea99db722"
+    }
+  },
+  "source_manifests": {
+    "source-manifest.json-ccb028e362f3": {
+      "sha256": "ccb028e362f3aa6db8eddc9f38735b0564599f9c5e1456c2d52e42293d741165",
+      "value": {
+        "base_url": "https://github.com/Ther-nullptr/piR2",
+        "base_revision": "3c96deed507daa2878dc7e78b0deee9431ceec32",
+        "modification_scope": "192-site progressive selection and mixed-bit producer adaptation; no owned CUDA source edits",
+        "changed_files": [
+          ".local/scripts/MEASUREMENT_NOTES.txt",
+          ".local/scripts/measure_progressive.py",
+          ".local/scripts/measurement_support.py",
+          ".local/scripts/prepared-input.npz",
+          ".local/scripts/test_measurement_support.py",
+          ".local/scripts/thor-reference.json",
+          "coexecution/optimization/config.py",
+          "coexecution/optimization/groot/integer.py",
+          "coexecution/optimization/groot/integer_connections.py",
+          "coexecution/optimization/progressive.py",
+          "coexecution/optimization/session.py",
+          "tests/contracts/test_progressive_quantization.py",
+          "tests/gpu/test_progressive_gpu.py",
+          "tests/helpers/groot_streaming.py",
+          "tools/run_checks.py"
+        ],
+        "files": {
+          ".github/CODEOWNERS": "7c658928e5aae8f6a7983af922159667ace29b268848e76d9617dc0992e9b4b6",
+          ".github/PULL_REQUEST_TEMPLATE.md": "70b2190000d3f957b822e3d05ad42cf6a9bcf43a775aa49d360c072008d97017",
+          ".github/workflows/checks.yml": "d69e06b0d22c68e7cd26e33aa5178dd4629b6c48f6b0e1616982924da842182c",
+          ".gitignore": "ff97b84ca4b023ed2805f3d8f728155a1bd9a19e8ccad4c9e56ed9cec2f6d868",
+          ".gitmodules": "b59e572ab69c1f25ecc1a976186838d9ffc80c6fe72fb3e3481d9c9e905a4144",
+          ".local/scripts/MEASUREMENT_NOTES.txt": "90e53753e83c1519a1ae7d0d8276819c7b1ab34388b69c3448661e48ef6e8707",
+          ".local/scripts/measure_progressive.py": "b8c487b18c32b2e5bbbb5803d64b007441496052be44823771c1ed03c46aaed9",
+          ".local/scripts/measurement_support.py": "45cb02caadfa4874601291ad0a8a98d5e43c02a73b645535e10dc7ca1394f8ed",
+          ".local/scripts/prepared-input.npz": "9934a1a0f432f1e4408cbd47fa92b5187129d10b2efaa7cbe2fbc3c34e821116",
+          ".local/scripts/test_measurement_support.py": "d8c3abfbf1b6edd233b346f723482d4129989e5fa27235c7e1c469fb6071783a",
+          ".local/scripts/thor-reference.json": "10727af75d40f9e529cd489f2cb359d63a0c9cdd11394eeefc2cb08a6d598666",
+          "AGENTS.md": "73782b73aae22935e471be2bb8bab075518b5790e5d378dc995fc99f13a4a5f8",
+          "CONTRIBUTING.md": "903d528952e26d72dc1848f16d64e30ded930e1e572c49af58eb4be546a68907",
+          "README.md": "d729a566c29cab7305970451c2f66c42f0e66c973b67b906b50d9cf2adbac9ad",
+          "THIRD_PARTY_NOTICES.md": "8f9c9039926e1967f4751160cba3ec38368c596eca33f62cc4023f6267e62e89",
+          "coexecution/README.md": "2ea938d961fd443966f4cc0d334b26848b82b5c186472ce0267390e0a5f28819",
+          "coexecution/__init__.py": "f273fa55af1dc864ee8e28bd6c53cf828974c9c575ee0dec8648960bc018afb4",
+          "coexecution/analyze_trace.py": "c068f299d9712bf909b116b178210778d0edd559e38c93face2ee4b02a6ccfb5",
+          "coexecution/audit_runtime_trace.py": "202e775f20c123765f8f37b25a75f4ac41bfb37542242d97ecd0343f9fd4155d",
+          "coexecution/cache.py": "cc992d7bda668ece0ec351b9ed16860e79a2cd2191bac779e7acedcf92c6991f",
+          "coexecution/feature_usage.py": "7f580e4269c3aff83aa5b75912378da6704523e3297d5dc268ac3e894e3c13fb",
+          "coexecution/floating_connections.py": "b7534a5e49d3c87e9f080685687bda68739bc4ee38b07a33031ea34e1088cfab",
+          "coexecution/floating_packing.py": "e53bf5ff64165b8c1dc10764c440179bc37b3ebd044d4cc3695e2d8bcc71a687",
+          "coexecution/floating_quantization.py": "e55c676f694e347cfbf75889bb0c1de85a9ffb9f888dc46b54fbcd1b292fd160",
+          "coexecution/fused_ops.py": "e52585abd96bb6f36ac012280e9682fb507545ebac48d685fde3a87bdd75240d",
+          "coexecution/fusion.py": "22ad2830cac4d7873cc239ae58ebbc2c664b61d6ef1ea6be843781c4407c35f7",
+          "coexecution/fusion_ab.py": "a1b0fb71dd15a047a04dcbad0e60d926082b83d9a2c76b0dd47737ff483bf4f6",
+          "coexecution/fusion_trace.py": "f07bbec13c074a3410fdc93af42c9d0b0f5d6b4df413e4c1b4686b035fc009b4",
+          "coexecution/graph_dit.py": "b977ba6e500a0cf482fc27efaa615911780c3d0035c41af3dc515f8229ba2947",
+          "coexecution/groot_fusion.py": "b7e00961e9ab4d2c5389029f0827eefc92a90cbe2a0c1c15d92d31b5633b464c",
+          "coexecution/groot_graph.py": "a7c90df37c4e390ef9d0f7c4ecd30b60f5fb6dae67337ab2169bdd8612febee8",
+          "coexecution/groot_optimization.py": "4f3b24c8f1cf9cfefd8ffc61b1212487ba92a3c9954372ac06f3f0fb6ac05529",
+          "coexecution/groot_pointwise.py": "6e6cd72b9b5bb16594459f0e85c4cfb4a0f192314567bdf75dd3921a96409292",
+          "coexecution/groot_projections.py": "380de827816926ffe04e80033b67bb06408b0615083eca6a7d2b2e23eda4cb15",
+          "coexecution/kernels/SOURCE_MANIFEST.json": "4b6d2b507148c5a80d99a6191fb5f8bc3070900810104a5bf8b9cd3c684352ca",
+          "coexecution/kernels/UPSTREAM_NOTICE.txt": "40eda68bc45a688083d36a6cfc6da0f445f4935fbb8dd769c69bcc4f5f180b97",
+          "coexecution/kernels/__init__.py": "ac75ec9230475fb30db053dd8c166cd1faaa75ef8ade055f8aceea184e726a29",
+          "coexecution/kernels/ampere_ada/__init__.py": "4143aece1ffda6aa46076df65ce148e6dffb8f4b9d051540966f908a3acac359",
+          "coexecution/kernels/ampere_ada/_candidate_support.py": "3e06d72a938d71d2af3ca1333fdb8a6fbc43f186ef3906af13f54f12f0340cf0",
+          "coexecution/kernels/ampere_ada/build.py": "6d8a9609f39fe28c212c955bbae3a5fd63f1a4502ddffabfad42ca59337d6392",
+          "coexecution/kernels/ampere_ada/csrc/int4_gemv.cu": "4cd42591644849f7c3bb0615d3afb973617d92ed9d2a20be4d1e6cb0f6c78809",
+          "coexecution/kernels/ampere_ada/csrc/int4_small_m.cu": "56718a2fa2c8747034c02f1c386cb6dd63798bb01db51e49e2541cf4faa54aaa",
+          "coexecution/kernels/ampere_ada/csrc/integer_dispatch.cu": "c6f360b7669896af469befdb9a5e4621dc21a85b8e0725ec9be4b8f9db18327d",
+          "coexecution/kernels/ampere_ada/csrc/integer_epilogue.cu": "744bd1061ac75a3097c0c5f86587c5487e0b3b16de22b5fc60f4ecde6811d93f",
+          "coexecution/kernels/ampere_ada/csrc/integer_gemm.cu": "78689a96089653d3cf2f9fabb1fa64eeb5bb7ee835b7d3316297c7ef884a431f",
+          "coexecution/kernels/ampere_ada/csrc/integer_split_k.cu": "197aa5d521fb06cbff1a17326bdf47637324aa506a46ef4b9e1584960a1f73c3",
+          "coexecution/kernels/ampere_ada/csrc/layernorm_pack.cu": "45b2f1d1172cd9e6b24c4a71b8f2991e7332a3697b0134c86cbb159b1f30ec3c",
+          "coexecution/kernels/ampere_ada/csrc/rms_statistics.cu": "89263ca8761deaaee520f81653f7a8c581f927c978b93be10c2aab048d0bf961",
+          "coexecution/kernels/ampere_ada/epilogue.py": "25b676d0315864505922404386e3ff7c0362d7a34676e1899c45eec4b034cd78",
+          "coexecution/kernels/ampere_ada/int4_gemv.py": "95abfd3d572fc71aa0b878a5d1bd1d187b360b25f9d3e8af73e9b11e3b3568e6",
+          "coexecution/kernels/ampere_ada/int4_small_m.py": "8a68fff093275854475375543fd5ad422e244a691c6ec241a8a96c12a88bd163",
+          "coexecution/kernels/ampere_ada/integer.py": "d8de21e90077230c8260a036dfc35f1e993c26946256fe5aa052154d78e5c326",
+          "coexecution/kernels/ampere_ada/modulation.py": "bf8a20b0cc2a84d229aadfb7ad7d85dc373421d0340f8419ed96dcce5b731385",
+          "coexecution/kernels/ampere_ada/norm.py": "3c5dd63b9b2a3f2dc5d7276ef95c5d3841dbc178df5244fd1e65c1d534b7c785",
+          "coexecution/kernels/ampere_ada/producers.py": "e86f94b1014eff6d18beb3f5fda7327b3458c9e452b8f79304d9973b1d81a82b",
+          "coexecution/kernels/ampere_ada/rms_statistics.py": "c3aef9190d872d38b09bb4a9b081c69a6c2a17c473dd9faecae5db04589ddd1d",
+          "coexecution/kernels/ampere_ada/split_k.py": "d9e8c3477d760b22f8970be45cac249f7208be2f41ca9250bad0e26b1263f681",
+          "coexecution/kernels/blackwell/LICENSE": "e539b34a7a9b6bb05e543d9bedb1768b3991c1ea9557f972963be0a64ab083b7",
+          "coexecution/kernels/blackwell/UPSTREAM_PROVENANCE.json": "fc6845f15e25d467f4ffbe282e6b5b096ab2c48c0a5fc97800337f1523fca510",
+          "coexecution/kernels/blackwell/__init__.py": "18efb3d8d49ccf44e9c38b53c66452d39639e3e69f0221740e513ac8fad517e9",
+          "coexecution/kernels/blackwell/csrc/fp4_cutlass_linear.cu": "62e489ad470dfc0ccd76968b9947389d9d589fe872f05a7054743c6cc71d4097",
+          "coexecution/kernels/blackwell/csrc/fp8_cutlass_linear.cu": "0e51eb551e4f84471bb84a7bd65082f3cc678f4ffe95c1629237cc5e53ff1a7d",
+          "coexecution/kernels/blackwell/csrc/sampling_bf16.cuh": "3c23f625eb05cc5499286e2277e2daa74135f42156d0c9cec49fb3c777d1a231",
+          "coexecution/kernels/blackwell/extension_loader.py": "9922a722444181fa3a0c7ed375d12c1c9d9218256c58b7e9ab3f1514a98f5b3c",
+          "coexecution/kernels/blackwell/fp4_linear.py": "5572192413f6cd4071de49c948adc10ac0d0c2f572c1a7da588176a50858552d",
+          "coexecution/kernels/blackwell/fp8_linear.py": "2f5939db89324c0c4d71d4c40ce527ba352a5bedcadc4ec6295c5e936a4338f4",
+          "coexecution/kernels/build.py": "e249ca8ca13d102b5ce0a630389610e4d054b4c9e807f499323348a544f1b096",
+          "coexecution/kernels/common/__init__.py": "bcd91ec6cc32912ba8f424297819add0e7ca19a7ff8192d6101a9b3745c4cd41",
+          "coexecution/kernels/common/csrc/adaln_modulation.cu": "be0ad2dfd95db899334f5cd41ee0ded3f940ade845aa68241b776e9c931fbebd",
+          "coexecution/kernels/common/csrc/fusion_torch.cu": "c074c7efbcb2dbc07c95c42a5f0c9c8241a6ba5599fda1f259b60ae490941961",
+          "coexecution/kernels/common/csrc/vision_rope.cu": "be1421b63b6f0b2a44090676134af1fcbf7a5f01ca8540b1e62460cbfaeca3f0",
+          "coexecution/kernels/common/fused.py": "d20a76b4b84b5c547f32f22afcf20a20371fdf2ffa05d23ba2189aeefddc77bd",
+          "coexecution/kernels/common/graph.py": "10fa00dec9e55510bf0528a0318757406a3606ea08c98a1eb2c203355f3f7d6c",
+          "coexecution/kernels/common/source_identity.cpp": "83eb39d9bdb842ec34b96cc924c0350fa318eb0a1d5b4a28e9b4b7af0e775fe4",
+          "coexecution/kernels/sources.py": "8865b394b260db4576933787d6f7365eea1ed7038b2b0b94b19237d0087839b2",
+          "coexecution/libero/__init__.py": "0932dc88d9065c1723e27dd65ef3177a04b4929c69759d5b276835180ec866dd",
+          "coexecution/libero/backend.py": "fd558559b02b8032e4c25d6674ee7b42209afe77fa6ce2922254f0df9b3b9e96",
+          "coexecution/libero/loading.py": "4d1634abbc133cd425a2017e93f676dab23ba96851b680746642da4f792cbab3",
+          "coexecution/libero/service.py": "38036d48f5e7b61a763980096a621cd475084858a3b36bab7f74d6024f812419",
+          "coexecution/operator_analysis.py": "9584d002da8af7c686613cbc61986aa7abba917100307750b3f18333e7f019c0",
+          "coexecution/optimization/__init__.py": "33072bab441b01814cf0a6f41f6e00fd6ca503687950cd6f06a9af7067057820",
+          "coexecution/optimization/backends/__init__.py": "54d03818b5dea934a242d36577263bfef069c2ff4d3e90b6c2d02a64ebfbdfe3",
+          "coexecution/optimization/backends/integer/__init__.py": "abe6bdbfeb7dbba12d49966b068c610342ae6cfa1d15d2c9b99b0f3f949c3a54",
+          "coexecution/optimization/backends/integer/linear.py": "7d586c6505a3f5d5bac3242609d27cf785586beacadc0d23fc5eaf2ae30883db",
+          "coexecution/optimization/backends/thor/__init__.py": "46526bb02cf828d3e6fd49102617331d1a37d53720768b4c68c2533526b80e9c",
+          "coexecution/optimization/backends/thor/linear.py": "c39799dd0dbdb4a95105f1b53a550a36bc3ed0ecf993b2b1b9cb1dbff46d2897",
+          "coexecution/optimization/backends/thor/packing.py": "87c2d76f73b02f0d4fbc3aa814ccda14d6f27b0d9109637e26d0ad0d2b97a12a",
+          "coexecution/optimization/capabilities.py": "e426a9b3bc4886ae5b2c21ab5651064f4a8c0a34766babc02a85553d10eee56d",
+          "coexecution/optimization/config.py": "a7d5fd47d3a5ce2dc8e7b8e0c02cd25cef7727f71c7ac9613b1e6ac4e0bfdf47",
+          "coexecution/optimization/execution/__init__.py": "8234ced1a83c2bbdaa0db694c2045e2aebcce88f0e8c2cbdfd89f9d249b53377",
+          "coexecution/optimization/execution/cache.py": "92321a88e6cb1014ae6858c068aafd6abe036598ae1dcab87de0011614850feb",
+          "coexecution/optimization/execution/graph.py": "4c38a3b16ec4125315b38ad79375058c67d10f2ff21e3c98d53185ecd81cb648",
+          "coexecution/optimization/groot/__init__.py": "d0f5ae8ef98ee9c762c6b0fad7838750c5209ab196bafbfbe2c583dad90c6377",
+          "coexecution/optimization/groot/floating.py": "29169cb65b369dd967079c05fbb191c79c4b799419b81813cdbe693df6c6b717",
+          "coexecution/optimization/groot/floating_connections.py": "c67f2fb8c8229bd02f99a19be694870e831027e1512464e8266dcf17325d54f3",
+          "coexecution/optimization/groot/group_outputs.py": "151e93d5f851fee6d23a9921a3bfc817fb7b74ab8fea2999b7f0f2cbbd8026a5",
+          "coexecution/optimization/groot/integer.py": "3b0ecfdf73f3bae7442edd2ac0950a46fee2b815ab3554dc9e5e7b85f2625f4e",
+          "coexecution/optimization/groot/integer_candidates.py": "65458118ccba697e443ac73ad86412f8415134daf33375c513ed36b8e7fabf91",
+          "coexecution/optimization/groot/integer_connections.py": "64e330f45ca59807590e5933a9c1cc7e96fc93884acbc7e9061fea742213934a",
+          "coexecution/optimization/groot/producers.py": "122dcfa798bdb4e6fb24b3ee855c1eb8085b88391b88fa7b8a5062788b5a68ac",
+          "coexecution/optimization/groot/projections.py": "190916967f507f884d02b57bacdf10bec498bb42015db787fd185496e00f1e0f",
+          "coexecution/optimization/groot/residual.py": "6009e73089ec99b0bcf2824a424b603e6e8d09cfddb97d22ad8d8cf4eb808b65",
+          "coexecution/optimization/installation.py": "c8152822e4ab11952dd5c397ea84636e3fcd4fe74892b2d89b5eea7bd173d74c",
+          "coexecution/optimization/operators.py": "26045c8b0c95f542ab04b2a80827820870358ac1d1127eac3713b276e652ca10",
+          "coexecution/optimization/progressive.py": "3ea72c04e170a06d4e8f5de91dc6704fc93350441201f022803f6ac9997ee22c",
+          "coexecution/optimization/session.py": "e6681fc03dc00fcd3055c62346a05bcb0f1beedc9e6690b5b4bf568017d84f14",
+          "coexecution/optimization/tactics.py": "bddcb83e45b04a435120ab45211e8416663a933b3e1140f4c3a196427bd7868c",
+          "coexecution/patching.py": "cd5943aaa5faf5cef142c8e88673376ab03ecaefdb88aa359feb86d913aa22a4",
+          "coexecution/periodic.py": "f1bc23e42db38b8a95510b09ca6adfc0efd4feed463ecb82d98b3d4314982577",
+          "coexecution/preflight.py": "b15d9685df612bd15f145b7e4beda3ccfed38c1125cce2ceb58465a157cb432a",
+          "coexecution/profile_operators.py": "ebde85272eb3b08327ebffebe13a6f4f667214040653b31d28f69e7369d63f03",
+          "coexecution/profiling/__init__.py": "489dbfe09d4dff2ce10646dc09c593ada0044fa35b97f832d5baf56479504348",
+          "coexecution/profiling/aggregation.py": "bc90b2e0432e096868244e6e77cccebc8228bea5f8c4e5cb7e1769c4e7cb7b5a",
+          "coexecution/profiling/analysis.py": "d41a66c2c8d96ce1b6a8ab0d009da9a15ee23d49ab4cb260a18c26babc77a3e1",
+          "coexecution/profiling/campaign.py": "0ed9e7d98f4010f004718ba0f3ac6c6fb448a3d006992b4e8667943944da5663",
+          "coexecution/profiling/cli.py": "8b0537e4c90f4fd9d95f9ad68eeb4a7f587756c86c13ffe013b7fd3c1c798df4",
+          "coexecution/profiling/collection.py": "4955ea732e568761e628f05ddaaa1775a96910439b772133c2d17bd36cc80af0",
+          "coexecution/profiling/common.py": "1976c0ef69826d6736b4ecaee5dc726b1b22ba029eb9c0f24907c6fc7fcea68b",
+          "coexecution/profiling/execution.py": "9e45008fe9874b47e80806359ce18cd11493aaf49645ebe8eaee54595e8bd116",
+          "coexecution/profiling/figures.py": "b888f0894210a565943531df0a20d20f2b9fb271d230f9419481465ce5243efd",
+          "coexecution/profiling/hardware.py": "1e8ae43e2ca1729a1b0a61919b3b706a3e1e7552f7f696298db7bf22becfb92c",
+          "coexecution/profiling/labels.py": "7277aae0f789191081e477c1c27292bc15b6804188ba3a69f35d0cd77a17b44b",
+          "coexecution/profiling/ncu.py": "db0a102c57f8a88ca9785f2833b24084c7763b4eb6909d81d97defd2a6f2fc46",
+          "coexecution/profiling/nsight.py": "4ca1713df12a5577c41a1d36648478d093a0dc2465004180e22314f4426ca240",
+          "coexecution/profiling/provenance.py": "ea3e1a475b68c82dff18249c4abd4f1a529ec31bccb8a0da9624d52403626d9b",
+          "coexecution/profiling/reporting.py": "aa1682265f44da5f59f001db361e4e2437f0c43410ff8795f7524d469838573e",
+          "coexecution/profiling/runtime.py": "076a5da87375d7187435e15b5ca766d61352a76c007496d07e3f7a38fdd0353f",
+          "coexecution/profiling/scheduling.py": "adff630da176dc0765ea2f314178e0a9a5bed3a04a233af45eb6649f3173e7f1",
+          "coexecution/profiling/validation.py": "5ea6a2b9522e46b9eb324b4a13fb493faf2892185a1725189dd15a59b9220f91",
+          "coexecution/profiling/worker.py": "1c260a2e1a3a2f59a65cfc1e35f2087622693f2295e323c3e34d23e9992610fe",
+          "coexecution/profiling/workload.py": "46db89a0268897bae07354c1b9455e40680f629fc866e689519c17da6212c28b",
+          "coexecution/protocol_ab.py": "342da8ba80b7e5f020bf3b24b6e447acda4f3aaeb2b9139baa43e55ad535294e",
+          "coexecution/quantization.py": "c036f2083d35be21c66eb4fad12f3d99d133d5e8941c4049389f3f183855b6b2",
+          "coexecution/quantization_connections.py": "bcd1669eca6c0566e1956d1f32b28fefc7d8a874ccc1cb9a8038907e5dc2f4b7",
+          "coexecution/queue_report.py": "953dfc92bc2041a955c687a4b38e8e96cdb2549a6f8d4a32eb82222d855013e0",
+          "coexecution/run.py": "426231a024f589732ff05dcf4ccb5ed70a35beb320c2194961f4c1d420664cb8",
+          "coexecution/runtime_ab.py": "da079f7cde2e9582acb2a05477b810368e545ba5e37c4e30c9e4073fa4aa8999",
+          "coexecution/static_s1.py": "70ee9a08b27a925bbb80cec122865edc39542c3f723ee802219a3b88a445da57",
+          "coexecution/static_s2.py": "a4b2a7a6b78201c8a98c76ab3460c87882ab472f5c35f9ebe71562c5e9ffade4",
+          "coexecution/test_attribution.py": "06aaa09c12a74406b0c23c1ba3bb9893fc66fe89a7354f768170022124a9bcc4",
+          "coexecution/test_cache_gpu.py": "cf5a2552bc50bb284ed5873ee917fd2f4e2edc5c0b2f21c877f503fed63d65bd",
+          "coexecution/test_feature_usage.py": "6b0bb69c9a103d56a7f6343a0dc250ee026df644b2d9508d636bf1c1f5d049c0",
+          "coexecution/test_fusion_gpu.py": "dda4d38e0877bf0502b44a0963b7272ac20aeb16e954dd6d3fcd1549189ab82a",
+          "coexecution/test_queue_report.py": "8a8db0f0e584ec642b93e2d9b6c539ddcaa4a2dcc0ea63964b95274200b285b6",
+          "coexecution/test_static_s1_gpu.py": "11beff9cc97a3173031ef9cb3df6550fa06b7d114107758dde41a38130c5be87",
+          "coexecution/test_static_s2_gpu.py": "51a0a8a8c37f2b758093ae454b69cb309915cc1dd2f38b328ada63a9acf5fb62",
+          "coexecution/test_timeline.py": "a8c5c65d2890ef3465131eb84ca584c82c33e218966915bb8485c7bb6dc0d7ff",
+          "coexecution/workload.py": "a573112bcb0a595e26fc99eb07a83500b668367b0565aee891ba9b383696ded2",
+          "configs/libero/model-family.json": "8001c0f913464248fb243b81b6b672745cd6ad67c26f81dba0108a5c0ee812f8",
+          "configs/quantization/groot-libero10-ada/coverage.json": "ab73c139fcaee9d941c6457c3e51fed5a3bdeb454c6a9bbf5d7a9f12deacfd75",
+          "configs/quantization/groot-libero10-ada/group-tactics.json": "fe0ecc76f500d8ce88031d3ded425d74ce0f0025ad8e20f92feac7188e22c141",
+          "configs/quantization/groot-libero10-ada/tactics.json": "b18503115fd4c8e4ac0f78e41bcef70fedd56111af1cd9d0e3c66593a60dca26",
+          "docs/coexecution.md": "125ca4b796576be230a073a37fab7ceed05d4ff89eb5b18bbb02878d22b8db06",
+          "docs/environment.md": "ca50e89496a8b57a543547431bfa8f89c817bb2e655dddf4cf4a864e04862df3",
+          "docs/libero.md": "8054df071a0226df495abd3e2767edabb7e76f432c95b5a8c515c2e6f35c7d1e",
+          "docs/timing-protocols.md": "00b3a46b4a9e4dc197d5fe0bcd17e764f202ccaafa627040b454986571fc8e5e",
+          "docs/upstream.md": "49545466ad1364c5dc3359251e4d902b52cbf7d2f86ccbb2ea46c70e2e661b1a",
+          "licenses/DIFFUSION_POLICY_LICENSE": "304e99a48271e10820f71a1b86ef395c06c100d7f68dd1d308790d1064fc4d41",
+          "licenses/ISAAC_GROOT_LICENSE": "93363510f62ce25ad1a47605b0b06ab335edd82f1a444531c58dd30b6e5a5a0c",
+          "licenses/ISAAC_GROOT_NOTICE": "497d93c600636b2566bc49562288f136ef8def1c9c50bdb612530af64f77c1b3",
+          "licenses/PYTORCH_LICENSE": "a8a2c6b67cf8a597ffaa5c82380a6bd1b82629c0417e00673d8013d662eb500a",
+          "licenses/ROBOTICS_BLACKWELL_LICENSE": "e539b34a7a9b6bb05e543d9bedb1768b3991c1ea9557f972963be0a64ab083b7",
+          "licenses/SOURCE_HAN_SANS_LICENSE": "fcac737e761ec63dbfbdce11030a1780161920d80315edba9c8beff1c2bac5a2",
+          "licenses/TRANSFORMERS_LICENSE": "77fd4710def9ec3c0f6225800e0235f15a425abd4a8b03559127fcd782612049",
+          "patches/groot-reproduction-fixes.patch": "e8ef1215af9202a645f10e658fb9fd09cfac61bf68ca06c3e1f1170fe97cd7ca",
+          "pyproject.toml": "0664455370bb1a99e24e33e8e6a3f772eee0c1bd05f251893fae84e7918bea39",
+          "requirements-dev.txt": "0e77295bd924423126afcfda7016a103c833c3d56132d207d2da311857dcf89e",
+          "scripts/check_libero_reset.py": "f0f9290126b81b496653cef014fc2db2a6eebdf114c0f2c11401e4851b31392b",
+          "scripts/check_libero_timing_gpu.py": "29ecb138c6080ced8406b9294ab686cee25e4f8c2fb86365b8145297a0503cf4",
+          "scripts/check_pir2_schedule.py": "4fc558f6dc7e48e45a5d9237524d4a9ea203ed7eceee306d10d27e94f65425ae",
+          "scripts/evaluate_libero_protocol.py": "4ba9318d5e65a370573c10a54da3b16cb8e7341ef6c29b337bc62446abe2b4e8",
+          "scripts/fetch_groot_spatial.py": "3d83d35f6b28aeae44874a46676345333c4fa87cbab5fae7913837b7a1295acf",
+          "scripts/infer_pir2_demo.py": "bf946273704a04d2c7157910e5617e975a1d9c9bd7ef8322a101cb92b5336ef3",
+          "scripts/libero_experiment_utils.py": "d190fd205952c56af41af1f34ccdc7049cd439f771b32a64e4ab8560dc2d173d",
+          "scripts/libero_inference_backend.py": "45ddafd6cca552241e1076b6ef6529a3555ec308700ff2be138e38247bd96839",
+          "scripts/libero_model_loading.py": "f4cd24fa4dadc9e575e7b58641b074f8bea4b63642421b48c37e26e2ced7bb4b",
+          "scripts/libero_observations.py": "0480fcf42aee28b1739b96af6f0d050efd7d177a9950c6eea1721cf47d3ec74b",
+          "scripts/libero_protocol_scheduler.py": "7660ea5e4604817fe9259ee287a0481307fa18de9acd7d3bf23db6c50d209203",
+          "scripts/libero_queue_trace.py": "77c1e5b072db137c8a5c0e50b4c60f62e6702e7e7d70554ac29953403b3cf07d",
+          "scripts/libero_reproducible_env.py": "80f07dd9c0fda35c6cbe8aedff0bac0d5e488d35b6cb51d1df64b7f9ed9686c1",
+          "scripts/libero_streaming_client.py": "5f4bbb6e2d51a6ff9fa2c8c21ae97393d9e12fb5bf4947bbd3626e470e75eeb1",
+          "scripts/libero_wallclock.py": "835e44be15b8a38fc241966a81914b18b9bac7cb3de3549077c84515df237e8c",
+          "scripts/profile_libero_contention.py": "de371bcbbbc90efbab659ea68415ea57897b2edca7e85b981318029f103b5343",
+          "scripts/report_libero_protocols.py": "5ac65085272f49ddd89a02356c77050d6a631f719f2f59860b496b060bc6f5d2",
+          "scripts/run_leap_seed.sh": "71f92495a4482e28c2ef3b582a9a8a587272b1667fbaafeb348b16eb64d71422",
+          "scripts/run_libero_protocol_pipeline.py": "d21226d642faa9140eaa2a79fff4ea642672a4fbb16b5ebc4a259d26df691695",
+          "scripts/run_libero_protocols.py": "d9a73822f38914ee11d298d9c7c9cc0fc317f8b3cdae52bc4b7e1c6802e24f29",
+          "scripts/run_single_gpu_baseline.sh": "8a4749c98a90c94981f19b3114b3ad21a134820320fdada1f00dc45b8c4bcee1",
+          "scripts/serve_libero_protocol.py": "fcfb6216cd1101c5d6a948b7a624c38319b55a8a09090bcfb4da939d97adde66",
+          "scripts/test_libero_protocol_scheduler.py": "f5a83e5337dec613a4043608cb41ff4cf02f727e1e9cf63af85b3efc583eea0c",
+          "scripts/test_libero_supervisor.py": "e905c69f0eecf933f4d125cb7ab4aae0af14d0f08e5dfc155a736cae2605f651",
+          "scripts/test_libero_wallclock.py": "a92e65fc51a17d7e630bb43959b28bc03c3bd8e7335cb46569afab76818d4238",
+          "scripts/train_groot_spatial.py": "0f9a97368f4845e4644c033c837d82462120f082cfc78ce38cbcd4a0ab1a912a",
+          "scripts/train_pir2_demo.sh": "14270877d286b5655ce4c243d44eba970429febb6adb27bc17d060e4eec20c44",
+          "simulation/README.md": "a5cc25c42437394713a9afe7e62802be9d8d1b7db66f813b0a78946307d7c8c4",
+          "simulation/__init__.py": "644f1b64cfce145534664175c25f87166fc71d36aceb668f514a3a483756e766",
+          "simulation/collect.py": "1697b8de31d8d02418c41c3324b23f39bb1999fc0519779ca18972fb235b5e03",
+          "simulation/evaluate.py": "aa6ae9fd6877416053653caa8ef492fa0ebf474beab45463bc47ff8aa575704f",
+          "simulation/expert.py": "c0b6a03ec96f9a139bb44c23a10277d3178571f86f373dae5c1e96a9d784a4cc",
+          "simulation/leap_env.py": "0da289b97279333fcdfcf2c6306f69da1e26c5e3b53771a4380792ec5379a086",
+          "simulation/model.py": "0c8588f55e2e8c60ef29e030be129e6da6ab832e92c86273651d9fa926044237",
+          "simulation/test_gpu_simulation.py": "e37ca2f039b1a5afcbb3cb0144af5c06e867d480b9c6568160f826b0a13e5545",
+          "simulation/test_policy_gpu.py": "4b84818eb5b26c0e24e5cdbcfb17725a7b50f1b3517da3d2074261465a9c904f",
+          "simulation/train.py": "e56ae6ab225417007b965ca45dfe1b0ee1f5fa1de0b2ac959d4fcf80795af53b",
+          "simulator/README.md": "e0658a4911bbdd901a48b253dc0c46c33096bc09eb346c25cf5b9c8151878e69",
+          "simulator/app.js": "6f2e615dbc440db2f185e559af4850e0bb33e0171a3edf7a329f8bea64fe782d",
+          "simulator/browser-check.cjs": "2c552676fca8036a61cd514878ac6c4172219c2bdde1f64cc4f9e33897608c56",
+          "simulator/index.html": "f7624c76cdf0122c00a5c38ba93a63e34c34af9e2ccbcf4e65c6684c8fab07e9",
+          "simulator/lab.js": "03b254be7822fb933b8849852aeec1a512ecd03f93711f98c28e1147da5b4211",
+          "simulator/measured-model.js": "2be9200e54581d5d0c10aa51f54bbcdec6d66f5b5a630748b98b74159af8ab0b",
+          "simulator/measured-model.test.cjs": "16afc281743ddb52821dada3601ed13cab7f137c4f1e2024ece67c2348ec3bf6",
+          "simulator/measured.html": "a868ab2669097fab8142f8405e78bb17b3a53b7419fcebb46b02f1c94959bde0",
+          "simulator/measured.js": "50bc263d58f376ab6907f7823c8f0c04dc8115096847a2251492905e05a225ea",
+          "simulator/model.js": "6785cf688900ee09e8fa0afaaa8828af9de19c3042064011f726ac388faff3de",
+          "simulator/model.test.cjs": "5a615b404ba1cf7e5879ada9bccdfcbfaa1ef2c01072161627f7e8de386fc926",
+          "simulator/scenarios.js": "6f83ff434b5faaa16af2a9afff1f4c8869141de24eaede0763704a50bb9a2645",
+          "simulator/scenarios.test.cjs": "c241193da48a6b6ed2a0cfda6171f115ac144269c7445531af9607d3ca174d54",
+          "simulator/serve.py": "771689ec6e8f26da1d913156cf3ed16b0eb415c629fcbcbcc459c99dd1ef617b",
+          "simulator/shared.css": "05f6784aa78ebe2ceab13113bc1af91c8c58fdf991a0df89ca3d0bc095e7f444",
+          "simulator/style.css": "47d8ec5f314afd48f1821fc636218cb6b6c1ec914f13fafbbd6eeb3702c8748f",
+          "simulator/test_serve.py": "c0e90d4270169e8d7c81f7ccd71550ab92339c8f04bb7617d38e44fc3fbce476",
+          "sources.lock.json": "cffc5afa020a1277b653ef8928961e9875ccac37b3d864de752b2c46055d29e7",
+          "tests/__init__.py": "7f8281a71dea048b5744e7c13084194b02cd6e3569a28b21dc5f317fa32b2ee6",
+          "tests/contracts/__init__.py": "455627edf8075b97883419c566e4d55b75bc471ad2802a5fdba30d04ab371e29",
+          "tests/contracts/test_adapter_lifecycle.py": "6fc2375e5795a4507f0341b96f4755352a94bf9b419d8949c3689fe5a3d096c9",
+          "tests/contracts/test_backend_capabilities.py": "96475754b8458b3dc348acd9de119795b093274b639e51afe4e3a10c055fab1e",
+          "tests/contracts/test_contention_analysis.py": "e6a73a39e80be3d7ff1c7e88f583ca1af5aedeb513e7ae74e955f13aa3ce5dfd",
+          "tests/contracts/test_contention_campaign.py": "98892cf4ce2ffbf1a9aab918e09e12aefcab5ce40eb9839a9340fb9f1cf4b857",
+          "tests/contracts/test_contention_cli.py": "8414392dcaea4e1ffa51700f7ae8bb228c279d97df692dcd465a233d4a0ab54d",
+          "tests/contracts/test_contention_worker.py": "f19abcab08b6dadeb113ad7f0b828c6f1ffd026200b8d9c3021161426d62d994",
+          "tests/contracts/test_groot_optimization.py": "e4a29402bc73ce282dffbf7fc73df1d4891e02323a0736e6ea9531a662491a79",
+          "tests/contracts/test_libero_imports.py": "ac9830727f02d26574fa0bd0f645575945948f1864941755691ee1524776c49f",
+          "tests/contracts/test_libero_inference_backend.py": "6a5d79e1df9a3372e251530ebd37513ddb11bbaea9859e4c0e50bd4be3d70650",
+          "tests/contracts/test_libero_model_loading.py": "4a8ccc8ebb59f4c77b0d082ee0f5a813ad3a7c4dcaa80b329dbf6843ca15e240",
+          "tests/contracts/test_operator_validation.py": "e9ef7e6cbc87607d0d2211f49857f197ab65aca5f27ebae46e43803750c466f5",
+          "tests/contracts/test_optimization_imports.py": "966e4dce3fae04d45c724ef3c5fd702d55c08cd7d1cf0377069ea78b8117355a",
+          "tests/contracts/test_progressive_quantization.py": "68fff126f109dd79c6f4944e5a67800038689f085e43393fd6708898b533b19c",
+          "tests/contracts/test_streaming_components.py": "179561e724e12024fb03d7501a93cdbdce1c3a119f32129163347aa8a05abfc9",
+          "tests/contracts/test_tactic_profiles.py": "f08cbd798e016fdafabcd200e009b9cd4ba1da510aca8f1d00ae34abd1e9021c",
+          "tests/gpu/__init__.py": "b9d734e1f193af224b7e0253dea220b613d830b5b331961658f8572fa3701379",
+          "tests/gpu/conftest.py": "b2f839f54449f034bec7ceb06661d3d527da734eaccc5994ad66aed27ad15fcd",
+          "tests/gpu/test_floating_fusion_gpu.py": "d4389276b27c3a1b8745491ab5d4b8799b0efff0a502e8c5dc8a335356b53af9",
+          "tests/gpu/test_floating_quantization_gpu.py": "1f70fd88e7ec07e10d1e08619168523b150ff5821d524d068cfa0b1e767f12c2",
+          "tests/gpu/test_fp4_swap_ab_gpu.py": "0107b34279bfc1f58623821dc70cd09871276936261264f72ae78f23a8e27181",
+          "tests/gpu/test_groot_fusion_gpu.py": "dd41aab97c81fee6430e56c1bfea20a03bbf1fc1181f0842c0b6f593279f79f0",
+          "tests/gpu/test_groot_fusion_modes_gpu.py": "59f293300aad43f9f460079d03ea8fccdd0562eeb7d63391dbd12d45660522c3",
+          "tests/gpu/test_groot_norm_quant_gpu.py": "ba938b07ab0d04252b9c6b4941c4a4644eaca55a0bae4e6e4cabfb8e01d0db27",
+          "tests/gpu/test_groot_streaming_gpu.py": "f35dae490e50e42abc5ff08ca0bcf93f1598db7637fca7c1bee511ef30a91a9f",
+          "tests/gpu/test_groot_vision_layout_gpu.py": "9194e93cab5bdf7b556d719d09d8f407bf0fc8aab9f26303cdd5434377de0891",
+          "tests/gpu/test_progressive_gpu.py": "bc51d560252b77a5f3e58e3f0a5713d3815282aaab95d0e0d0eb6989c8a7137a",
+          "tests/gpu/test_quantization_gpu.py": "fcdfc954612e4dfe70d5d9df731726a97fc60dfa96e074c94d915a93f1333ff2",
+          "tests/gpu/test_shape_tactics_gpu.py": "e7cd9c9687eb1a1f68f630102210661b4d18c78648b572ca25a604613b5e6497",
+          "tests/gpu/test_streaming_component_cache_gpu.py": "06fd7a056ba0138bd5ac01c400c5a9d4b592ce908d8e43104974726273c49273",
+          "tests/helpers/__init__.py": "4194edef5dbb2df65800a6b3ce0e6a70ae925d3c0b992fe00ce10841003dc20d",
+          "tests/helpers/cuda_assertions.py": "5614b6e00b432545fc8b27c3cd69ba7353172bbadf4f381fe6d277490ffef8af",
+          "tests/helpers/groot_streaming.py": "3ab7a3e1b9ca55f032cad01141c30a3c18578cb00ad2d05bbfe99d8c59ca6241",
+          "tests/helpers/projection_models.py": "e4bdf4101549e8de27d826664c1f0bf4d94610bb86a8869cfb50d74ac2867a18",
+          "tools/check_repository.py": "56de66d217e489477d211dd2947ffe81ce5fd742da1a768f817df5b07c068533",
+          "tools/prepare_libero_config.py": "1755163d8caa3c0173bd74584c84bd5472bfb28e97bb8aa31c09103b90250a2d",
+          "tools/prepare_sources.py": "f49e87fc459f9d875f4b51dd7896b0201386be62920c551580b44642e46d01a0",
+          "tools/run_checks.py": "375184b463eedf9b5a5744555926a7b8e8d5e12f6f37a01d7b3a68d038f84952",
+          "tools/ui-check/package-lock.json": "0a1dc20f67aa17017fee5921a4cbbf98cb28981d3eaa5b1c9e8b8ac89f497304",
+          "tools/ui-check/package.json": "394e7bbe661ebeb25e3ccdb5f6ae96504c00992d06c171c4edb3194ad148a11b"
+        }
+      }
+    }
+  },
+  "formal_environment": {
+    "torch": "2.10.0+cu128",
+    "cuda": "12.8",
+    "cudnn": 91002,
+    "cudnn_enabled": true,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "package_versions": {
+      "torch": "2.10.0+cu128",
+      "torchvision": "0.25.0+cu128",
+      "triton": "3.6.0",
+      "transformers": "4.57.3",
+      "numpy": "1.26.4",
+      "Pillow": "12.2.0",
+      "safetensors": "0.7.0",
+      "tokenizers": "0.22.2",
+      "nvidia-cudnn-cu12": "9.10.2.21"
+    },
+    "device": "NVIDIA RTX 6000 Ada Generation",
+    "capability": [
+      8,
+      9
+    ],
+    "python": "3.12.15 (main, Oct  3 2026, 01:03:07) [Clang 22.1.3 ]",
+    "threads": 2,
+    "interop_threads": 1,
+    "cuda_visible_devices": "0"
+  },
+  "environment_record": {
+    "sha256": "b503152a14ea20f1b7e3281263b8fe82b1cb5e63de616a8f5ab9d3006f83b8dc",
+    "value": {
+      "python": "3.12.15 (main, Oct  3 2026, 01:03:07) [Clang 22.1.3 ]",
+      "packages": {
+        "torch": "2.10.0+cu128",
+        "transformers": "4.57.3",
+        "diffusers": "0.35.1",
+        "triton": "3.6.0",
+        "numpy": "1.26.4",
+        "safetensors": "0.7.0"
+      },
+      "cuda_runtime": "12.8",
+      "groot_manifest": {
+        "schema_version": 2,
+        "source_url": "https://github.com/pi-r2-flow/Isaac-GR00T.git",
+        "source_revision": "2a39d591a3af24c42bb1d1c9cd708a2dddac0600",
+        "source_preparation": "git -c core.autocrlf=false archive of exact pinned commit; independent git root; exact pre-patch blobs verified; git apply --check --verbose then apply --verbose; four applied files and reverse --check verified",
+        "maintainer_repository": "https://github.com/Ther-nullptr/piR2",
+        "maintainer_revision": "3c96deed507daa2878dc7e78b0deee9431ceec32",
+        "maintainer_patch": "patches/groot-reproduction-fixes.patch",
+        "maintainer_patch_sha256": "e8ef1215af9202a645f10e658fb9fd09cfac61bf68ca06c3e1f1170fe97cd7ca",
+        "patch_affected_files": [
+          "gr00t/data/dataset/sharded_single_step_dataset.py",
+          "gr00t/model/gr00t_n1d7/gr00t_n1d7.py",
+          "gr00t/model/gr00t_n1d7/setup.py",
+          "gr00t/policy/decoupled_policy.py"
+        ],
+        "patch_before_sha256": {
+          "gr00t/data/dataset/sharded_single_step_dataset.py": "97865191d095bcd14cc7ac3bfaaabad1b08b81625e942502aff646384ef335c8",
+          "gr00t/model/gr00t_n1d7/gr00t_n1d7.py": "2d6b1cf85bacb6fd8e1f9481464791820c4f3fae8ab49197320c35db8c096f0c",
+          "gr00t/model/gr00t_n1d7/setup.py": "4327a662fafffa1ce65a42c2ddbdb26e9a27f97b36f751200c6935bcaafc7545",
+          "gr00t/policy/decoupled_policy.py": "fd923f3d1965eecca06f5660a11d2013a8c829368f2edb406c5cdc6946033acc"
+        },
+        "patch_after_sha256": {
+          "gr00t/data/dataset/sharded_single_step_dataset.py": "1aec8dc9306554e93291facab64efe35df378b43bdae01eeb8bc45ff2c3e9f3d",
+          "gr00t/model/gr00t_n1d7/gr00t_n1d7.py": "776c60602a835c8156b2c336793c569daf2cb4291f706f3562fb144774a91434",
+          "gr00t/model/gr00t_n1d7/setup.py": "33790e50116d47b5a3d5f6e91d910a0b17510ef7d415aaedb10d79d7c100a598",
+          "gr00t/policy/decoupled_policy.py": "15534a522786612e66bc2e921c81bb28bb8f1897c9921f0b3463ed832b88475d"
+        },
+        "patch_validation": {
+          "check": "Checking patch gr00t/data/dataset/sharded_single_step_dataset.py...\nChecking patch gr00t/model/gr00t_n1d7/gr00t_n1d7.py...\nChecking patch gr00t/model/gr00t_n1d7/setup.py...\nChecking patch gr00t/policy/decoupled_policy.py...\n",
+          "apply": "Checking patch gr00t/data/dataset/sharded_single_step_dataset.py...\nChecking patch gr00t/model/gr00t_n1d7/gr00t_n1d7.py...\nChecking patch gr00t/model/gr00t_n1d7/setup.py...\nChecking patch gr00t/policy/decoupled_policy.py...\nApplied patch gr00t/data/dataset/sharded_single_step_dataset.py cleanly.\nApplied patch gr00t/model/gr00t_n1d7/gr00t_n1d7.py cleanly.\nApplied patch gr00t/model/gr00t_n1d7/setup.py cleanly.\nApplied patch gr00t/policy/decoupled_policy.py cleanly.\n",
+          "reverse_check": "Checking patch gr00t/policy/decoupled_policy.py...\nChecking patch gr00t/model/gr00t_n1d7/setup.py...\nChecking patch gr00t/model/gr00t_n1d7/gr00t_n1d7.py...\nChecking patch gr00t/data/dataset/sharded_single_step_dataset.py...\n",
+          "applied_file_count": 4
+        },
+        "package_scope": "Complete gr00t Python package, pyproject and licenses/notices. Demo data, media and example checkpoint binaries are excluded.",
+        "files": {
+          "gr00t/__init__.py": "0233f3e8dff014e166075e00bab07d554df6d4178e65ba3a15ebe14e40cc3a82",
+          "gr00t/configs/__init__.py": "c4dc0cf54a15db963e684ed996a7ceb38a3737390327929f05930ac903f33514",
+          "gr00t/configs/base_config.py": "55f3027bf435434fb406f3384ab4b2ce2fb615f72b539fa29fbc09509008e261",
+          "gr00t/configs/data/__init__.py": "c4dc0cf54a15db963e684ed996a7ceb38a3737390327929f05930ac903f33514",
+          "gr00t/configs/data/data_config.py": "b389f9b9168522c46275a5154c2f5092e4f47505d542fdfd51d6bba29da2db89",
+          "gr00t/configs/data/embodiment_configs.py": "de92a131919a95ce082f344cd79766621c2e02e023717fa3c23544b92a008052",
+          "gr00t/configs/deepspeed/zero2_config.json": "8b0cd28759c69f399c559e906c2f3337db52450a6da61c763e02009a687d42dd",
+          "gr00t/configs/deepspeed/zero3_config.json": "1e197fb4e8712cb8d726198f980877bf674688b3bade41af3779b3135e311fa9",
+          "gr00t/configs/finetune_config.py": "4d5a0c251fcb9dbd4baedfb83af6e5f4131acdca7c0124e38fa16de9f8ecbef8",
+          "gr00t/configs/model/__init__.py": "64fce2a393b80abb30f5a3ee3e529489233997487c52a6fbf203fd74e97d0e66",
+          "gr00t/configs/model/gr00t_n1d7.py": "d00743325aef3f3a37dd947e74d471c44bc80dbf6a0583aaf55fc20df4e6dc71",
+          "gr00t/configs/training/__init__.py": "c4dc0cf54a15db963e684ed996a7ceb38a3737390327929f05930ac903f33514",
+          "gr00t/configs/training/training_config.py": "d2656ba75905c8a401d98073243f2bbacfdad26d1dcbf1c3fd3c00b8e95d3220",
+          "gr00t/data/__init__.py": "c4dc0cf54a15db963e684ed996a7ceb38a3737390327929f05930ac903f33514",
+          "gr00t/data/collator/__init__.py": "fc7caf6412180d0bc12ca41be082e0cdd141daa90ba12d958628bbdf57f80002",
+          "gr00t/data/collator/collators.py": "2fb50c5a808d023aa759043f4ddaf54a313efc04ff036a3c16b2c126b808c516",
+          "gr00t/data/dataset/__init__.py": "c4dc0cf54a15db963e684ed996a7ceb38a3737390327929f05930ac903f33514",
+          "gr00t/data/dataset/factory.py": "89aca290edd7a74bc49e5ba72ec7f7d328c47a8e18f0a7166fd4bf72060cc32d",
+          "gr00t/data/dataset/lerobot_episode_loader.py": "0d12a396ff365f5d329116e9b946535ac291a5d66543da0685113891a849fe03",
+          "gr00t/data/dataset/sharded_mixture_dataset.py": "7ed4a5f585dd12b7dcf33a18c23b569fc006f65050b96cf6f1acac92aba5f13d",
+          "gr00t/data/dataset/sharded_single_step_dataset.py": "1aec8dc9306554e93291facab64efe35df378b43bdae01eeb8bc45ff2c3e9f3d",
+          "gr00t/data/embodiment_tags.py": "e1d2e640a6b9eacf06cd201d61b128baeb3b6fb0ebace1afb66d6279f7d96c5a",
+          "gr00t/data/interfaces.py": "daa4c6c41e785abc549181153d870fd8d6cca70e3a5ebc43e51bc6b492fad864",
+          "gr00t/data/state_action/action_chunking.py": "0b8379b903a87ec35e1671afa15f8bb4af8d948ee239b5e0eb1c90c8b4dd6b78",
+          "gr00t/data/state_action/pose.py": "4a09d0f1da9fe80bd8c3b0788e04c06979666f5dd636a91799a21e7d92c5f808",
+          "gr00t/data/state_action/state_action_processor.py": "4d52c8246d651540bf12304a3d9f39b6eadf2c8c1a63ffda1225345617711269",
+          "gr00t/data/stats.py": "715626bc3560a928a35b753d97bf058f62555604d70e0951c3b32d6effe6bc7b",
+          "gr00t/data/types.py": "2841f077f4cdb831cd66947fc41e88eade7599645e0b76dd1b4723f22580befa",
+          "gr00t/data/utils.py": "3cd7789dabdfaca5826ec3357d4c46697486d7f01c20ce03d7df6d4931a05123",
+          "gr00t/eval/open_loop_eval.py": "91a1ff4a090e01a8e50ddb2147983bc07063de145cafbe73adadc8e9ef09e754",
+          "gr00t/eval/real_robot/SO100/eval_so100.py": "4b33cf7471428ebf833f1b2cd5b6d1bc0614d4739c29d84187d7749956b67c8e",
+          "gr00t/eval/real_robot/SO100/pyproject.toml": "43cf4526a9b821eb5cd488db252f5916d58d32f161450a6744be35a1dd4a51ac",
+          "gr00t/eval/rollout_policy.py": "e3a918fc7129dd392c2b59dc30d6a97149e27d072e5096b2e03d78a1b442a532",
+          "gr00t/eval/run_gr00t_server.py": "2916a845e8ee932d3fa91bb4af7a69a3433818d379f0ad425d7edbd913c42838",
+          "gr00t/eval/sim/LIBERO/libero_env.py": "2d6400a2cc94a33454a8dbe32bbb71df0c36afe808f0b6925ab71850c87bc399",
+          "gr00t/eval/sim/LIBERO/setup_libero.sh": "1d9ec98511574bd4b2e727187c2821c03105725eb067af7fc407c1fc3627c5ee",
+          "gr00t/eval/sim/SimplerEnv/setup_SimplerEnv.sh": "963a309b084355b9b087aaa8a848bcea5b9326382ba07cacfe3d194097271f2c",
+          "gr00t/eval/sim/SimplerEnv/simpler_env.py": "7be1e9450db9bab76bff57c7fac9359a816b5faf15b50b83bb101e1bc5527ccc",
+          "gr00t/eval/sim/__init__.py": "c4dc0cf54a15db963e684ed996a7ceb38a3737390327929f05930ac903f33514",
+          "gr00t/eval/sim/env_utils.py": "9cd4106737d4d5a5c5c29c6bffc84a628a08f3cb8f8a3a22affa946468398d3c",
+          "gr00t/eval/sim/wrapper/multistep_wrapper.py": "a3e3499a7e574f23123c54f057ca49d8d5dbb63fbd9606b6740a8fe3d6fdfa76",
+          "gr00t/eval/sim/wrapper/video_recording_wrapper.py": "13c7ff421f6dae900b69a4b90f938d9c1040943e2ce8db12cd7d72dbd97c1725",
+          "gr00t/experiment/__init__.py": "c4dc0cf54a15db963e684ed996a7ceb38a3737390327929f05930ac903f33514",
+          "gr00t/experiment/dist_utils.py": "5e9f6fe032faf45d4be261b86aaf7480f290965a9a42a8cb684c3256766f1b1c",
+          "gr00t/experiment/experiment.py": "a3907b70337bd0fdcc0f0c64f671749256787bcd3d63570a332fd767bcf9d780",
+          "gr00t/experiment/launch_finetune.py": "d260503aa87e9fac8460117e11beac6259db10af1531217cfe8d92b6a471ca1c",
+          "gr00t/experiment/launch_train.py": "e1e86e694459b661b4ce53424acb44aeb3ebccee63de0accde9637ad244a0c7f",
+          "gr00t/experiment/trainer.py": "e3448a16c5ec2e3229a81080c826bf2200dd94f32af83b40bfa40595e2a97b2f",
+          "gr00t/experiment/utils.py": "31adf57ae653178b94c0c7a7bb30023c0cd79b6e2ddd745a1dea0f423c4b8b34",
+          "gr00t/model/__init__.py": "c8285a55bed73f760502b37034f59eba80610555d2ec5a49b027bd78fdb64e97",
+          "gr00t/model/base/model_pipeline.py": "223981b0974fe6ca3768896cfa7e0a7409667506a64df6d77106af57b75365eb",
+          "gr00t/model/gr00t_n1d7/__init__.py": "c4dc0cf54a15db963e684ed996a7ceb38a3737390327929f05930ac903f33514",
+          "gr00t/model/gr00t_n1d7/gr00t_n1d7.py": "776c60602a835c8156b2c336793c569daf2cb4291f706f3562fb144774a91434",
+          "gr00t/model/gr00t_n1d7/image_augmentations.py": "162ca1d419dc477c8c9eb4f6656cd337722c43defdb951df42d87a137405bcab",
+          "gr00t/model/gr00t_n1d7/processing_gr00t_n1d7.py": "f5df900d4a1e4c2eb4d12d871cec0946bc06affb29111ba80645d30125193098",
+          "gr00t/model/gr00t_n1d7/setup.py": "33790e50116d47b5a3d5f6e91d910a0b17510ef7d415aaedb10d79d7c100a598",
+          "gr00t/model/modules/__init__.py": "8d39b2b127a2f9b08581fb05a0f3099e1490d3cb83a25e7140a768d416e7aaf7",
+          "gr00t/model/modules/dit.py": "4c2f940265fce390a9703b39dcb2c6c1c1c8eae1f0776d723aa37ea1296d4d8c",
+          "gr00t/model/modules/embodiment_conditioned_mlp.py": "2c024de8132ce6d148b64e907fc6970040b299e15d5ee9970aebb6667803b733",
+          "gr00t/model/modules/flowmatching_modules.py": "6a1c70ad24ba54e52d1b6431b97158e7da5dcd41c6dfdda19e36e60d8c5b5cd4",
+          "gr00t/model/modules/qwen3_backbone.py": "c73316c2f2b17739fbea9f302d6dd190ac12b03e9f11f254681fbc13eecb2eb2",
+          "gr00t/model/registry.py": "665a57055e9351eae8084bebfb8a32835fbe5231395c047a6f1520853d20fd4e",
+          "gr00t/policy/__init__.py": "34a63218deecd2a4318af43ce5606c231b4b8629df434381012d1b9ddfe1e1fe",
+          "gr00t/policy/decoupled_policy.py": "15534a522786612e66bc2e921c81bb28bb8f1897c9921f0b3463ed832b88475d",
+          "gr00t/policy/gr00t_policy.py": "a357118ddb448c4533de165de7ce8c077d630a5e9f4ce74ba5db6f2fdc0cca6e",
+          "gr00t/policy/policy.py": "b53326aee0c26ea34201d70510ad92608a96929d7f39039f578c3d865446de23",
+          "gr00t/policy/replay_policy.py": "3ffd9da3ea579ed5c61b3c99a834facdbbeb87be3a172eb83fc0f0d50bc349a3",
+          "gr00t/policy/server_client.py": "f30b8095a524cbc096bbda330f481e590bb8c53c5a1afee216a07302df2071b3",
+          "gr00t/utils/initial_actions.py": "dd85765d4f938229a2b999922269163c95ec00c40c37124644313c5678cd091c",
+          "gr00t/utils/video_utils.py": "0b6613cd83104cff19e0c3285bca9a88eca88855ffe95e275b5d10e3fd59424c",
+          "pyproject.toml": "9d67b1190f6372bb73719452da1bbfcf02699ff5dd0cee58d260633d979c987e",
+          "LICENSE": "93363510f62ce25ad1a47605b0b06ab335edd82f1a444531c58dd30b6e5a5a0c",
+          "NOTICE": "497d93c600636b2566bc49562288f136ef8def1c9c50bdb612530af64f77c1b3",
+          "ATTRIBUTIONS.md": "a4b8f31f3cd191b97735b266161f5cca757f133e23e6c26549d78ff0997dc3ff",
+          "applied-maintainer.patch": "e8ef1215af9202a645f10e658fb9fd09cfac61bf68ca06c3e1f1170fe97cd7ca"
+        }
+      },
+      "groot_source_root": "groot-source",
+      "owned_kernels": {
+        "integer": {
+          "kind": "repository-owned",
+          "expected_revision": "sha256:63604889c3028490a56e3fd5f3b489424f225760d231a706708944bfe054e518",
+          "revision": "sha256:0e9216482d4d7c31d918f8833440e3fcd66672f45e59aa9716c5f8931d9f380b",
+          "dirty": true,
+          "owned_dirty": false,
+          "source_sha256": "0e9216482d4d7c31d918f8833440e3fcd66672f45e59aa9716c5f8931d9f380b",
+          "manifest_sha256": "4b6d2b507148c5a80d99a6191fb5f8bc3070900810104a5bf8b9cd3c684352ca",
+          "url": "https://github.com/thu-ee-acts-lab/robotics-the-speedup-paradox",
+          "upstream_revision": "239b4a3ef2268048571c9f508ad5700f98398c2f",
+          "module_tracked": false,
+          "module_sha256": "unknown",
+          "missing_sources": [],
+          "changed_sources": [],
+          "unrecorded_sources": [],
+          "submodules": [
+            {
+              "name": "cutlass",
+              "path": "vendor/cutlass",
+              "url": "https://github.com/NVIDIA/cutlass.git",
+              "scope": [
+                "include",
+                "tools/util/include",
+                "LICENSE.txt"
+              ],
+              "expected_revision": "982748aa7356fa838c2ea4994ddcb0b2a4b4cefa",
+              "revision": "unknown",
+              "initialized": false,
+              "dirty": "unknown",
+              "missing_paths": [],
+              "error": null,
+              "source": "environment",
+              "header_sha256": "6226274f7ee88c43b4c849a39e69dcf94d8c57ee7b0b95c1d8dd63dc6a65d543",
+              "matches_recommended_revision": false
+            }
+          ],
+          "backend": "integer",
+          "namespace": "pir2_integer",
+          "cutlass_revision": "unknown"
+        },
+        "integer_dispatch": {
+          "kind": "repository-owned",
+          "expected_revision": "sha256:332032b3d9071ce6a114b2eba3517bc2d0be75de7fd249d11e2fa9d351532855",
+          "revision": "sha256:332032b3d9071ce6a114b2eba3517bc2d0be75de7fd249d11e2fa9d351532855",
+          "dirty": false,
+          "owned_dirty": false,
+          "source_sha256": "332032b3d9071ce6a114b2eba3517bc2d0be75de7fd249d11e2fa9d351532855",
+          "manifest_sha256": "4b6d2b507148c5a80d99a6191fb5f8bc3070900810104a5bf8b9cd3c684352ca",
+          "url": "https://github.com/thu-ee-acts-lab/robotics-the-speedup-paradox",
+          "upstream_revision": "239b4a3ef2268048571c9f508ad5700f98398c2f",
+          "module_tracked": false,
+          "module_sha256": "unknown",
+          "missing_sources": [],
+          "changed_sources": [],
+          "unrecorded_sources": [],
+          "submodules": [],
+          "backend": "integer_dispatch",
+          "namespace": "pir2_integer_dispatch",
+          "cutlass_revision": null
+        },
+        "bf16_fusion": {
+          "kind": "repository-owned",
+          "expected_revision": "sha256:332032b3d9071ce6a114b2eba3517bc2d0be75de7fd249d11e2fa9d351532855",
+          "revision": "sha256:332032b3d9071ce6a114b2eba3517bc2d0be75de7fd249d11e2fa9d351532855",
+          "dirty": false,
+          "owned_dirty": false,
+          "source_sha256": "332032b3d9071ce6a114b2eba3517bc2d0be75de7fd249d11e2fa9d351532855",
+          "manifest_sha256": "4b6d2b507148c5a80d99a6191fb5f8bc3070900810104a5bf8b9cd3c684352ca",
+          "url": "https://github.com/thu-ee-acts-lab/robotics-the-speedup-paradox",
+          "upstream_revision": "239b4a3ef2268048571c9f508ad5700f98398c2f",
+          "module_tracked": false,
+          "module_sha256": "unknown",
+          "missing_sources": [],
+          "changed_sources": [],
+          "unrecorded_sources": [],
+          "submodules": [],
+          "backend": "bf16_fusion",
+          "namespace": "pir2_bf16_fusion",
+          "cutlass_revision": null
+        }
+      },
+      "offline_assets": {
+        "repo_id": "nvidia/Cosmos-Reason2-2B",
+        "resolution": "existing local config and tokenizer assets; task checkpoint supplies all model weights",
+        "files": {
+          "chat_template.json": "6f8a6a55027e3da5160105556cda5dd69f6423f1c32645f6730d32de7773d0c4",
+          "config.json": "bec4b3d446efa05807365c9e1cec03ac590836879d02f3a6da879971154bdd3b",
+          "generation_config.json": "1e241830b48b397cb0900101421df5450baddc7adf01e5fc86b5615865f3bae4",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "preprocessor_config.json": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516",
+          "tokenizer.json": "a5d85b6dcc535e6b93115a9ef287e6132fdbf30270da6218194ba742261173c7",
+          "tokenizer_config.json": "c2da771801886ad9ae98181793ffd3dfb7f1af30f6f7c6a4e15d7dbba52e2399",
+          "video_preprocessor_config.json": "7768af27c1fafa9cc9011c1dc20067e03f8915e03b63504550e11d5066986d13",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      },
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "0",
+        "CUDA_HOME": "/usr/local/cuda-12.8",
+        "TORCH_CUDA_ARCH_LIST": "8.9",
+        "TORCH_EXTENSIONS_DIR": "torch210_extensions",
+        "TRITON_CACHE_DIR": "triton360",
+        "CUTLASS_ROOT": "cutlass",
+        "PYTHONPATH": "testdeps"
+      },
+      "gpu_snapshot": "index, name, uuid, driver_version, memory.used [MiB], utilization.gpu [%], clocks.current.sm [MHz], clocks.current.memory [MHz], power.limit [W]\n0, NVIDIA RTX 6000 Ada Generation, [gpu-uuid], 570.172.08, 126 MiB, 0 %, 915 MHz, 10001 MHz, 300.00 W\n1, NVIDIA RTX 6000 Ada Generation, [gpu-uuid], 570.172.08, 63 MiB, 0 %, 915 MHz, 10001 MHz, 300.00 W\n2, NVIDIA RTX 6000 Ada Generation, [gpu-uuid], 570.172.08, 11611 MiB, 29 %, 915 MHz, 10001 MHz, 300.00 W\n3, NVIDIA RTX 6000 Ada Generation, [gpu-uuid], 570.172.08, 131 MiB, 0 %, 210 MHz, 405 MHz, 300.00 W\n",
+      "operating_conditions": "GPU0 inspected idle before run; no clock or power changes; other GPUs shared"
+    }
+  },
+  "model_source_manifest": {
+    "status": "verified",
+    "sha256": "65228d9f68ffbf45d0e82c9cc66f4e6a33fcff9f2621d27f773ff5e17592788a",
+    "file_count": 75,
+    "value": {
+      "schema_version": 2,
+      "source_url": "https://github.com/pi-r2-flow/Isaac-GR00T.git",
+      "source_revision": "2a39d591a3af24c42bb1d1c9cd708a2dddac0600",
+      "source_preparation": "git -c core.autocrlf=false archive of exact pinned commit; independent git root; exact pre-patch blobs verified; git apply --check --verbose then apply --verbose; four applied files and reverse --check verified",
+      "maintainer_repository": "https://github.com/Ther-nullptr/piR2",
+      "maintainer_revision": "3c96deed507daa2878dc7e78b0deee9431ceec32",
+      "maintainer_patch": "patches/groot-reproduction-fixes.patch",
+      "maintainer_patch_sha256": "e8ef1215af9202a645f10e658fb9fd09cfac61bf68ca06c3e1f1170fe97cd7ca",
+      "patch_affected_files": [
+        "gr00t/data/dataset/sharded_single_step_dataset.py",
+        "gr00t/model/gr00t_n1d7/gr00t_n1d7.py",
+        "gr00t/model/gr00t_n1d7/setup.py",
+        "gr00t/policy/decoupled_policy.py"
+      ],
+      "patch_before_sha256": {
+        "gr00t/data/dataset/sharded_single_step_dataset.py": "97865191d095bcd14cc7ac3bfaaabad1b08b81625e942502aff646384ef335c8",
+        "gr00t/model/gr00t_n1d7/gr00t_n1d7.py": "2d6b1cf85bacb6fd8e1f9481464791820c4f3fae8ab49197320c35db8c096f0c",
+        "gr00t/model/gr00t_n1d7/setup.py": "4327a662fafffa1ce65a42c2ddbdb26e9a27f97b36f751200c6935bcaafc7545",
+        "gr00t/policy/decoupled_policy.py": "fd923f3d1965eecca06f5660a11d2013a8c829368f2edb406c5cdc6946033acc"
+      },
+      "patch_after_sha256": {
+        "gr00t/data/dataset/sharded_single_step_dataset.py": "1aec8dc9306554e93291facab64efe35df378b43bdae01eeb8bc45ff2c3e9f3d",
+        "gr00t/model/gr00t_n1d7/gr00t_n1d7.py": "776c60602a835c8156b2c336793c569daf2cb4291f706f3562fb144774a91434",
+        "gr00t/model/gr00t_n1d7/setup.py": "33790e50116d47b5a3d5f6e91d910a0b17510ef7d415aaedb10d79d7c100a598",
+        "gr00t/policy/decoupled_policy.py": "15534a522786612e66bc2e921c81bb28bb8f1897c9921f0b3463ed832b88475d"
+      },
+      "patch_validation": {
+        "check": "Checking patch gr00t/data/dataset/sharded_single_step_dataset.py...\nChecking patch gr00t/model/gr00t_n1d7/gr00t_n1d7.py...\nChecking patch gr00t/model/gr00t_n1d7/setup.py...\nChecking patch gr00t/policy/decoupled_policy.py...\n",
+        "apply": "Checking patch gr00t/data/dataset/sharded_single_step_dataset.py...\nChecking patch gr00t/model/gr00t_n1d7/gr00t_n1d7.py...\nChecking patch gr00t/model/gr00t_n1d7/setup.py...\nChecking patch gr00t/policy/decoupled_policy.py...\nApplied patch gr00t/data/dataset/sharded_single_step_dataset.py cleanly.\nApplied patch gr00t/model/gr00t_n1d7/gr00t_n1d7.py cleanly.\nApplied patch gr00t/model/gr00t_n1d7/setup.py cleanly.\nApplied patch gr00t/policy/decoupled_policy.py cleanly.\n",
+        "reverse_check": "Checking patch gr00t/policy/decoupled_policy.py...\nChecking patch gr00t/model/gr00t_n1d7/setup.py...\nChecking patch gr00t/model/gr00t_n1d7/gr00t_n1d7.py...\nChecking patch gr00t/data/dataset/sharded_single_step_dataset.py...\n",
+        "applied_file_count": 4
+      },
+      "package_scope": "Complete gr00t Python package, pyproject and licenses/notices. Demo data, media and example checkpoint binaries are excluded.",
+      "files": {
+        "gr00t/__init__.py": "0233f3e8dff014e166075e00bab07d554df6d4178e65ba3a15ebe14e40cc3a82",
+        "gr00t/configs/__init__.py": "c4dc0cf54a15db963e684ed996a7ceb38a3737390327929f05930ac903f33514",
+        "gr00t/configs/base_config.py": "55f3027bf435434fb406f3384ab4b2ce2fb615f72b539fa29fbc09509008e261",
+        "gr00t/configs/data/__init__.py": "c4dc0cf54a15db963e684ed996a7ceb38a3737390327929f05930ac903f33514",
+        "gr00t/configs/data/data_config.py": "b389f9b9168522c46275a5154c2f5092e4f47505d542fdfd51d6bba29da2db89",
+        "gr00t/configs/data/embodiment_configs.py": "de92a131919a95ce082f344cd79766621c2e02e023717fa3c23544b92a008052",
+        "gr00t/configs/deepspeed/zero2_config.json": "8b0cd28759c69f399c559e906c2f3337db52450a6da61c763e02009a687d42dd",
+        "gr00t/configs/deepspeed/zero3_config.json": "1e197fb4e8712cb8d726198f980877bf674688b3bade41af3779b3135e311fa9",
+        "gr00t/configs/finetune_config.py": "4d5a0c251fcb9dbd4baedfb83af6e5f4131acdca7c0124e38fa16de9f8ecbef8",
+        "gr00t/configs/model/__init__.py": "64fce2a393b80abb30f5a3ee3e529489233997487c52a6fbf203fd74e97d0e66",
+        "gr00t/configs/model/gr00t_n1d7.py": "d00743325aef3f3a37dd947e74d471c44bc80dbf6a0583aaf55fc20df4e6dc71",
+        "gr00t/configs/training/__init__.py": "c4dc0cf54a15db963e684ed996a7ceb38a3737390327929f05930ac903f33514",
+        "gr00t/configs/training/training_config.py": "d2656ba75905c8a401d98073243f2bbacfdad26d1dcbf1c3fd3c00b8e95d3220",
+        "gr00t/data/__init__.py": "c4dc0cf54a15db963e684ed996a7ceb38a3737390327929f05930ac903f33514",
+        "gr00t/data/collator/__init__.py": "fc7caf6412180d0bc12ca41be082e0cdd141daa90ba12d958628bbdf57f80002",
+        "gr00t/data/collator/collators.py": "2fb50c5a808d023aa759043f4ddaf54a313efc04ff036a3c16b2c126b808c516",
+        "gr00t/data/dataset/__init__.py": "c4dc0cf54a15db963e684ed996a7ceb38a3737390327929f05930ac903f33514",
+        "gr00t/data/dataset/factory.py": "89aca290edd7a74bc49e5ba72ec7f7d328c47a8e18f0a7166fd4bf72060cc32d",
+        "gr00t/data/dataset/lerobot_episode_loader.py": "0d12a396ff365f5d329116e9b946535ac291a5d66543da0685113891a849fe03",
+        "gr00t/data/dataset/sharded_mixture_dataset.py": "7ed4a5f585dd12b7dcf33a18c23b569fc006f65050b96cf6f1acac92aba5f13d",
+        "gr00t/data/dataset/sharded_single_step_dataset.py": "1aec8dc9306554e93291facab64efe35df378b43bdae01eeb8bc45ff2c3e9f3d",
+        "gr00t/data/embodiment_tags.py": "e1d2e640a6b9eacf06cd201d61b128baeb3b6fb0ebace1afb66d6279f7d96c5a",
+        "gr00t/data/interfaces.py": "daa4c6c41e785abc549181153d870fd8d6cca70e3a5ebc43e51bc6b492fad864",
+        "gr00t/data/state_action/action_chunking.py": "0b8379b903a87ec35e1671afa15f8bb4af8d948ee239b5e0eb1c90c8b4dd6b78",
+        "gr00t/data/state_action/pose.py": "4a09d0f1da9fe80bd8c3b0788e04c06979666f5dd636a91799a21e7d92c5f808",
+        "gr00t/data/state_action/state_action_processor.py": "4d52c8246d651540bf12304a3d9f39b6eadf2c8c1a63ffda1225345617711269",
+        "gr00t/data/stats.py": "715626bc3560a928a35b753d97bf058f62555604d70e0951c3b32d6effe6bc7b",
+        "gr00t/data/types.py": "2841f077f4cdb831cd66947fc41e88eade7599645e0b76dd1b4723f22580befa",
+        "gr00t/data/utils.py": "3cd7789dabdfaca5826ec3357d4c46697486d7f01c20ce03d7df6d4931a05123",
+        "gr00t/eval/open_loop_eval.py": "91a1ff4a090e01a8e50ddb2147983bc07063de145cafbe73adadc8e9ef09e754",
+        "gr00t/eval/real_robot/SO100/eval_so100.py": "4b33cf7471428ebf833f1b2cd5b6d1bc0614d4739c29d84187d7749956b67c8e",
+        "gr00t/eval/real_robot/SO100/pyproject.toml": "43cf4526a9b821eb5cd488db252f5916d58d32f161450a6744be35a1dd4a51ac",
+        "gr00t/eval/rollout_policy.py": "e3a918fc7129dd392c2b59dc30d6a97149e27d072e5096b2e03d78a1b442a532",
+        "gr00t/eval/run_gr00t_server.py": "2916a845e8ee932d3fa91bb4af7a69a3433818d379f0ad425d7edbd913c42838",
+        "gr00t/eval/sim/LIBERO/libero_env.py": "2d6400a2cc94a33454a8dbe32bbb71df0c36afe808f0b6925ab71850c87bc399",
+        "gr00t/eval/sim/LIBERO/setup_libero.sh": "1d9ec98511574bd4b2e727187c2821c03105725eb067af7fc407c1fc3627c5ee",
+        "gr00t/eval/sim/SimplerEnv/setup_SimplerEnv.sh": "963a309b084355b9b087aaa8a848bcea5b9326382ba07cacfe3d194097271f2c",
+        "gr00t/eval/sim/SimplerEnv/simpler_env.py": "7be1e9450db9bab76bff57c7fac9359a816b5faf15b50b83bb101e1bc5527ccc",
+        "gr00t/eval/sim/__init__.py": "c4dc0cf54a15db963e684ed996a7ceb38a3737390327929f05930ac903f33514",
+        "gr00t/eval/sim/env_utils.py": "9cd4106737d4d5a5c5c29c6bffc84a628a08f3cb8f8a3a22affa946468398d3c",
+        "gr00t/eval/sim/wrapper/multistep_wrapper.py": "a3e3499a7e574f23123c54f057ca49d8d5dbb63fbd9606b6740a8fe3d6fdfa76",
+        "gr00t/eval/sim/wrapper/video_recording_wrapper.py": "13c7ff421f6dae900b69a4b90f938d9c1040943e2ce8db12cd7d72dbd97c1725",
+        "gr00t/experiment/__init__.py": "c4dc0cf54a15db963e684ed996a7ceb38a3737390327929f05930ac903f33514",
+        "gr00t/experiment/dist_utils.py": "5e9f6fe032faf45d4be261b86aaf7480f290965a9a42a8cb684c3256766f1b1c",
+        "gr00t/experiment/experiment.py": "a3907b70337bd0fdcc0f0c64f671749256787bcd3d63570a332fd767bcf9d780",
+        "gr00t/experiment/launch_finetune.py": "d260503aa87e9fac8460117e11beac6259db10af1531217cfe8d92b6a471ca1c",
+        "gr00t/experiment/launch_train.py": "e1e86e694459b661b4ce53424acb44aeb3ebccee63de0accde9637ad244a0c7f",
+        "gr00t/experiment/trainer.py": "e3448a16c5ec2e3229a81080c826bf2200dd94f32af83b40bfa40595e2a97b2f",
+        "gr00t/experiment/utils.py": "31adf57ae653178b94c0c7a7bb30023c0cd79b6e2ddd745a1dea0f423c4b8b34",
+        "gr00t/model/__init__.py": "c8285a55bed73f760502b37034f59eba80610555d2ec5a49b027bd78fdb64e97",
+        "gr00t/model/base/model_pipeline.py": "223981b0974fe6ca3768896cfa7e0a7409667506a64df6d77106af57b75365eb",
+        "gr00t/model/gr00t_n1d7/__init__.py": "c4dc0cf54a15db963e684ed996a7ceb38a3737390327929f05930ac903f33514",
+        "gr00t/model/gr00t_n1d7/gr00t_n1d7.py": "776c60602a835c8156b2c336793c569daf2cb4291f706f3562fb144774a91434",
+        "gr00t/model/gr00t_n1d7/image_augmentations.py": "162ca1d419dc477c8c9eb4f6656cd337722c43defdb951df42d87a137405bcab",
+        "gr00t/model/gr00t_n1d7/processing_gr00t_n1d7.py": "f5df900d4a1e4c2eb4d12d871cec0946bc06affb29111ba80645d30125193098",
+        "gr00t/model/gr00t_n1d7/setup.py": "33790e50116d47b5a3d5f6e91d910a0b17510ef7d415aaedb10d79d7c100a598",
+        "gr00t/model/modules/__init__.py": "8d39b2b127a2f9b08581fb05a0f3099e1490d3cb83a25e7140a768d416e7aaf7",
+        "gr00t/model/modules/dit.py": "4c2f940265fce390a9703b39dcb2c6c1c1c8eae1f0776d723aa37ea1296d4d8c",
+        "gr00t/model/modules/embodiment_conditioned_mlp.py": "2c024de8132ce6d148b64e907fc6970040b299e15d5ee9970aebb6667803b733",
+        "gr00t/model/modules/flowmatching_modules.py": "6a1c70ad24ba54e52d1b6431b97158e7da5dcd41c6dfdda19e36e60d8c5b5cd4",
+        "gr00t/model/modules/qwen3_backbone.py": "c73316c2f2b17739fbea9f302d6dd190ac12b03e9f11f254681fbc13eecb2eb2",
+        "gr00t/model/registry.py": "665a57055e9351eae8084bebfb8a32835fbe5231395c047a6f1520853d20fd4e",
+        "gr00t/policy/__init__.py": "34a63218deecd2a4318af43ce5606c231b4b8629df434381012d1b9ddfe1e1fe",
+        "gr00t/policy/decoupled_policy.py": "15534a522786612e66bc2e921c81bb28bb8f1897c9921f0b3463ed832b88475d",
+        "gr00t/policy/gr00t_policy.py": "a357118ddb448c4533de165de7ce8c077d630a5e9f4ce74ba5db6f2fdc0cca6e",
+        "gr00t/policy/policy.py": "b53326aee0c26ea34201d70510ad92608a96929d7f39039f578c3d865446de23",
+        "gr00t/policy/replay_policy.py": "3ffd9da3ea579ed5c61b3c99a834facdbbeb87be3a172eb83fc0f0d50bc349a3",
+        "gr00t/policy/server_client.py": "f30b8095a524cbc096bbda330f481e590bb8c53c5a1afee216a07302df2071b3",
+        "gr00t/utils/initial_actions.py": "dd85765d4f938229a2b999922269163c95ec00c40c37124644313c5678cd091c",
+        "gr00t/utils/video_utils.py": "0b6613cd83104cff19e0c3285bca9a88eca88855ffe95e275b5d10e3fd59424c",
+        "pyproject.toml": "9d67b1190f6372bb73719452da1bbfcf02699ff5dd0cee58d260633d979c987e",
+        "LICENSE": "93363510f62ce25ad1a47605b0b06ab335edd82f1a444531c58dd30b6e5a5a0c",
+        "NOTICE": "497d93c600636b2566bc49562288f136ef8def1c9c50bdb612530af64f77c1b3",
+        "ATTRIBUTIONS.md": "a4b8f31f3cd191b97735b266161f5cca757f133e23e6c26549d78ff0997dc3ff",
+        "applied-maintainer.patch": "e8ef1215af9202a645f10e658fb9fd09cfac61bf68ca06c3e1f1170fe97cd7ca"
+      }
+    }
+  },
+  "loaded_model_source": {
+    "gr00t.model.modules.dit": {
+      "file": "dit.py",
+      "sha256": "4c2f940265fce390a9703b39dcb2c6c1c1c8eae1f0776d723aa37ea1296d4d8c"
+    },
+    "gr00t.model.gr00t_n1d7.gr00t_n1d7": {
+      "file": "gr00t_n1d7.py",
+      "sha256": "776c60602a835c8156b2c336793c569daf2cb4291f706f3562fb144774a91434"
+    },
+    "gr00t.policy.decoupled_policy": {
+      "file": "decoupled_policy.py",
+      "sha256": "15534a522786612e66bc2e921c81bb28bb8f1897c9921f0b3463ed832b88475d"
+    },
+    "gr00t.model.modules.qwen3_backbone": {
+      "file": "qwen3_backbone.py",
+      "sha256": "c73316c2f2b17739fbea9f302d6dd190ac12b03e9f11f254681fbc13eecb2eb2"
+    }
+  },
+  "convolution_profiles": {
+    "original_bf16": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 160.14199999999983
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 155.38999999999942
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 150.19700000000012
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 110.07200000000012
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "bf16": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 141.4380000000001
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 139.0010000000002
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 135.71199999999953
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 102.34300000000076
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "tier00": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 127.13999999999942
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 124.33699999999953
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 120.7489999999998
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 87.83399999999892
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "tier01": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 133.53399999999965
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 130.862000000001
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 127.4260000000013
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 94.41200000000026
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "tier02": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 135.65999999999985
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 132.63600000000042
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 129.15599999999904
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 95.10499999999956
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "tier03": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 147.45499999999993
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 144.41100000000006
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 139.90399999999863
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 100.56800000000112
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "tier04": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 153.7009999999991
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 150.11199999999917
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 146.27200000000084
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 109.28600000000006
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "tier05": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 137.5689999999995
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 134.3700000000008
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 130.77700000000004
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 97.01699999999983
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "tier06": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 184.12900000000081
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 180.20900000000074
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 175.25900000000001
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 133.9380000000001
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "tier07": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 131.67100000000028
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 128.47500000000036
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 124.875
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 89.66400000000067
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "tier08": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 131.52399999999943
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 128.8859999999986
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 125.39699999999903
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 91.47999999999956
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "tier09": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 134.83100000000013
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 131.58300000000054
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 127.92300000000068
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 91.8090000000011
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    },
+    "tier10": {
+      "scope": "separate single-policy profiler; nested CPU event totals, not additive GPU wall time",
+      "events": {
+        "aten::conv3d": {
+          "count": 1,
+          "cpu_time_total_us": 131.4390000000003
+        },
+        "aten::convolution": {
+          "count": 1,
+          "cpu_time_total_us": 128.64699999999903
+        },
+        "aten::_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 125.27399999999943
+        },
+        "aten::cudnn_convolution": {
+          "count": 1,
+          "cpu_time_total_us": 90.59199999999873
+        },
+        "aten::slow_conv_dilated3d": {
+          "count": 0,
+          "cpu_time_total_us": 0.0
+        }
+      },
+      "cudnn_present": true,
+      "slow_conv_dilated3d_present": false
+    }
+  },
+  "thor_reference": {
+    "status": "reference_only",
+    "sha256": "29c5c575a2a59b0c0713e6cc1a82d4761bccf33fb0d7a3da30096fa40681bc47",
+    "environment": {
+      "torch": "2.10.0+cu130",
+      "cuda": "13.0",
+      "device": "NVIDIA Thor",
+      "capability": [
+        11,
+        0
+      ],
+      "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+      "threads": 2
+    },
+    "environment_status": "recorded",
+    "note": "Ada INT8/INT4 vs Thor FP8/FP4; Torch CUDA builds differ. Not a hardware-only comparison."
+  }
+}

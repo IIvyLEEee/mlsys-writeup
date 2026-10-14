@@ -1,0 +1,70 @@
+{
+  "ada_diagnosis.json": {
+    "bytes": 123840,
+    "sha256": "32693b54eee5961bb7044a3745c01d0607bfcd3f2d71e5464e21dadd9e6e571d"
+  },
+  "ada_graph_breakdown.csv": {
+    "bytes": 2479,
+    "sha256": "129d6341b225f9e3f4305d9e726949407312d8b699863eab8b8fb7d3b31d2253"
+  },
+  "ada_graph_counts.csv": {
+    "bytes": 1940,
+    "sha256": "d0bc85e377e9ad56f947fe58148e59b39ce0610d7541b5b7d821d1cb3a322148"
+  },
+  "ada_latency_samples.csv": {
+    "bytes": 55295,
+    "sha256": "ad141c504a4e09460951d31e85f6359ed4f829199ccdcb86bde6824891673db0"
+  },
+  "ada_operator_breakdown.png": {
+    "bytes": 183313,
+    "sha256": "47c23bebb194cba96ae1f5a1d3220815343133f44b9e3a3f40949daa72c18946"
+  },
+  "ada_operator_breakdown.svg": {
+    "bytes": 16809,
+    "sha256": "d7b5160c694c2aca510f04b8e9ae04e08389d6340a4bb98429bf851cd3aecb17"
+  },
+  "ada_progressive_curve.png": {
+    "bytes": 361872,
+    "sha256": "933697c3eb0e1b3b4c0958e46dbe637bbfcaa88e2d6843228cac9c8fb245d54e"
+  },
+  "ada_progressive_report.tex": {
+    "bytes": 3497,
+    "sha256": "a2e9f6a714635fc641cbf07942d1ed7e30c37918f717596d1b2a7a69e20e817b"
+  },
+  "ada_provenance.json": {
+    "bytes": 22734,
+    "sha256": "19268dd956d43ae18d8a74254ae818533b4e101dd8661b824bda26d6bb0953ab"
+  },
+  "ada_README.txt": {
+    "bytes": 1120,
+    "sha256": "f8a4c1a0f2311891e331344ede2054c7977142bf1d7db8b0b2b4ec3b028addc4"
+  },
+  "ada_reproducibility.zip": {
+    "bytes": 116418,
+    "sha256": "db6a93582dc5d7cf6405633757c9c26f1eb9325b79a5c6faec5597b145624319"
+  },
+  "ada_rounds.csv": {
+    "bytes": 1244,
+    "sha256": "1b196fdff481ac8eb58f2734015ffc9e45fed33feb3795c05693d69c86ed6314"
+  },
+  "ada_sanitization.json": {
+    "bytes": 4749,
+    "sha256": "c3e300f45c1d1f756eafb995e19fc01592aedc935796dada47ea774d10423372"
+  },
+  "ada_selected_sites.json": {
+    "bytes": 521822,
+    "sha256": "68f5421aa3777c53693cd62598d36b1b8b10192b80ea225cadf28347e325e58b"
+  },
+  "ada_t7_t8_delta.csv": {
+    "bytes": 1685,
+    "sha256": "be4e66bab71ac8ece91cf2944788c9b45754ec142d93c05615116ce52d1c1a12"
+  },
+  "ada_tiers.csv": {
+    "bytes": 2133,
+    "sha256": "f58b4cdf48ea9396a5df32b61f675f644bfc39aa8a80f3ad8b3cd57eb00b3204"
+  },
+  "ada_validation_summary.json": {
+    "bytes": 7613,
+    "sha256": "2f2b058062469d600fdbc387fa3a9bc6d8bf5274218f541227c42c63a27f8eba"
+  }
+}

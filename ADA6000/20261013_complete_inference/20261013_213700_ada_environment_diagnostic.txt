@@ -1,0 +1,13 @@
+环境诊断与正式结果边界
+诊断证据状态：available。旧环境 original BF16 实测中位数 2874.253231 ms。
+旧 Torch 2.9 测量仅作为环境诊断保留，未加入本轮 13 档曲线、原始样本 CSV 或加速比。
+原始 profile 归集的 slow_conv_dilated3d、DtoD、vol2col 等事件计数及 trace SHA 保留在 20261013_213700_ada_environment_diagnostic.json，计数不与 CPU 墙钟时长混合。
+官方 PyTorch 2.9 源码对满足条件的 contiguous BF16/FP16 Conv3D 拒绝使用 cuDNN；2.10 对应选择代码已移除此分支。慢路径观测与这处选择条件一致。
+正式环境来自实际记录：Torch 2.10.0+cu128，CUDA 12.8，cuDNN 91002。
+正式所有配置重新测量，保持原始视觉张量布局；各档 profile 均要求观察到 cuDNN convolution 且没有 slow_conv_dilated3d。微型 Conv probe 不能替代这些完整调用检查。
+Thor 参考环境与依赖版本单列于 provenance；CUDA 构建与低精度格式仍不同，不能称纯硬件对比。
+profile CPU 时长包含分析器开销，不能与无 profiler 的 plan 中位数直接相除。
+源码依据：
+https://github.com/pytorch/pytorch/blob/v2.9.0/aten/src/ATen/native/Convolution.cpp#L386-L406
+https://github.com/pytorch/pytorch/blob/v2.10.0/aten/src/ATen/native/Convolution.cpp#L382-L409
+https://github.com/pytorch/pytorch/blob/v2.9.0/aten/src/ATen/native/cuda/NaiveDilatedConvolution.cu#L249-L275

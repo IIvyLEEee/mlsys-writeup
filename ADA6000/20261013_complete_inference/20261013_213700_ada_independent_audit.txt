@@ -1,0 +1,36 @@
+Ada complete-policy intermediate results: independent evidence audit
+Status: PASS; 1380 checks; 0 failures.
+Scope: read-only CPU analysis of saved evidence; no extra GPU experiment.
+
+Verified: 13 modes x 10 timed calls = 130 samples; 3 warmups; 3 validation seeds.
+Each audited request has 1 fresh VLM + 1 streaming DiT call. Setup/bootstrap/reset/profile are outside timing.
+All eleven integer tiers have the exact 192 DiT candidate sites; W4 counts 0/6/16/21/33/43/48/80/128/160/192.
+VLM and noncandidate DiT remain BF16. Layout is unchanged; every saved profile uses cuDNN Conv3d, with no slow_conv_dilated3d.
+Formal runtime: Torch 2.10.0+cu128; CUDA 12.8; cuDNN 91002; RTX 6000 Ada SM89.
+Source audit: 263 LF execution-archive files and all 75 GR00T source files match manifests; four loaded module hashes match.
+Maintainer piR2 base: 3c96deed507daa2878dc7e78b0deee9431ceec32; pinned GR00T: 2a39d591a3af24c42bb1d1c9cd708a2dddac0600.
+Thor checkpoint/input-array/attention-backend identities match. All 78 saved action/decoded arrays are finite; error metrics independently recompute.
+Recorded repeats (39 seed-mode pairs) and restoration (13 modes) are exact; separate duplicate arrays were not retained.
+
+Observed changes; wall = median of ten calls; GPU/DiT = separate one-call trace duration sums:
+bf16 -> tier00: wall 46.517221 -> 47.876281 ms (+1.359060); GPU operations 24.706688 -> 25.538993 ms (+0.832305); DiT Graph kernels 633 -> 505, work 6.357217 -> 7.211502 ms (+0.854285).
+tier05 -> tier06: wall 47.907085 -> 49.784675 ms (+1.877590); GPU operations 25.246382 -> 25.177103 ms (-0.069279); DiT Graph kernels 505 -> 505, work 6.886670 -> 6.857770 ms (-0.028900).
+tier07 -> tier08: wall 46.291116 -> 46.620755 ms (+0.329639); GPU operations 24.251773 -> 24.605984 ms (+0.354211); DiT Graph kernels 505 -> 569, work 5.961055 -> 6.296065 ms (+0.335010).
+bf16 -> tier10: wall 46.517221 -> 46.078661 ms (-0.438560); GPU operations 24.706688 -> 23.700626 ms (-1.006062); DiT Graph kernels 633 -> 505, work 6.357217 -> 5.405690 ms (-0.951527).
+
+All 13 modes have valid complete timing, exact candidate inventory, source/runtime evidence, recorded exact repeats and restoration, and recomputed saved-output error metrics.
+Shared BF16 to T0 increases both complete-call latency and independently profiled GPU work even though DiT Graph kernel count decreases. Fewer kernels or lower integer precision alone does not establish a faster complete policy call.
+T5 to T6 wall median increases but independently profiled GPU work and DiT Graph kernel work decrease. This profile does not support a slower W4 GPU-kernel explanation for the T6 wall bump.
+T7 to T8 (66.7 percent) does show a modest profiled GPU-work increase and 64 more DiT Graph kernels. Causal attribution to a specific fusion requires a controlled ablation.
+T10 wall median is only about 0.94 percent lower than shared BF16. Ten samples in a single ordered sweep do not establish a statistically robust optimum or task quality.
+
+Limits:
+Repeat and restoration exactness are verified from recorded comparison evidence; duplicate repeat/restoration arrays were not separately saved.
+Each profiler is a separate single call. GPU duration sums are not elapsed wall time, may overlap, and must not be subtracted from the clean timing median.
+Only one fixed input and one sequential sweep were measured. Timing confidence across randomized rounds and closed-loop task quality are not established.
+CUTLASS headers are fingerprinted environment-provided headers; their Git revision is unknown and does not match the recommended submodule revision. Owned kernel sources report unchanged.
+Integer binary provenance records two preloaded library hashes but cannot uniquely attribute the selected binary. Do not describe binary attribution as fully pinned.
+Original BF16 has global in-process runtime identity but no optimization-backend record; the other twelve modes each report their actual backend runtime.
+Windows checkout text has CRLF conversions. Source-file byte hashes were verified against the exact LF run-source archive, not by treating checkout CRLF bytes as the executed source.
+
+Detailed checks and original trace SHA256 values: independent-audit.json

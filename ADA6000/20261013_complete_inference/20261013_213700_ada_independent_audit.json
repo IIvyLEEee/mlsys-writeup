@@ -1,0 +1,256 @@
+{
+  "schema_version": 1,
+  "audited_at": "2026-10-13T13:44:18.376729+00:00",
+  "status": "pass",
+  "checks": 1380,
+  "failures": [],
+  "scope": "Independent CPU-only audit of downloaded formal evidence; no new GPU experiment.",
+  "summary_sha256": "75c57572440abb6f9f0480c52a6e6b95c4fba8516ff46cce1c4e894753e2d202",
+  "identity_hash": "4504e11effbaee41ce9eac35dc2456dacae7a3b9a36339a3426f9141c9896d43",
+  "runtime": {
+    "torch": "2.10.0+cu128",
+    "cuda": "12.8",
+    "cudnn": 91002,
+    "cudnn_enabled": true,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false
+  },
+  "source": {
+    "maintainer_revision": "3c96deed507daa2878dc7e78b0deee9431ceec32",
+    "source_manifest_sha256": "ccb028e362f3aa6db8eddc9f38735b0564599f9c5e1456c2d52e42293d741165",
+    "archive_verified_files": 263,
+    "model_revision": "2a39d591a3af24c42bb1d1c9cd708a2dddac0600",
+    "model_manifest_sha256": "65228d9f68ffbf45d0e82c9cc66f4e6a33fcff9f2621d27f773ff5e17592788a",
+    "model_files_verified": 75,
+    "actually_loaded_model_modules_verified": 4,
+    "owned_kernel_source_fingerprints": [
+      "0e9216482d4d7c31d918f8833440e3fcd66672f45e59aa9716c5f8931d9f380b"
+    ]
+  },
+  "protocol_verified": {
+    "mode_count": 13,
+    "samples_per_mode": 10,
+    "timing_samples": 130,
+    "warmup": 3,
+    "validation_seeds": [
+      42,
+      0,
+      195
+    ],
+    "saved_output_arrays_verified": 78,
+    "candidate_sites": 192,
+    "w4_site_counts": [
+      0,
+      6,
+      16,
+      21,
+      33,
+      43,
+      48,
+      80,
+      128,
+      160,
+      192
+    ],
+    "vlm_precision": "bf16",
+    "noncandidate_dit_precision": "bf16",
+    "layout": "vision_channels_last=false",
+    "full_path": "one fresh VLM plus one streaming DiT call; prepared CPU observation to CPU action",
+    "thor_input_checkpoint_attention_match": true
+  },
+  "modes": {
+    "original_bf16": {
+      "samples": 10,
+      "wall_median_ms": 52.36374773085117,
+      "gpu_kernel_work_ms": 29.272122,
+      "gpu_transfer_work_ms": 0.35424600000000006,
+      "gpu_work_including_transfers_ms": 29.626368,
+      "kernel_calls": 2847,
+      "dit_graph_kernel_work_ms": 0.0,
+      "dit_graph_kernel_calls": 0,
+      "profile_sha256": "1da30829118174c1d2fd916f6b37820f8c2fda7d845ee999f4b15d52cbd9c16f"
+    },
+    "bf16": {
+      "samples": 10,
+      "wall_median_ms": 46.51722079142928,
+      "gpu_kernel_work_ms": 24.304541,
+      "gpu_transfer_work_ms": 0.402147,
+      "gpu_work_including_transfers_ms": 24.706688,
+      "kernel_calls": 1791,
+      "dit_graph_kernel_work_ms": 6.357217,
+      "dit_graph_kernel_calls": 633,
+      "profile_sha256": "b9f48614b6068b13776fb8e8dee187a6f9928ffb62489485a764dbfcaadbdcdd"
+    },
+    "tier00": {
+      "samples": 10,
+      "wall_median_ms": 47.87628073245287,
+      "gpu_kernel_work_ms": 25.156875,
+      "gpu_transfer_work_ms": 0.382118,
+      "gpu_work_including_transfers_ms": 25.538992999999998,
+      "kernel_calls": 1663,
+      "dit_graph_kernel_work_ms": 7.211502,
+      "dit_graph_kernel_calls": 505,
+      "profile_sha256": "2030ae382673733a92000b21f742fcbc9ebd0804fd44e7b2f10e5cdfb38424be"
+    },
+    "tier01": {
+      "samples": 10,
+      "wall_median_ms": 47.69649589434266,
+      "gpu_kernel_work_ms": 25.139405,
+      "gpu_transfer_work_ms": 0.381954,
+      "gpu_work_including_transfers_ms": 25.521359,
+      "kernel_calls": 1663,
+      "dit_graph_kernel_work_ms": 7.180619,
+      "dit_graph_kernel_calls": 505,
+      "profile_sha256": "e14f37b55883f59bdbb5eddd55bce1ba092a55553f9b908573927848e53b3c10"
+    },
+    "tier02": {
+      "samples": 10,
+      "wall_median_ms": 47.72197362035513,
+      "gpu_kernel_work_ms": 25.025486,
+      "gpu_transfer_work_ms": 0.387971,
+      "gpu_work_including_transfers_ms": 25.413457,
+      "kernel_calls": 1663,
+      "dit_graph_kernel_work_ms": 7.096172999999999,
+      "dit_graph_kernel_calls": 505,
+      "profile_sha256": "824160c867fe3367eecbe4f0044c6803417aff6435591d41f9630e947d1c032b"
+    },
+    "tier03": {
+      "samples": 10,
+      "wall_median_ms": 47.43351321667433,
+      "gpu_kernel_work_ms": 24.995621,
+      "gpu_transfer_work_ms": 0.38135,
+      "gpu_work_including_transfers_ms": 25.376971,
+      "kernel_calls": 1663,
+      "dit_graph_kernel_work_ms": 7.0706999999999995,
+      "dit_graph_kernel_calls": 505,
+      "profile_sha256": "ae296cc56959601fc5ba8b7cf6302e71c7a15f4ed010b2928cd23c7529b2c55c"
+    },
+    "tier04": {
+      "samples": 10,
+      "wall_median_ms": 47.41547629237175,
+      "gpu_kernel_work_ms": 24.865431,
+      "gpu_transfer_work_ms": 0.38003899999999996,
+      "gpu_work_including_transfers_ms": 25.24547,
+      "kernel_calls": 1663,
+      "dit_graph_kernel_work_ms": 6.973769,
+      "dit_graph_kernel_calls": 505,
+      "profile_sha256": "82537cd41f1ca19c109609999ff869cda9603b98046d7945fd213c371d66c2fd"
+    },
+    "tier05": {
+      "samples": 10,
+      "wall_median_ms": 47.90708515793085,
+      "gpu_kernel_work_ms": 24.865197,
+      "gpu_transfer_work_ms": 0.381185,
+      "gpu_work_including_transfers_ms": 25.246381999999997,
+      "kernel_calls": 1663,
+      "dit_graph_kernel_work_ms": 6.8866700000000005,
+      "dit_graph_kernel_calls": 505,
+      "profile_sha256": "8828b99049ccbf29364ca358c506e3059a610e8dbf634ca9f0b2ebcdd4935d7b"
+    },
+    "tier06": {
+      "samples": 10,
+      "wall_median_ms": 49.78467524051666,
+      "gpu_kernel_work_ms": 24.798505000000002,
+      "gpu_transfer_work_ms": 0.378598,
+      "gpu_work_including_transfers_ms": 25.177103000000002,
+      "kernel_calls": 1663,
+      "dit_graph_kernel_work_ms": 6.85777,
+      "dit_graph_kernel_calls": 505,
+      "profile_sha256": "2f1e20c0811309b720cd6e63e6fa421c814c3c5fd1dfa3a35036385b32f89a17"
+    },
+    "tier07": {
+      "samples": 10,
+      "wall_median_ms": 46.291116159409285,
+      "gpu_kernel_work_ms": 23.882429,
+      "gpu_transfer_work_ms": 0.369344,
+      "gpu_work_including_transfers_ms": 24.251773,
+      "kernel_calls": 1663,
+      "dit_graph_kernel_work_ms": 5.961055,
+      "dit_graph_kernel_calls": 505,
+      "profile_sha256": "3be5f3e03045156b3522ed6fa15ee7bac78c80f950968f8ed6c258cc4d3794cf"
+    },
+    "tier08": {
+      "samples": 10,
+      "wall_median_ms": 46.620755456388,
+      "gpu_kernel_work_ms": 24.252509,
+      "gpu_transfer_work_ms": 0.35347500000000004,
+      "gpu_work_including_transfers_ms": 24.605984,
+      "kernel_calls": 1727,
+      "dit_graph_kernel_work_ms": 6.296065,
+      "dit_graph_kernel_calls": 569,
+      "profile_sha256": "1962f2428c31c06044b69406a532885392d304daf5c5bf17497d1fb5d47b8458"
+    },
+    "tier09": {
+      "samples": 10,
+      "wall_median_ms": 46.25517874956131,
+      "gpu_kernel_work_ms": 23.4967,
+      "gpu_transfer_work_ms": 0.353222,
+      "gpu_work_including_transfers_ms": 23.849922,
+      "kernel_calls": 1663,
+      "dit_graph_kernel_work_ms": 5.567454,
+      "dit_graph_kernel_calls": 505,
+      "profile_sha256": "e6c16b9cab155c85733019bf7dc9e1c203f3cb2100b14f763d6ed919f659cad4"
+    },
+    "tier10": {
+      "samples": 10,
+      "wall_median_ms": 46.078660525381565,
+      "gpu_kernel_work_ms": 23.348080000000003,
+      "gpu_transfer_work_ms": 0.35254599999999997,
+      "gpu_work_including_transfers_ms": 23.700626000000003,
+      "kernel_calls": 1663,
+      "dit_graph_kernel_work_ms": 5.40569,
+      "dit_graph_kernel_calls": 505,
+      "profile_sha256": "73eb0522a051d7adb9ec065456a8ab617a577600717676ec3e2d2a552d0b882b"
+    }
+  },
+  "profile_deltas": {
+    "bf16_to_tier00": {
+      "wall_median_ms": 1.3590599410235882,
+      "gpu_work_including_transfers_ms": 0.8323049999999981,
+      "gpu_kernel_work_ms": 0.852333999999999,
+      "dit_graph_kernel_work_ms": 0.854285,
+      "kernel_calls": -128,
+      "dit_graph_kernel_calls": -128
+    },
+    "tier05_to_tier06": {
+      "wall_median_ms": 1.8775900825858116,
+      "gpu_work_including_transfers_ms": -0.06927899999999454,
+      "gpu_kernel_work_ms": -0.0666919999999962,
+      "dit_graph_kernel_work_ms": -0.028900000000000148,
+      "kernel_calls": 0,
+      "dit_graph_kernel_calls": 0
+    },
+    "tier07_to_tier08": {
+      "wall_median_ms": 0.3296392969787121,
+      "gpu_work_including_transfers_ms": 0.3542109999999994,
+      "gpu_kernel_work_ms": 0.3700800000000015,
+      "dit_graph_kernel_work_ms": 0.3350099999999996,
+      "kernel_calls": 64,
+      "dit_graph_kernel_calls": 64
+    },
+    "bf16_to_tier10": {
+      "wall_median_ms": -0.43856026604771614,
+      "gpu_work_including_transfers_ms": -1.0060619999999965,
+      "gpu_kernel_work_ms": -0.9564609999999973,
+      "dit_graph_kernel_work_ms": -0.9515270000000005,
+      "kernel_calls": -128,
+      "dit_graph_kernel_calls": -128
+    }
+  },
+  "conclusions": [
+    "All 13 modes have valid complete timing, exact candidate inventory, source/runtime evidence, recorded exact repeats and restoration, and recomputed saved-output error metrics.",
+    "Shared BF16 to T0 increases both complete-call latency and independently profiled GPU work even though DiT Graph kernel count decreases. Fewer kernels or lower integer precision alone does not establish a faster complete policy call.",
+    "T5 to T6 wall median increases but independently profiled GPU work and DiT Graph kernel work decrease. This profile does not support a slower W4 GPU-kernel explanation for the T6 wall bump.",
+    "T7 to T8 (66.7 percent) does show a modest profiled GPU-work increase and 64 more DiT Graph kernels. Causal attribution to a specific fusion requires a controlled ablation.",
+    "T10 wall median is only about 0.94 percent lower than shared BF16. Ten samples in a single ordered sweep do not establish a statistically robust optimum or task quality."
+  ],
+  "limitations": [
+    "Repeat and restoration exactness are verified from recorded comparison evidence; duplicate repeat/restoration arrays were not separately saved.",
+    "Each profiler is a separate single call. GPU duration sums are not elapsed wall time, may overlap, and must not be subtracted from the clean timing median.",
+    "Only one fixed input and one sequential sweep were measured. Timing confidence across randomized rounds and closed-loop task quality are not established.",
+    "CUTLASS headers are fingerprinted environment-provided headers; their Git revision is unknown and does not match the recommended submodule revision. Owned kernel sources report unchanged.",
+    "Integer binary provenance records two preloaded library hashes but cannot uniquely attribute the selected binary. Do not describe binary attribution as fully pinned.",
+    "Original BF16 has global in-process runtime identity but no optimization-backend record; the other twelve modes each report their actual backend runtime.",
+    "Windows checkout text has CRLF conversions. Source-file byte hashes were verified against the exact LF run-source archive, not by treating checkout CRLF bytes as the executed source."
+  ]
+}

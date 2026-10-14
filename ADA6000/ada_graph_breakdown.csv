@@ -1,0 +1,51 @@
+mode,scope,category,mean_gpu_operation_sum_ms,profile_plan_count
+bf16,dit_graph,Activation quantize / pack,0,6
+bf16,dit_graph,Attention core,0.647590333333333,6
+bf16,dit_graph,Copy / layout,0.004793333333333334,6
+bf16,dit_graph,Floating GEMM / reduction,4.972763333333327,6
+bf16,dit_graph,INT4 GEMM,0,6
+bf16,dit_graph,INT8 GEMM,0,6
+bf16,dit_graph,LN + modulation + pack,0,6
+bf16,dit_graph,Other GPU work,0.7487335000000018,6
+bf16,dit_graph,Residual + LN + pack,0,6
+bf16,dit_graph,TOTAL,6.3738805,6
+t0,dit_graph,Activation quantize / pack,0.7377256666666651,6
+t0,dit_graph,Attention core,0.6378183333333333,6
+t0,dit_graph,Copy / layout,0.23943916666666654,6
+t0,dit_graph,Floating GEMM / reduction,0,6
+t0,dit_graph,INT4 GEMM,0,6
+t0,dit_graph,INT8 GEMM,3.991602666666664,6
+t0,dit_graph,LN + modulation + pack,0.2985588333333334,6
+t0,dit_graph,Other GPU work,0.1282631666666668,6
+t0,dit_graph,Residual + LN + pack,0.3113786666666663,6
+t0,dit_graph,TOTAL,6.3447865,6
+t7,dit_graph,Activation quantize / pack,0.7325361666666664,6
+t7,dit_graph,Attention core,0.6376921666666667,6
+t7,dit_graph,Copy / layout,0.23890266666666682,6
+t7,dit_graph,Floating GEMM / reduction,0,6
+t7,dit_graph,INT4 GEMM,1.3560025000000009,6
+t7,dit_graph,INT8 GEMM,1.7194375000000017,6
+t7,dit_graph,LN + modulation + pack,0.29835300000000037,6
+t7,dit_graph,Other GPU work,0.12799250000000026,6
+t7,dit_graph,Residual + LN + pack,0.2483963333333334,6
+t7,dit_graph,TOTAL,5.359312833333333,6
+t8,dit_graph,Activation quantize / pack,0.7340273333333309,6
+t8,dit_graph,Attention core,0.6382608333333328,6
+t8,dit_graph,Copy / layout,0.3518794999999996,6
+t8,dit_graph,Floating GEMM / reduction,0,6
+t8,dit_graph,INT4 GEMM,1.689619500000001,6
+t8,dit_graph,INT8 GEMM,1.4468960000000024,6
+t8,dit_graph,LN + modulation + pack,0.4225486666666669,6
+t8,dit_graph,Other GPU work,0.12947866666666694,6
+t8,dit_graph,Residual + LN + pack,0.24834599999999984,6
+t8,dit_graph,TOTAL,5.6610565,6
+t9,dit_graph,Activation quantize / pack,0.7320273333333335,6
+t9,dit_graph,Attention core,0.6366499999999998,6
+t9,dit_graph,Copy / layout,0.2392751666666669,6
+t9,dit_graph,Floating GEMM / reduction,0,6
+t9,dit_graph,INT4 GEMM,1.8572086666666696,6
+t9,dit_graph,INT8 GEMM,0.9665314999999991,6
+t9,dit_graph,LN + modulation + pack,0.24781299999999987,6
+t9,dit_graph,Other GPU work,0.12780783333333343,6
+t9,dit_graph,Residual + LN + pack,0.24807366666666672,6
+t9,dit_graph,TOTAL,5.055387166666667,6

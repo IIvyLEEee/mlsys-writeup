@@ -1,0 +1,18 @@
+Ada 完整本地调用扫描：已完成的中间结果
+生成日期：2026-10-13T21:37:04+08:00
+本轮完成：original BF16、共享优化 BF16 和 11 个 W8A8→W4A4 档位，共 13×10=130 条计时样本。
+模型：Spatial checkpoint-500，episode 0/frame 20，seed 42；另以 0/195 验证可重复性。
+正式环境：Torch 2.10.0+cu128 / CUDA 12.8 / cuDNN 91002；完整包版本与每档卷积后端检查在 provenance。旧 Torch 2.9 慢路径诊断单列，不入曲线。
+范围：VLM 和所有非候选模块保持 BF16，仅替换 192 个 DiT Linear；无校准或微调。
+边界：准备好的 CPU 观测→一次新 VLM→一次 streaming DiT→CPU 动作，含在线打包、前后处理和请求日志。
+加载、编译、权重打包、Graph 捕获、bootstrap、状态恢复、3 次 warmup 及 profiler 不在延迟样本内。
+原始 BF16 中位数 52.3637 ms；共享 BF16 46.5172 ms。
+W8A8 47.8763 ms；100% W4A4 46.0787 ms。
+本轮最低观测中位数为 tier10，46.0787 ms；仅 10 个样本，不能据此认定稳定最优。
+图中误差条为样本 p10–p90，不是置信区间。GPU 时长是另一次单调用 profile 的 kernel+transfer 时长之和，不是 wall 延迟的可相加分解。
+动作 MAE/RMSE 比较完整 40×7 解码连续动作，相对本轮共享 BF16；是固定输入诊断，不是任务成功率。
+本轮未运行闭环，不产生成功率、任务级加速或质量验收结论。
+相对旧 Ada 图，本轮新增计时内 VLM，并统一为 VLM/非候选 BF16；因此不能把新旧差值仅解释为 VLM 时间。
+与 Thor 对齐的是输入、状态恢复与完整调用边界；Ada INT8/INT4 和 Thor FP8/FP4 是不同格式，不能当成纯硬件对比。
+附件：curve PNG/SVG、130 条原始计时 CSV、各档 CSV、GPU breakdown、配置历史 PNG、脱敏 summary/provenance。
+保留所有源代码版本和 SHA256；仅分发去除私人绝对路径、主机地址及标识的证据。原始大 trace 和权重不在上传包。

@@ -1,0 +1,88 @@
+{
+  "assets": [
+    {
+      "package_path": "scripts/progressive_replay.py",
+      "original_relative_path": ".local/progressive_replay.py",
+      "original_sha256": "b394a2d20f51d0343886055fdcaab54affdccc1ee19767bb5e315756e62d8052",
+      "distributed_sha256": "b394a2d20f51d0343886055fdcaab54affdccc1ee19767bb5e315756e62d8052",
+      "sanitization": []
+    },
+    {
+      "package_path": "scripts/replay_spatial_checkpoint.py",
+      "original_relative_path": ".local/replay_spatial_checkpoint.py",
+      "original_sha256": "941ab2705beef1867031c3bb033c01caccb54a0899a07168e9cdc36685283c1c",
+      "distributed_sha256": "941ab2705beef1867031c3bb033c01caccb54a0899a07168e9cdc36685283c1c",
+      "sanitization": []
+    },
+    {
+      "package_path": "scripts/replay_profile_report.py",
+      "original_relative_path": ".local/replay_profile_report.py",
+      "original_sha256": "cf94aebb453138128019d010924cd93d4fd4ed2524a403bda0ef7e493064d22d",
+      "distributed_sha256": "27ff043eb85b3097848bd7a97639228e949f2ccc2a926e0d1f71e04422e5b9ad",
+      "sanitization": [
+        "Replaced two machine-specific standalone rendering defaults with relative example locations; attribution function and measurement logic unchanged."
+      ]
+    },
+    {
+      "package_path": "scripts/shape-tactics-candidate.json",
+      "original_relative_path": ".local/shape-tactics-candidate.json",
+      "original_sha256": "6f74985f79574053f2a33ec67e53150e66b9e0f7018677b06681920e4fcab373",
+      "distributed_sha256": "6f74985f79574053f2a33ec67e53150e66b9e0f7018677b06681920e4fcab373",
+      "sanitization": []
+    },
+    {
+      "package_path": "scripts/progressive.patch",
+      "original_relative_path": ".local/progressive.patch",
+      "original_sha256": "ecd12b7c4b8e4bda049ab7f659d4508280b0bbcd808eb12099fe0f43b1d7e297",
+      "distributed_sha256": "ecd12b7c4b8e4bda049ab7f659d4508280b0bbcd808eb12099fe0f43b1d7e297",
+      "sanitization": []
+    },
+    {
+      "package_path": "evidence/full-contracts.log",
+      "original_relative_path": "evidence/full-contracts.log",
+      "original_sha256": "310b24dcb5796b4c45cf0e406eb33c2f8c31aa59398d6f6d1409a9708868459c",
+      "distributed_sha256": "37e7c3a03b657f1a999f9bf211fe6c349d95feaebb894687590ea891bfd7e707",
+      "sanitization": [
+        "Replaced host-specific absolute traceback paths with symbolic root placeholders; results and stack content retained."
+      ]
+    },
+    {
+      "package_path": "evidence/contracts.log",
+      "original_relative_path": "evidence/contracts.log",
+      "original_sha256": "45253e282f5d134936c51ee78fee86c7eecec1e86a5d413d73c10ced65077259",
+      "distributed_sha256": "798ac657cecea14935ca7f045401e7addb5379163ee26b0466f3c7a1c7267a97",
+      "sanitization": [
+        "Replaced host-specific absolute traceback paths with symbolic root placeholders; results and stack content retained."
+      ]
+    },
+    {
+      "package_path": "evidence/node-tests.log",
+      "original_relative_path": "evidence/node-tests.log",
+      "original_sha256": "1a0d3f2d469cb69486892ffd20c610850304f1d53150b3b1da52daf28fec7fdb",
+      "distributed_sha256": "4796a9ebf3a622ddfbb06be8c123cb7f81fa95cb550647d6683f1731e7f4a767",
+      "sanitization": [
+        "Replaced host-specific absolute traceback paths with symbolic root placeholders; results and stack content retained."
+      ]
+    },
+    {
+      "package_path": "evidence/gpu-tests.log",
+      "original_relative_path": "evidence/gpu-tests.log",
+      "original_sha256": "f2f2b8d35b60bd26f4ef41c3d4917ecd3b1ad20a308994d8b01610e63a04f63f",
+      "distributed_sha256": "480e28d08a0e809cb0bef428d53e0b1ec86d92213635c3f879022e4755d6af40",
+      "sanitization": [
+        "Replaced host-specific absolute traceback paths with symbolic root placeholders; results and stack content retained."
+      ]
+    },
+    {
+      "package_path": "evidence/base-gpu-test.log",
+      "original_relative_path": "evidence/base-gpu-test.log",
+      "original_sha256": "bc77d6a204552b57ec75650756d2ed93d14ddb1a62a0f1344e810e7b63a4c05a",
+      "distributed_sha256": "55402afc0d4258b921cb725cab27fc32a390d0107e1886646ccaac073e092427",
+      "sanitization": [
+        "Replaced host-specific absolute traceback paths with symbolic root placeholders; results and stack content retained."
+      ]
+    }
+  ],
+  "metadata": "Constructed a whitelist-based provenance summary; original manifest private paths and GPU identifiers were not copied. Source/evidence digests are retained for auditing.",
+  "sample_data": "Only plan timing numbers, tier labels, round/replay indices and precision maps were exported; model weights, observations and action arrays are not included."
+}

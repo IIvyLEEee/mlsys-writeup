@@ -1,0 +1,904 @@
+{
+  "schema_version": 1,
+  "title": "Ada full-call progressive quantization",
+  "evidence_kind": "measured",
+  "current_run_id": "tier10",
+  "protocols": [
+    {
+      "id": "fresh-plan",
+      "label": "Fresh VLM + streaming DiT; CPU to CPU",
+      "original_state_id": "original_bf16",
+      "workload": {
+        "name": "GR00T DiT W8A8-to-W4A4 adaptation of reference progressive protocol; full fresh-vision plan",
+        "reference_revision": "239b4a3ef2268048571c9f508ad5700f98398c2f",
+        "model_base_revision": "3c96deed507daa2878dc7e78b0deee9431ceec32",
+        "timing": "prepared CPU observation -> Backend.plan -> CPU action; 1 VLM + 1 streaming DiT",
+        "includes": [
+          "online activation packing",
+          "pre/postprocessing",
+          "request JSONL write"
+        ],
+        "excludes": [
+          "model load",
+          "weight packing",
+          "compile",
+          "CUDA Graph capture",
+          "warmup",
+          "bootstrap 1 VLM + 4 DiT",
+          "state reset",
+          "profiling"
+        ],
+        "state_reset": "per-config bootstrap snapshot; clone buffers/cache and restore all RNG outside timing",
+        "validation": "full 40x7 decoded continuous CPU action chunk and projected commands; per-config bootstrap error propagates; finite only guard",
+        "input": "Spatial episode 0 frame 20; fresh visual; action delay1 image age0 fixed demo prefix",
+        "coverage": "192 structurally selected DiT Linear sites; not dynamic GEMM-call coverage",
+        "quantization_scope": "192 candidate DiT Linears only; VLM and noncandidate DiT remain BF16",
+        "optimization_bundle": "Shared fusion=all and DiT Graph; integer tiers also use norm/modulation and residual/norm quantization fusion",
+        "quality": "fixed-input replay diagnostics only; no closed-loop runs requested or performed"
+      },
+      "environment": {
+        "torch": "2.10.0+cu128",
+        "cuda": "12.8",
+        "cudnn": 91002,
+        "cudnn_enabled": true,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": false,
+        "package_versions": {
+          "torch": "2.10.0+cu128",
+          "torchvision": "0.25.0+cu128",
+          "triton": "3.6.0",
+          "transformers": "4.57.3",
+          "numpy": "1.26.4",
+          "Pillow": "12.2.0",
+          "safetensors": "0.7.0",
+          "tokenizers": "0.22.2",
+          "nvidia-cudnn-cu12": "9.10.2.21"
+        },
+        "device": "NVIDIA RTX 6000 Ada Generation",
+        "capability": [
+          8,
+          9
+        ],
+        "python": "3.12.15 (main, Oct  3 2026, 01:03:07) [Clang 22.1.3 ]",
+        "threads": 2,
+        "interop_threads": 1,
+        "cuda_visible_devices": "0"
+      },
+      "metric": {
+        "name": "Complete local plan",
+        "unit": "ms",
+        "statistic": "median"
+      }
+    }
+  ],
+  "optimizations": [
+    {
+      "id": "shared",
+      "label": "Shared fusion + DiT Graph",
+      "scope": "shared"
+    },
+    {
+      "id": "integer",
+      "label": "Integer precision / shared-input bundle",
+      "scope": "precision"
+    }
+  ],
+  "states": [
+    {
+      "id": "original_bf16",
+      "label": "Original BF16",
+      "revision": "3c96deed507daa2878dc7e78b0deee9431ceec32",
+      "precision": "bf16",
+      "classification": "reference",
+      "status": "experimental",
+      "description": "{\"category_id\": null, \"component\": \"dit\", \"coverage\": null, \"dit_graph\": false, \"fp4_swap_ab\": false, \"fp8_fast_quant\": false, \"fp_grouped\": false, \"fp_shared_inputs\": false, \"fp_swiglu\": false, \"fusion\": false, \"fusion_mode\": \"all\", \"group_conditioning\": false, \"group_tactics\": null, \"norm_modulation_quant\": false, \"operator_profile\": null, \"precision\": \"bf16\", \"quant_tier\": null, \"residual_norm_quant\": false, \"scope\": \"transformer\", \"shape_tactics\": null, \"tactics\": null, \"vision_channels_last\": false}",
+      "shared_config": {
+        "fusion": false,
+        "dit_graph": false,
+        "fusion_mode": "all",
+        "component": "dit"
+      },
+      "active_optimizations": []
+    },
+    {
+      "id": "bf16",
+      "label": "Shared BF16",
+      "revision": "3c96deed507daa2878dc7e78b0deee9431ceec32",
+      "precision": "bf16",
+      "classification": "exact",
+      "status": "experimental",
+      "description": "{\"category_id\": null, \"component\": \"dit\", \"coverage\": null, \"dit_graph\": true, \"fp4_swap_ab\": false, \"fp8_fast_quant\": false, \"fp_grouped\": false, \"fp_shared_inputs\": false, \"fp_swiglu\": false, \"fusion\": true, \"fusion_mode\": \"all\", \"group_conditioning\": false, \"group_tactics\": null, \"norm_modulation_quant\": false, \"operator_profile\": null, \"precision\": \"bf16\", \"quant_tier\": null, \"residual_norm_quant\": false, \"scope\": \"transformer\", \"shape_tactics\": null, \"tactics\": null, \"vision_channels_last\": false}",
+      "shared_config": {
+        "fusion": true,
+        "dit_graph": true,
+        "fusion_mode": "all",
+        "component": "dit"
+      },
+      "active_optimizations": [
+        "shared"
+      ],
+      "parent_id": "original_bf16"
+    },
+    {
+      "id": "tier00",
+      "label": "W8A8",
+      "revision": "3c96deed507daa2878dc7e78b0deee9431ceec32",
+      "precision": "int8",
+      "classification": "lossy",
+      "status": "experimental",
+      "description": "{\"category_id\": null, \"component\": \"dit\", \"coverage\": null, \"dit_graph\": true, \"fp4_swap_ab\": false, \"fp8_fast_quant\": false, \"fp_grouped\": false, \"fp_shared_inputs\": false, \"fp_swiglu\": false, \"fusion\": true, \"fusion_mode\": \"all\", \"group_conditioning\": false, \"group_tactics\": null, \"norm_modulation_quant\": true, \"operator_profile\": null, \"precision\": \"w8a8\", \"quant_tier\": 0, \"residual_norm_quant\": true, \"scope\": \"transformer\", \"shape_tactics\": null, \"tactics\": null, \"vision_channels_last\": false}",
+      "shared_config": {
+        "fusion": true,
+        "dit_graph": true,
+        "fusion_mode": "all",
+        "component": "dit"
+      },
+      "active_optimizations": [
+        "shared",
+        "integer"
+      ],
+      "parent_id": "bf16"
+    },
+    {
+      "id": "tier01",
+      "label": "Tier 1",
+      "revision": "3c96deed507daa2878dc7e78b0deee9431ceec32",
+      "precision": "mixed int8/int4",
+      "classification": "lossy",
+      "status": "experimental",
+      "description": "{\"category_id\": null, \"component\": \"dit\", \"coverage\": null, \"dit_graph\": true, \"fp4_swap_ab\": false, \"fp8_fast_quant\": false, \"fp_grouped\": false, \"fp_shared_inputs\": false, \"fp_swiglu\": false, \"fusion\": true, \"fusion_mode\": \"all\", \"group_conditioning\": false, \"group_tactics\": null, \"norm_modulation_quant\": true, \"operator_profile\": null, \"precision\": \"w8a8\", \"quant_tier\": 1, \"residual_norm_quant\": true, \"scope\": \"transformer\", \"shape_tactics\": null, \"tactics\": null, \"vision_channels_last\": false}",
+      "shared_config": {
+        "fusion": true,
+        "dit_graph": true,
+        "fusion_mode": "all",
+        "component": "dit"
+      },
+      "active_optimizations": [
+        "shared",
+        "integer"
+      ],
+      "parent_id": "bf16"
+    },
+    {
+      "id": "tier02",
+      "label": "Tier 2",
+      "revision": "3c96deed507daa2878dc7e78b0deee9431ceec32",
+      "precision": "mixed int8/int4",
+      "classification": "lossy",
+      "status": "experimental",
+      "description": "{\"category_id\": null, \"component\": \"dit\", \"coverage\": null, \"dit_graph\": true, \"fp4_swap_ab\": false, \"fp8_fast_quant\": false, \"fp_grouped\": false, \"fp_shared_inputs\": false, \"fp_swiglu\": false, \"fusion\": true, \"fusion_mode\": \"all\", \"group_conditioning\": false, \"group_tactics\": null, \"norm_modulation_quant\": true, \"operator_profile\": null, \"precision\": \"w8a8\", \"quant_tier\": 2, \"residual_norm_quant\": true, \"scope\": \"transformer\", \"shape_tactics\": null, \"tactics\": null, \"vision_channels_last\": false}",
+      "shared_config": {
+        "fusion": true,
+        "dit_graph": true,
+        "fusion_mode": "all",
+        "component": "dit"
+      },
+      "active_optimizations": [
+        "shared",
+        "integer"
+      ],
+      "parent_id": "bf16"
+    },
+    {
+      "id": "tier03",
+      "label": "Tier 3",
+      "revision": "3c96deed507daa2878dc7e78b0deee9431ceec32",
+      "precision": "mixed int8/int4",
+      "classification": "lossy",
+      "status": "experimental",
+      "description": "{\"category_id\": null, \"component\": \"dit\", \"coverage\": null, \"dit_graph\": true, \"fp4_swap_ab\": false, \"fp8_fast_quant\": false, \"fp_grouped\": false, \"fp_shared_inputs\": false, \"fp_swiglu\": false, \"fusion\": true, \"fusion_mode\": \"all\", \"group_conditioning\": false, \"group_tactics\": null, \"norm_modulation_quant\": true, \"operator_profile\": null, \"precision\": \"w8a8\", \"quant_tier\": 3, \"residual_norm_quant\": true, \"scope\": \"transformer\", \"shape_tactics\": null, \"tactics\": null, \"vision_channels_last\": false}",
+      "shared_config": {
+        "fusion": true,
+        "dit_graph": true,
+        "fusion_mode": "all",
+        "component": "dit"
+      },
+      "active_optimizations": [
+        "shared",
+        "integer"
+      ],
+      "parent_id": "bf16"
+    },
+    {
+      "id": "tier04",
+      "label": "Tier 4",
+      "revision": "3c96deed507daa2878dc7e78b0deee9431ceec32",
+      "precision": "mixed int8/int4",
+      "classification": "lossy",
+      "status": "experimental",
+      "description": "{\"category_id\": null, \"component\": \"dit\", \"coverage\": null, \"dit_graph\": true, \"fp4_swap_ab\": false, \"fp8_fast_quant\": false, \"fp_grouped\": false, \"fp_shared_inputs\": false, \"fp_swiglu\": false, \"fusion\": true, \"fusion_mode\": \"all\", \"group_conditioning\": false, \"group_tactics\": null, \"norm_modulation_quant\": true, \"operator_profile\": null, \"precision\": \"w8a8\", \"quant_tier\": 4, \"residual_norm_quant\": true, \"scope\": \"transformer\", \"shape_tactics\": null, \"tactics\": null, \"vision_channels_last\": false}",
+      "shared_config": {
+        "fusion": true,
+        "dit_graph": true,
+        "fusion_mode": "all",
+        "component": "dit"
+      },
+      "active_optimizations": [
+        "shared",
+        "integer"
+      ],
+      "parent_id": "bf16"
+    },
+    {
+      "id": "tier05",
+      "label": "Tier 5",
+      "revision": "3c96deed507daa2878dc7e78b0deee9431ceec32",
+      "precision": "mixed int8/int4",
+      "classification": "lossy",
+      "status": "experimental",
+      "description": "{\"category_id\": null, \"component\": \"dit\", \"coverage\": null, \"dit_graph\": true, \"fp4_swap_ab\": false, \"fp8_fast_quant\": false, \"fp_grouped\": false, \"fp_shared_inputs\": false, \"fp_swiglu\": false, \"fusion\": true, \"fusion_mode\": \"all\", \"group_conditioning\": false, \"group_tactics\": null, \"norm_modulation_quant\": true, \"operator_profile\": null, \"precision\": \"w8a8\", \"quant_tier\": 5, \"residual_norm_quant\": true, \"scope\": \"transformer\", \"shape_tactics\": null, \"tactics\": null, \"vision_channels_last\": false}",
+      "shared_config": {
+        "fusion": true,
+        "dit_graph": true,
+        "fusion_mode": "all",
+        "component": "dit"
+      },
+      "active_optimizations": [
+        "shared",
+        "integer"
+      ],
+      "parent_id": "bf16"
+    },
+    {
+      "id": "tier06",
+      "label": "Tier 6",
+      "revision": "3c96deed507daa2878dc7e78b0deee9431ceec32",
+      "precision": "mixed int8/int4",
+      "classification": "lossy",
+      "status": "experimental",
+      "description": "{\"category_id\": null, \"component\": \"dit\", \"coverage\": null, \"dit_graph\": true, \"fp4_swap_ab\": false, \"fp8_fast_quant\": false, \"fp_grouped\": false, \"fp_shared_inputs\": false, \"fp_swiglu\": false, \"fusion\": true, \"fusion_mode\": \"all\", \"group_conditioning\": false, \"group_tactics\": null, \"norm_modulation_quant\": true, \"operator_profile\": null, \"precision\": \"w8a8\", \"quant_tier\": 6, \"residual_norm_quant\": true, \"scope\": \"transformer\", \"shape_tactics\": null, \"tactics\": null, \"vision_channels_last\": false}",
+      "shared_config": {
+        "fusion": true,
+        "dit_graph": true,
+        "fusion_mode": "all",
+        "component": "dit"
+      },
+      "active_optimizations": [
+        "shared",
+        "integer"
+      ],
+      "parent_id": "bf16"
+    },
+    {
+      "id": "tier07",
+      "label": "Tier 7",
+      "revision": "3c96deed507daa2878dc7e78b0deee9431ceec32",
+      "precision": "mixed int8/int4",
+      "classification": "lossy",
+      "status": "experimental",
+      "description": "{\"category_id\": null, \"component\": \"dit\", \"coverage\": null, \"dit_graph\": true, \"fp4_swap_ab\": false, \"fp8_fast_quant\": false, \"fp_grouped\": false, \"fp_shared_inputs\": false, \"fp_swiglu\": false, \"fusion\": true, \"fusion_mode\": \"all\", \"group_conditioning\": false, \"group_tactics\": null, \"norm_modulation_quant\": true, \"operator_profile\": null, \"precision\": \"w8a8\", \"quant_tier\": 7, \"residual_norm_quant\": true, \"scope\": \"transformer\", \"shape_tactics\": null, \"tactics\": null, \"vision_channels_last\": false}",
+      "shared_config": {
+        "fusion": true,
+        "dit_graph": true,
+        "fusion_mode": "all",
+        "component": "dit"
+      },
+      "active_optimizations": [
+        "shared",
+        "integer"
+      ],
+      "parent_id": "bf16"
+    },
+    {
+      "id": "tier08",
+      "label": "Tier 8",
+      "revision": "3c96deed507daa2878dc7e78b0deee9431ceec32",
+      "precision": "mixed int8/int4",
+      "classification": "lossy",
+      "status": "experimental",
+      "description": "{\"category_id\": null, \"component\": \"dit\", \"coverage\": null, \"dit_graph\": true, \"fp4_swap_ab\": false, \"fp8_fast_quant\": false, \"fp_grouped\": false, \"fp_shared_inputs\": false, \"fp_swiglu\": false, \"fusion\": true, \"fusion_mode\": \"all\", \"group_conditioning\": false, \"group_tactics\": null, \"norm_modulation_quant\": true, \"operator_profile\": null, \"precision\": \"w8a8\", \"quant_tier\": 8, \"residual_norm_quant\": true, \"scope\": \"transformer\", \"shape_tactics\": null, \"tactics\": null, \"vision_channels_last\": false}",
+      "shared_config": {
+        "fusion": true,
+        "dit_graph": true,
+        "fusion_mode": "all",
+        "component": "dit"
+      },
+      "active_optimizations": [
+        "shared",
+        "integer"
+      ],
+      "parent_id": "bf16"
+    },
+    {
+      "id": "tier09",
+      "label": "Tier 9",
+      "revision": "3c96deed507daa2878dc7e78b0deee9431ceec32",
+      "precision": "mixed int8/int4",
+      "classification": "lossy",
+      "status": "experimental",
+      "description": "{\"category_id\": null, \"component\": \"dit\", \"coverage\": null, \"dit_graph\": true, \"fp4_swap_ab\": false, \"fp8_fast_quant\": false, \"fp_grouped\": false, \"fp_shared_inputs\": false, \"fp_swiglu\": false, \"fusion\": true, \"fusion_mode\": \"all\", \"group_conditioning\": false, \"group_tactics\": null, \"norm_modulation_quant\": true, \"operator_profile\": null, \"precision\": \"w8a8\", \"quant_tier\": 9, \"residual_norm_quant\": true, \"scope\": \"transformer\", \"shape_tactics\": null, \"tactics\": null, \"vision_channels_last\": false}",
+      "shared_config": {
+        "fusion": true,
+        "dit_graph": true,
+        "fusion_mode": "all",
+        "component": "dit"
+      },
+      "active_optimizations": [
+        "shared",
+        "integer"
+      ],
+      "parent_id": "bf16"
+    },
+    {
+      "id": "tier10",
+      "label": "W4A4",
+      "revision": "3c96deed507daa2878dc7e78b0deee9431ceec32",
+      "precision": "int4",
+      "classification": "lossy",
+      "status": "experimental",
+      "description": "{\"category_id\": null, \"component\": \"dit\", \"coverage\": null, \"dit_graph\": true, \"fp4_swap_ab\": false, \"fp8_fast_quant\": false, \"fp_grouped\": false, \"fp_shared_inputs\": false, \"fp_swiglu\": false, \"fusion\": true, \"fusion_mode\": \"all\", \"group_conditioning\": false, \"group_tactics\": null, \"norm_modulation_quant\": true, \"operator_profile\": null, \"precision\": \"w8a8\", \"quant_tier\": 10, \"residual_norm_quant\": true, \"scope\": \"transformer\", \"shape_tactics\": null, \"tactics\": null, \"vision_channels_last\": false}",
+      "shared_config": {
+        "fusion": true,
+        "dit_graph": true,
+        "fusion_mode": "all",
+        "component": "dit"
+      },
+      "active_optimizations": [
+        "shared",
+        "integer"
+      ],
+      "parent_id": "bf16"
+    }
+  ],
+  "runs": [
+    {
+      "id": "original_bf16",
+      "state_id": "original_bf16",
+      "protocol_id": "fresh-plan",
+      "cohort_id": "4504e11effbaee41ce9eac35dc2456dacae7a3b9a36339a3426f9141c9896d43",
+      "recorded_at": "2026-10-13T21:31:59.154036+08:00",
+      "samples": [
+        52.71201953291893,
+        52.41966433823109,
+        53.20732016116381,
+        52.30783112347126,
+        52.20393929630518,
+        52.44406498968601,
+        52.69982200115919,
+        52.052488550543785,
+        52.137221209704876,
+        52.27434076368809
+      ],
+      "sources": [
+        "20261013_213700_ada_measurement_summary.json"
+      ],
+      "profile": {
+        "path": "20261013_213700_original_bf16_breakdown_input.json",
+        "name": "Original BF16"
+      },
+      "quality": {
+        "status": "unmeasured",
+        "reference": "Fixed-input replay only; no closed-loop or success-rate evaluation"
+      }
+    },
+    {
+      "id": "bf16",
+      "state_id": "bf16",
+      "protocol_id": "fresh-plan",
+      "cohort_id": "4504e11effbaee41ce9eac35dc2456dacae7a3b9a36339a3426f9141c9896d43",
+      "recorded_at": "2026-10-13T21:32:03.890638+08:00",
+      "samples": [
+        46.343691647052765,
+        46.51949368417263,
+        46.11267242580652,
+        46.62997368723154,
+        46.31034657359123,
+        46.54119350016117,
+        46.23306170105934,
+        46.51494789868593,
+        47.17325512319803,
+        46.99439648538828
+      ],
+      "sources": [
+        "20261013_213700_ada_measurement_summary.json"
+      ],
+      "profile": {
+        "path": "20261013_213700_bf16_breakdown_input.json",
+        "name": "Shared BF16"
+      },
+      "quality": {
+        "status": "unmeasured",
+        "reference": "Fixed-input replay only; no closed-loop or success-rate evaluation"
+      }
+    },
+    {
+      "id": "tier00",
+      "state_id": "tier00",
+      "protocol_id": "fresh-plan",
+      "cohort_id": "4504e11effbaee41ce9eac35dc2456dacae7a3b9a36339a3426f9141c9896d43",
+      "recorded_at": "2026-10-13T21:32:07.333696+08:00",
+      "samples": [
+        47.783068381249905,
+        47.851307317614555,
+        48.00659418106079,
+        48.249730840325356,
+        47.42902331054211,
+        47.9658804833889,
+        48.28991834074259,
+        47.90125414729118,
+        47.2981221973896,
+        47.5293667986989
+      ],
+      "sources": [
+        "20261013_213700_ada_measurement_summary.json"
+      ],
+      "profile": {
+        "path": "20261013_213700_tier00_breakdown_input.json",
+        "name": "W8A8"
+      },
+      "quality": {
+        "status": "unmeasured",
+        "reference": "Fixed-input replay only; no closed-loop or success-rate evaluation"
+      }
+    },
+    {
+      "id": "tier01",
+      "state_id": "tier01",
+      "protocol_id": "fresh-plan",
+      "cohort_id": "4504e11effbaee41ce9eac35dc2456dacae7a3b9a36339a3426f9141c9896d43",
+      "recorded_at": "2026-10-13T21:32:09.967308+08:00",
+      "samples": [
+        47.31481149792671,
+        47.81511053442955,
+        47.70353622734547,
+        47.65952005982399,
+        47.90438525378704,
+        47.894589602947235,
+        47.76149895042181,
+        47.689455561339855,
+        47.66944795846939,
+        47.42463119328022
+      ],
+      "sources": [
+        "20261013_213700_ada_measurement_summary.json"
+      ],
+      "profile": {
+        "path": "20261013_213700_tier01_breakdown_input.json",
+        "name": "Tier 1"
+      },
+      "quality": {
+        "status": "unmeasured",
+        "reference": "Fixed-input replay only; no closed-loop or success-rate evaluation"
+      }
+    },
+    {
+      "id": "tier02",
+      "state_id": "tier02",
+      "protocol_id": "fresh-plan",
+      "cohort_id": "4504e11effbaee41ce9eac35dc2456dacae7a3b9a36339a3426f9141c9896d43",
+      "recorded_at": "2026-10-13T21:32:12.883150+08:00",
+      "samples": [
+        47.78632801026106,
+        47.90130164474249,
+        47.6576192304492,
+        49.263861030340195,
+        48.849938437342644,
+        47.863081097602844,
+        47.59832192212343,
+        47.62582387775183,
+        47.59890213608742,
+        47.51968663185835
+      ],
+      "sources": [
+        "20261013_213700_ada_measurement_summary.json"
+      ],
+      "profile": {
+        "path": "20261013_213700_tier02_breakdown_input.json",
+        "name": "Tier 2"
+      },
+      "quality": {
+        "status": "unmeasured",
+        "reference": "Fixed-input replay only; no closed-loop or success-rate evaluation"
+      }
+    },
+    {
+      "id": "tier03",
+      "state_id": "tier03",
+      "protocol_id": "fresh-plan",
+      "cohort_id": "4504e11effbaee41ce9eac35dc2456dacae7a3b9a36339a3426f9141c9896d43",
+      "recorded_at": "2026-10-13T21:32:15.602415+08:00",
+      "samples": [
+        47.482503578066826,
+        47.46326897293329,
+        47.53212630748749,
+        47.311837784945965,
+        47.40375746041536,
+        47.3528141155839,
+        47.37288411706686,
+        47.54071403294802,
+        47.3703583702445,
+        47.78058920055628
+      ],
+      "sources": [
+        "20261013_213700_ada_measurement_summary.json"
+      ],
+      "profile": {
+        "path": "20261013_213700_tier03_breakdown_input.json",
+        "name": "Tier 3"
+      },
+      "quality": {
+        "status": "unmeasured",
+        "reference": "Fixed-input replay only; no closed-loop or success-rate evaluation"
+      }
+    },
+    {
+      "id": "tier04",
+      "state_id": "tier04",
+      "protocol_id": "fresh-plan",
+      "cohort_id": "4504e11effbaee41ce9eac35dc2456dacae7a3b9a36339a3426f9141c9896d43",
+      "recorded_at": "2026-10-13T21:32:18.339394+08:00",
+      "samples": [
+        47.281233593821526,
+        47.42133803665638,
+        47.847201116383076,
+        47.40961454808712,
+        47.159839421510696,
+        47.208347357809544,
+        47.27894626557827,
+        47.7452427148819,
+        47.581104561686516,
+        47.69237246364355
+      ],
+      "sources": [
+        "20261013_213700_ada_measurement_summary.json"
+      ],
+      "profile": {
+        "path": "20261013_213700_tier04_breakdown_input.json",
+        "name": "Tier 4"
+      },
+      "quality": {
+        "status": "unmeasured",
+        "reference": "Fixed-input replay only; no closed-loop or success-rate evaluation"
+      }
+    },
+    {
+      "id": "tier05",
+      "state_id": "tier05",
+      "protocol_id": "fresh-plan",
+      "cohort_id": "4504e11effbaee41ce9eac35dc2456dacae7a3b9a36339a3426f9141c9896d43",
+      "recorded_at": "2026-10-13T21:32:21.112658+08:00",
+      "samples": [
+        47.37136233597994,
+        48.29546343535185,
+        47.72661440074444,
+        47.68411349505186,
+        47.77697939425707,
+        48.03719092160463,
+        47.59850539267063,
+        48.809546045958996,
+        48.910511657595634,
+        48.83610736578703
+      ],
+      "sources": [
+        "20261013_213700_ada_measurement_summary.json"
+      ],
+      "profile": {
+        "path": "20261013_213700_tier05_breakdown_input.json",
+        "name": "Tier 5"
+      },
+      "quality": {
+        "status": "unmeasured",
+        "reference": "Fixed-input replay only; no closed-loop or success-rate evaluation"
+      }
+    },
+    {
+      "id": "tier06",
+      "state_id": "tier06",
+      "protocol_id": "fresh-plan",
+      "cohort_id": "4504e11effbaee41ce9eac35dc2456dacae7a3b9a36339a3426f9141c9896d43",
+      "recorded_at": "2026-10-13T21:32:23.990419+08:00",
+      "samples": [
+        50.2370735630393,
+        50.438239239156246,
+        49.78286940604448,
+        49.74066186696291,
+        49.76492282003164,
+        50.85176136344671,
+        49.6625192463398,
+        49.7110141441226,
+        49.78648107498884,
+        50.51624309271574
+      ],
+      "sources": [
+        "20261013_213700_ada_measurement_summary.json"
+      ],
+      "profile": {
+        "path": "20261013_213700_tier06_breakdown_input.json",
+        "name": "Tier 6"
+      },
+      "quality": {
+        "status": "unmeasured",
+        "reference": "Fixed-input replay only; no closed-loop or success-rate evaluation"
+      }
+    },
+    {
+      "id": "tier07",
+      "state_id": "tier07",
+      "protocol_id": "fresh-plan",
+      "cohort_id": "4504e11effbaee41ce9eac35dc2456dacae7a3b9a36339a3426f9141c9896d43",
+      "recorded_at": "2026-10-13T21:32:26.771573+08:00",
+      "samples": [
+        46.109613962471485,
+        46.06439918279648,
+        46.216162852942944,
+        46.327210031449795,
+        46.136110089719296,
+        46.73837497830391,
+        46.255022287368774,
+        46.41138296574354,
+        46.40434496104717,
+        46.77770286798477
+      ],
+      "sources": [
+        "20261013_213700_ada_measurement_summary.json"
+      ],
+      "profile": {
+        "path": "20261013_213700_tier07_breakdown_input.json",
+        "name": "Tier 7"
+      },
+      "quality": {
+        "status": "unmeasured",
+        "reference": "Fixed-input replay only; no closed-loop or success-rate evaluation"
+      }
+    },
+    {
+      "id": "tier08",
+      "state_id": "tier08",
+      "protocol_id": "fresh-plan",
+      "cohort_id": "4504e11effbaee41ce9eac35dc2456dacae7a3b9a36339a3426f9141c9896d43",
+      "recorded_at": "2026-10-13T21:32:29.737754+08:00",
+      "samples": [
+        46.56663350760937,
+        46.81114200502634,
+        46.454764902591705,
+        46.674877405166626,
+        48.3934273943305,
+        46.973234973847866,
+        46.5446375310421,
+        46.85341566801071,
+        46.23849876224995,
+        46.470556408166885
+      ],
+      "sources": [
+        "20261013_213700_ada_measurement_summary.json"
+      ],
+      "profile": {
+        "path": "20261013_213700_tier08_breakdown_input.json",
+        "name": "Tier 8"
+      },
+      "quality": {
+        "status": "unmeasured",
+        "reference": "Fixed-input replay only; no closed-loop or success-rate evaluation"
+      }
+    },
+    {
+      "id": "tier09",
+      "state_id": "tier09",
+      "protocol_id": "fresh-plan",
+      "cohort_id": "4504e11effbaee41ce9eac35dc2456dacae7a3b9a36339a3426f9141c9896d43",
+      "recorded_at": "2026-10-13T21:32:32.501688+08:00",
+      "samples": [
+        45.97146436572075,
+        46.270839869976044,
+        45.92837765812874,
+        46.31687328219414,
+        46.239517629146576,
+        46.37682717293501,
+        46.112483367323875,
+        46.27229832112789,
+        45.96899636089802,
+        47.052107751369476
+      ],
+      "sources": [
+        "20261013_213700_ada_measurement_summary.json"
+      ],
+      "profile": {
+        "path": "20261013_213700_tier09_breakdown_input.json",
+        "name": "Tier 9"
+      },
+      "quality": {
+        "status": "unmeasured",
+        "reference": "Fixed-input replay only; no closed-loop or success-rate evaluation"
+      }
+    },
+    {
+      "id": "tier10",
+      "state_id": "tier10",
+      "protocol_id": "fresh-plan",
+      "cohort_id": "4504e11effbaee41ce9eac35dc2456dacae7a3b9a36339a3426f9141c9896d43",
+      "recorded_at": "2026-10-13T21:32:35.268240+08:00",
+      "samples": [
+        45.76305951923132,
+        45.90366315096617,
+        45.95842771232128,
+        45.778791420161724,
+        46.2335254997015,
+        46.59890476614237,
+        46.35283723473549,
+        46.4404858648777,
+        46.12806998193264,
+        46.02925106883049
+      ],
+      "sources": [
+        "20261013_213700_ada_measurement_summary.json"
+      ],
+      "profile": {
+        "path": "20261013_213700_tier10_breakdown_input.json",
+        "name": "W4A4"
+      },
+      "quality": {
+        "status": "unmeasured",
+        "reference": "Fixed-input replay only; no closed-loop or success-rate evaluation"
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "bf16-original",
+      "kind": "cumulative",
+      "label": "Versus original BF16",
+      "baseline_run_id": "original_bf16",
+      "candidate_run_id": "bf16"
+    },
+    {
+      "id": "tier00-original",
+      "kind": "cumulative",
+      "label": "Versus original BF16",
+      "baseline_run_id": "original_bf16",
+      "candidate_run_id": "tier00"
+    },
+    {
+      "id": "tier00-shared",
+      "kind": "incremental",
+      "label": "Integer bundle versus shared BF16",
+      "baseline_run_id": "bf16",
+      "candidate_run_id": "tier00"
+    },
+    {
+      "id": "tier01-original",
+      "kind": "cumulative",
+      "label": "Versus original BF16",
+      "baseline_run_id": "original_bf16",
+      "candidate_run_id": "tier01"
+    },
+    {
+      "id": "tier01-shared",
+      "kind": "incremental",
+      "label": "Integer bundle versus shared BF16",
+      "baseline_run_id": "bf16",
+      "candidate_run_id": "tier01"
+    },
+    {
+      "id": "tier02-original",
+      "kind": "cumulative",
+      "label": "Versus original BF16",
+      "baseline_run_id": "original_bf16",
+      "candidate_run_id": "tier02"
+    },
+    {
+      "id": "tier02-shared",
+      "kind": "incremental",
+      "label": "Integer bundle versus shared BF16",
+      "baseline_run_id": "bf16",
+      "candidate_run_id": "tier02"
+    },
+    {
+      "id": "tier03-original",
+      "kind": "cumulative",
+      "label": "Versus original BF16",
+      "baseline_run_id": "original_bf16",
+      "candidate_run_id": "tier03"
+    },
+    {
+      "id": "tier03-shared",
+      "kind": "incremental",
+      "label": "Integer bundle versus shared BF16",
+      "baseline_run_id": "bf16",
+      "candidate_run_id": "tier03"
+    },
+    {
+      "id": "tier04-original",
+      "kind": "cumulative",
+      "label": "Versus original BF16",
+      "baseline_run_id": "original_bf16",
+      "candidate_run_id": "tier04"
+    },
+    {
+      "id": "tier04-shared",
+      "kind": "incremental",
+      "label": "Integer bundle versus shared BF16",
+      "baseline_run_id": "bf16",
+      "candidate_run_id": "tier04"
+    },
+    {
+      "id": "tier05-original",
+      "kind": "cumulative",
+      "label": "Versus original BF16",
+      "baseline_run_id": "original_bf16",
+      "candidate_run_id": "tier05"
+    },
+    {
+      "id": "tier05-shared",
+      "kind": "incremental",
+      "label": "Integer bundle versus shared BF16",
+      "baseline_run_id": "bf16",
+      "candidate_run_id": "tier05"
+    },
+    {
+      "id": "tier06-original",
+      "kind": "cumulative",
+      "label": "Versus original BF16",
+      "baseline_run_id": "original_bf16",
+      "candidate_run_id": "tier06"
+    },
+    {
+      "id": "tier06-shared",
+      "kind": "incremental",
+      "label": "Integer bundle versus shared BF16",
+      "baseline_run_id": "bf16",
+      "candidate_run_id": "tier06"
+    },
+    {
+      "id": "tier07-original",
+      "kind": "cumulative",
+      "label": "Versus original BF16",
+      "baseline_run_id": "original_bf16",
+      "candidate_run_id": "tier07"
+    },
+    {
+      "id": "tier07-shared",
+      "kind": "incremental",
+      "label": "Integer bundle versus shared BF16",
+      "baseline_run_id": "bf16",
+      "candidate_run_id": "tier07"
+    },
+    {
+      "id": "tier08-original",
+      "kind": "cumulative",
+      "label": "Versus original BF16",
+      "baseline_run_id": "original_bf16",
+      "candidate_run_id": "tier08"
+    },
+    {
+      "id": "tier08-shared",
+      "kind": "incremental",
+      "label": "Integer bundle versus shared BF16",
+      "baseline_run_id": "bf16",
+      "candidate_run_id": "tier08"
+    },
+    {
+      "id": "tier09-original",
+      "kind": "cumulative",
+      "label": "Versus original BF16",
+      "baseline_run_id": "original_bf16",
+      "candidate_run_id": "tier09"
+    },
+    {
+      "id": "tier09-shared",
+      "kind": "incremental",
+      "label": "Integer bundle versus shared BF16",
+      "baseline_run_id": "bf16",
+      "candidate_run_id": "tier09"
+    },
+    {
+      "id": "tier10-original",
+      "kind": "cumulative",
+      "label": "Versus original BF16",
+      "baseline_run_id": "original_bf16",
+      "candidate_run_id": "tier10"
+    },
+    {
+      "id": "tier10-shared",
+      "kind": "incremental",
+      "label": "Integer bundle versus shared BF16",
+      "baseline_run_id": "bf16",
+      "candidate_run_id": "tier10"
+    }
+  ],
+  "notes": [
+    "Current run is the explicit full-coverage endpoint, not a selected fastest configuration.",
+    "Comparisons are directly measured within one cohort; coupled changes are attributed to their bundle.",
+    "VLM and noncandidate precision remain BF16. Closed-loop quality is not measured.",
+    "Ada INT8/INT4 and Thor FP8/FP4 are different formats; their curves are not a pure hardware comparison."
+  ]
+}

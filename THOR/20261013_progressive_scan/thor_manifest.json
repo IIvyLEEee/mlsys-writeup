@@ -1,0 +1,74 @@
+{
+  "export_at_cst": "2026-10-13T23:49:09.129989+08:00",
+  "files": {
+    "thor_brief_report.txt": {
+      "bytes": 3650,
+      "sha256": "97a04952da5237c6048bc4b7d549e373571586059c02a3ae896052cbca3dfd43"
+    },
+    "thor_clean_samples_360.csv": {
+      "bytes": 61201,
+      "sha256": "8f5e2297dd1106d474e2f2cf90154d067be65055a0c50df68c3629ff69d83a33"
+    },
+    "thor_configurations.json": {
+      "bytes": 13236,
+      "sha256": "6dc64f502da2fe0174bb4da189990795ef1f2fe1bc542ab99c95317e00632217"
+    },
+    "thor_dummy_profiles_36_excluded.csv": {
+      "bytes": 19844,
+      "sha256": "cfcc3f9e2fd8121363e4aa8d97104e892deac6140e3ebf0f22fd9cda6162e672"
+    },
+    "thor_figure.tex": {
+      "bytes": 1166,
+      "sha256": "0e5cc98c895426606eb815b3ffcb118cf25984c592a46c345daaa5042da3c36f"
+    },
+    "thor_measured_precision_map_2112.csv": {
+      "bytes": 209231,
+      "sha256": "d572faf102bfa0d70718288a2e6ebfacae9227188ccc060d5d9ccdc40598a4ea"
+    },
+    "thor_observed3200_summary.csv": {
+      "bytes": 4466,
+      "sha256": "fd4883a26bcc444a0513af3b552dd0b1c03ef569e4bdaf775fd6facae45975d3"
+    },
+    "thor_profiles_180.csv": {
+      "bytes": 94632,
+      "sha256": "6622a0556f694fc96ce2714866f51a884330b13ae84b5b89053fd434b6897f72"
+    },
+    "thor_progressive_latency_zh.png": {
+      "bytes": 296497,
+      "sha256": "ec0d29a3812ea02f727e01f4b35bd487304685a9d9730559078f31460ba1cb0c"
+    },
+    "thor_progressive_performance.pdf": {
+      "bytes": 75330,
+      "sha256": "c3c7d5e211106cb7b8d8e82ae22aea55d82fd7496f2a0ebfdfb9b82057cbf8ed"
+    },
+    "thor_progressive_performance.png": {
+      "bytes": 177889,
+      "sha256": "e397a128e629d5ff48c5129642fd047a213f9fa7a4e92bcfbfe33d694bf7e5a3"
+    },
+    "thor_progressive_performance.svg": {
+      "bytes": 98463,
+      "sha256": "1ca95ab0de26670a0e6944b198b9315d3d3e9ae74b7d235bfc89d9b9d627c3a3"
+    },
+    "thor_provenance.json": {
+      "bytes": 12036,
+      "sha256": "1e50d96b3c0e24daf0cb8605691f41443ab9375439d30a2b1a1cf79ca378e6ea"
+    },
+    "thor_quality_snapshot_193of360.csv": {
+      "bytes": 799,
+      "sha256": "8078e47a26fb06b49f046b485b57c7a3b16df8b1360de2fd08b4a4b2da914154"
+    },
+    "thor_README.txt": {
+      "bytes": 1268,
+      "sha256": "e098bfa02b053cb028b840b5eb1197327db3686b15ceeaef3e48f0e72f78c45d"
+    }
+  },
+  "validation": {
+    "clean_rows": 360,
+    "formal_profile_rows": 180,
+    "excluded_dummy_rows": 36,
+    "precision_rows": 2112,
+    "all_exported_statistics_match_audit": true,
+    "all_measured_precision_mappings_match_three_visits": true,
+    "private_path_scan": "passed"
+  }
+}

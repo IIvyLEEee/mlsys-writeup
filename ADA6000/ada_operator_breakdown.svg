@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1411" viewBox="0 0 1600 1411" role="img" aria-labelledby="title desc">
+<title id="title">Why mixed precision can lose speed</title>
+<desc id="desc">Timestamped profiler component breakdown generated at 2026-10-13T17:00:57+08:00.</desc>
+<style>
+text { font-family: Inter, 'Noto Sans', 'Noto Sans CJK SC', Arial, sans-serif; letter-spacing: 0; }
+.mono { font-family: 'JetBrains Mono', 'Noto Sans Mono', monospace; }
+</style>
+<rect width="1600" height="1411" fill="#F7F9FA"/>
+<rect x="0" y="0" width="14" height="1411" fill="#138A72"/>
+<text x="72.0" y="72.0" font-size="34" font-weight="700" fill="#16212B" text-anchor="start">Why mixed precision can lose speed</text>
+<text x="1528.0" y="68.0" font-size="17" font-weight="600" fill="#53616D" text-anchor="end" class="mono">20261013_170057</text>
+<text x="1528.0" y="94.0" font-size="14" font-weight="400" fill="#71808C" text-anchor="end">2026-10-13T17:00:57+08:00</text>
+<text x="72.0" y="110.0" font-size="19" font-weight="400" fill="#43515D" text-anchor="start">DiT CUDA Graph GPU work | RTX 6000 Ada | checkpoint-500</text>
+<text x="72.0" y="142.0" font-size="16" font-weight="600" fill="#138A72" text-anchor="start">GPU operation duration sum (ms)  |  mean of 6 profiled plan calls per mode</text>
+<text x="72.0" y="171.0" font-size="15" font-weight="400" fill="#64727E" text-anchor="start">scope: DiT Graph only; excludes graph submission and plan bookkeeping  |  source: Measured base 11d9ddb + progressive patch; see</text>
+<text x="72.0" y="194.0" font-size="15" font-weight="400" fill="#64727E" text-anchor="start">provenance attachment</text>
+<text x="72.0" y="241.0" font-size="23" font-weight="700" fill="#16212B" text-anchor="start">Measured breakdown</text>
+<text x="1528.0" y="241.0" font-size="15" font-weight="400" fill="#71808C" text-anchor="end">Scale: 0 to 6.374 ms</text>
+<text x="72.0" y="295.0" font-size="17" font-weight="650" fill="#16212B" text-anchor="start">Fused BF16</text>
+<text x="72.0" y="320.0" font-size="14" font-weight="400" fill="#64727E" text-anchor="start">6.374 ms  |  baseline</text>
+<rect x="360" y="275.0" width="1168" height="50" rx="4" fill="#E4E9EC"/>
+<rect x="360.00" y="275.0" width="911.25" height="50" fill="#2cc35c"><title>GEMM + GEMM epilogues: 4.973 ms</title></rect>
+<text x="815.6" y="306.0" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">78.0%</text>
+<rect x="1271.25" y="275.0" width="118.67" height="50" fill="#a54631"><title>Attention core: 0.648 ms</title></rect>
+<text x="1330.6" y="306.0" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">10.2%</text>
+<rect x="1389.92" y="275.0" width="0.88" height="50" fill="#9a24b7"><title>Copy / layout: 0.005 ms</title></rect>
+<rect x="1390.80" y="275.0" width="137.20" height="50" fill="#d9b836"><title>Other GPU work: 0.749 ms</title></rect>
+<text x="1459.4" y="306.0" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">11.7%</text>
+<line x1="360" y1="333.0" x2="1528" y2="333.0" stroke="#C9D1D7" stroke-width="1"/>
+<text x="72.0" y="377.0" font-size="17" font-weight="650" fill="#16212B" text-anchor="start">T0: all W8A8</text>
+<text x="72.0" y="402.0" font-size="14" font-weight="400" fill="#64727E" text-anchor="start">6.345 ms  |  1.005x vs baseline</text>
+<rect x="360" y="357.0" width="1168" height="50" rx="4" fill="#E4E9EC"/>
+<rect x="360.00" y="357.0" width="731.45" height="50" fill="#2cc35c"><title>GEMM + GEMM epilogues: 3.992 ms</title></rect>
+<text x="725.7" y="388.0" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">62.9%</text>
+<rect x="1091.45" y="357.0" width="135.19" height="50" fill="#28d7ae"><title>Activation quantize / pack: 0.738 ms</title></rect>
+<text x="1159.0" y="388.0" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">11.6%</text>
+<rect x="1226.64" y="357.0" width="116.88" height="50" fill="#a54631"><title>Attention core: 0.638 ms</title></rect>
+<text x="1285.1" y="388.0" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">10.1%</text>
+<rect x="1343.52" y="357.0" width="54.71" height="50" fill="#ac2f87"><title>LN + modulation + pack: 0.299 ms</title></rect>
+<rect x="1398.23" y="357.0" width="43.88" height="50" fill="#9a24b7"><title>Copy / layout: 0.239 ms</title></rect>
+<rect x="1442.11" y="357.0" width="57.06" height="50" fill="#2dc8b8"><title>Residual + LN + pack: 0.311 ms</title></rect>
+<rect x="1499.16" y="357.0" width="23.50" height="50" fill="#d9b836"><title>Other GPU work: 0.128 ms</title></rect>
+<line x1="360" y1="415.0" x2="1528" y2="415.0" stroke="#C9D1D7" stroke-width="1"/>
+<text x="72.0" y="459.0" font-size="17" font-weight="650" fill="#16212B" text-anchor="start">T7: 41.7% W4A4</text>
+<text x="72.0" y="484.0" font-size="14" font-weight="400" fill="#64727E" text-anchor="start">5.359 ms  |  1.189x vs baseline</text>
+<rect x="360" y="439.0" width="1168" height="50" rx="4" fill="#E4E9EC"/>
+<rect x="360.00" y="439.0" width="563.57" height="50" fill="#2cc35c"><title>GEMM + GEMM epilogues: 3.075 ms</title></rect>
+<text x="641.8" y="470.0" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">57.4%</text>
+<rect x="923.57" y="439.0" width="134.24" height="50" fill="#28d7ae"><title>Activation quantize / pack: 0.733 ms</title></rect>
+<text x="990.7" y="470.0" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">13.7%</text>
+<rect x="1057.80" y="439.0" width="116.86" height="50" fill="#a54631"><title>Attention core: 0.638 ms</title></rect>
+<text x="1116.2" y="470.0" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">11.9%</text>
+<rect x="1174.66" y="439.0" width="54.67" height="50" fill="#ac2f87"><title>LN + modulation + pack: 0.298 ms</title></rect>
+<rect x="1229.33" y="439.0" width="43.78" height="50" fill="#9a24b7"><title>Copy / layout: 0.239 ms</title></rect>
+<rect x="1273.11" y="439.0" width="45.52" height="50" fill="#2dc8b8"><title>Residual + LN + pack: 0.248 ms</title></rect>
+<rect x="1318.63" y="439.0" width="23.45" height="50" fill="#d9b836"><title>Other GPU work: 0.128 ms</title></rect>
+<line x1="360" y1="497.0" x2="1528" y2="497.0" stroke="#C9D1D7" stroke-width="1"/>
+<text x="72.0" y="541.0" font-size="17" font-weight="650" fill="#16212B" text-anchor="start">T8: 66.7% W4A4</text>
+<text x="72.0" y="566.0" font-size="14" font-weight="400" fill="#64727E" text-anchor="start">5.661 ms  |  1.126x vs baseline</text>
+<rect x="360" y="521.0" width="1168" height="50" rx="4" fill="#E4E9EC"/>
+<rect x="360.00" y="521.0" width="574.76" height="50" fill="#2cc35c"><title>GEMM + GEMM epilogues: 3.137 ms</title></rect>
+<text x="647.4" y="552.0" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">55.4%</text>
+<rect x="934.76" y="521.0" width="134.51" height="50" fill="#28d7ae"><title>Activation quantize / pack: 0.734 ms</title></rect>
+<text x="1002.0" y="552.0" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">13.0%</text>
+<rect x="1069.27" y="521.0" width="116.96" height="50" fill="#a54631"><title>Attention core: 0.638 ms</title></rect>
+<text x="1127.7" y="552.0" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">11.3%</text>
+<rect x="1186.23" y="521.0" width="77.43" height="50" fill="#ac2f87"><title>LN + modulation + pack: 0.423 ms</title></rect>
+<rect x="1263.66" y="521.0" width="64.48" height="50" fill="#9a24b7"><title>Copy / layout: 0.352 ms</title></rect>
+<rect x="1328.14" y="521.0" width="45.51" height="50" fill="#2dc8b8"><title>Residual + LN + pack: 0.248 ms</title></rect>
+<rect x="1373.65" y="521.0" width="23.73" height="50" fill="#d9b836"><title>Other GPU work: 0.129 ms</title></rect>
+<line x1="360" y1="579.0" x2="1528" y2="579.0" stroke="#C9D1D7" stroke-width="1"/>
+<text x="72.0" y="633.0" font-size="23" font-weight="700" fill="#16212B" text-anchor="start">Components</text>
+<text x="72.0" y="669.0" font-size="14" font-weight="700" fill="#53616D" text-anchor="start">Component</text>
+<text x="651.5" y="669.0" font-size="13" font-weight="700" fill="#53616D" text-anchor="middle">Fused BF16</text>
+<text x="850.5" y="669.0" font-size="13" font-weight="700" fill="#53616D" text-anchor="middle">T0: all W8A8</text>
+<text x="1049.5" y="669.0" font-size="13" font-weight="700" fill="#53616D" text-anchor="middle">T7: 41.7% W4A4</text>
+<text x="1248.5" y="669.0" font-size="13" font-weight="700" fill="#53616D" text-anchor="middle">T8: 66.7% W4A4</text>
+<text x="1528.0" y="669.0" font-size="13" font-weight="700" fill="#53616D" text-anchor="end">Current - baseline</text>
+<line x1="72" y1="686.0" x2="1528" y2="686.0" stroke="#AEB9C1" stroke-width="1.5"/>
+<rect x="72" y="702.0" width="13" height="13" rx="2" fill="#2cc35c"/>
+<text x="95.0" y="714.0" font-size="15" font-weight="550" fill="#16212B" text-anchor="start">GEMM + GEMM epilogues</text>
+<text x="651.5" y="714.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">4.973 ms  (78.0%)</text>
+<text x="850.5" y="714.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">3.992 ms  (62.9%)</text>
+<text x="1049.5" y="714.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">3.075 ms  (57.4%)</text>
+<text x="1248.5" y="714.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">3.137 ms  (55.4%)</text>
+<text x="1528.0" y="714.0" font-size="14" font-weight="650" fill="#187B62" text-anchor="end" class="mono">-1.84 ms  (-36.9%)</text>
+<rect x="72" y="733.0" width="1456" height="42" fill="#EEF2F4"/>
+<rect x="72" y="745.0" width="13" height="13" rx="2" fill="#28d7ae"/>
+<text x="95.0" y="757.0" font-size="15" font-weight="550" fill="#16212B" text-anchor="start">Activation quantize / pack</text>
+<text x="651.5" y="757.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.000 ms  (0.0%)</text>
+<text x="850.5" y="757.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.738 ms  (11.6%)</text>
+<text x="1049.5" y="757.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.733 ms  (13.7%)</text>
+<text x="1248.5" y="757.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.734 ms  (13.0%)</text>
+<text x="1528.0" y="757.0" font-size="14" font-weight="650" fill="#B54747" text-anchor="end" class="mono">+0.73 ms</text>
+<rect x="72" y="788.0" width="13" height="13" rx="2" fill="#a54631"/>
+<text x="95.0" y="800.0" font-size="15" font-weight="550" fill="#16212B" text-anchor="start">Attention core</text>
+<text x="651.5" y="800.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.648 ms  (10.2%)</text>
+<text x="850.5" y="800.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.638 ms  (10.1%)</text>
+<text x="1049.5" y="800.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.638 ms  (11.9%)</text>
+<text x="1248.5" y="800.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.638 ms  (11.3%)</text>
+<text x="1528.0" y="800.0" font-size="14" font-weight="650" fill="#187B62" text-anchor="end" class="mono">-0.01 ms  (-1.4%)</text>
+<rect x="72" y="819.0" width="1456" height="42" fill="#EEF2F4"/>
+<rect x="72" y="831.0" width="13" height="13" rx="2" fill="#ac2f87"/>
+<text x="95.0" y="843.0" font-size="15" font-weight="550" fill="#16212B" text-anchor="start">LN + modulation + pack</text>
+<text x="651.5" y="843.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.000 ms  (0.0%)</text>
+<text x="850.5" y="843.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.299 ms  (4.7%)</text>
+<text x="1049.5" y="843.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.298 ms  (5.6%)</text>
+<text x="1248.5" y="843.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.423 ms  (7.5%)</text>
+<text x="1528.0" y="843.0" font-size="14" font-weight="650" fill="#B54747" text-anchor="end" class="mono">+0.42 ms</text>
+<rect x="72" y="874.0" width="13" height="13" rx="2" fill="#9a24b7"/>
+<text x="95.0" y="886.0" font-size="15" font-weight="550" fill="#16212B" text-anchor="start">Copy / layout</text>
+<text x="651.5" y="886.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.005 ms  (0.1%)</text>
+<text x="850.5" y="886.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.239 ms  (3.8%)</text>
+<text x="1049.5" y="886.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.239 ms  (4.5%)</text>
+<text x="1248.5" y="886.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.352 ms  (6.2%)</text>
+<text x="1528.0" y="886.0" font-size="14" font-weight="650" fill="#B54747" text-anchor="end" class="mono">+0.35 ms  (+7241.0%)</text>
+<rect x="72" y="905.0" width="1456" height="42" fill="#EEF2F4"/>
+<rect x="72" y="917.0" width="13" height="13" rx="2" fill="#2dc8b8"/>
+<text x="95.0" y="929.0" font-size="15" font-weight="550" fill="#16212B" text-anchor="start">Residual + LN + pack</text>
+<text x="651.5" y="929.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.000 ms  (0.0%)</text>
+<text x="850.5" y="929.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.311 ms  (4.9%)</text>
+<text x="1049.5" y="929.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.248 ms  (4.6%)</text>
+<text x="1248.5" y="929.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.248 ms  (4.4%)</text>
+<text x="1528.0" y="929.0" font-size="14" font-weight="650" fill="#B54747" text-anchor="end" class="mono">+0.25 ms</text>
+<rect x="72" y="960.0" width="13" height="13" rx="2" fill="#d9b836"/>
+<text x="95.0" y="972.0" font-size="15" font-weight="550" fill="#16212B" text-anchor="start">Other GPU work</text>
+<text x="651.5" y="972.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.749 ms  (11.7%)</text>
+<text x="850.5" y="972.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.128 ms  (2.0%)</text>
+<text x="1049.5" y="972.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.128 ms  (2.4%)</text>
+<text x="1248.5" y="972.0" font-size="14" font-weight="400" fill="#33424F" text-anchor="middle" class="mono">0.129 ms  (2.3%)</text>
+<text x="1528.0" y="972.0" font-size="14" font-weight="650" fill="#187B62" text-anchor="end" class="mono">-0.62 ms  (-82.7%)</text>
+<line x1="72" y1="1029.0" x2="1528" y2="1029.0" stroke="#C9D1D7" stroke-width="1"/>
+<text x="72.0" y="1065.0" font-size="18" font-weight="700" fill="#16212B" text-anchor="start">Notes</text>
+<text x="72.0" y="1092.0" font-size="14" font-weight="400" fill="#53616D" text-anchor="start">- This is a fresh analysis of existing traces, not a new benchmark.</text>
+<text x="72.0" y="1114.0" font-size="14" font-weight="400" fill="#53616D" text-anchor="start">- Quantize/pack includes native prepare_integer&lt;4/8&gt; kernels.</text>
+<text x="72.0" y="1136.0" font-size="14" font-weight="400" fill="#53616D" text-anchor="start">- Fused LN categories include normalization and quantization together.</text>
+<text x="72.0" y="1158.0" font-size="14" font-weight="400" fill="#53616D" text-anchor="start">- T8 adds 16 norm/pack, 16 GEMM and 32 copy kernels per graph.</text>
+<text x="72.0" y="1180.0" font-size="14" font-weight="400" fill="#53616D" text-anchor="start">- GPU work is not host latency; do not subtract separately measured medians.</text>
+<text x="72.0" y="1216.0" font-size="18" font-weight="700" fill="#16212B" text-anchor="start">Profile sources</text>
+<text x="72.0" y="1243.0" font-size="13" font-weight="400" fill="#53616D" text-anchor="start">- ada_diagnosis.json</text>
+<text x="72.0" y="1264.0" font-size="13" font-weight="400" fill="#53616D" text-anchor="start">- ada_provenance.json</text>
+<text x="72.0" y="1285.0" font-size="13" font-weight="400" fill="#53616D" text-anchor="start">- ada_graph_breakdown.csv</text>
+<text x="72.0" y="1376.0" font-size="13" font-weight="400" fill="#71808C" text-anchor="start">profile-visualizer v1.1.0</text>
+<text x="1528.0" y="1376.0" font-size="13" font-weight="650" fill="#138A72" text-anchor="end">Measured values only</text>
+</svg>

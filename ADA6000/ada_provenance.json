@@ -1,0 +1,379 @@
+{
+  "schema_version": 1,
+  "experiment_date": "2026-10-13",
+  "timezone": "Asia/Shanghai",
+  "title": "RTX 6000 Ada streaming GR00T/piR2 progressive W8A8 to partial W4A4 replay",
+  "code": {
+    "repository": "https://github.com/Ther-nullptr/piR2",
+    "measured_base_commit": "11d9ddb6da0087ba9404850033646a43cf8045c2",
+    "patch": "scripts/progressive.patch",
+    "patch_sha256": "ecd12b7c4b8e4bda049ab7f659d4508280b0bbcd808eb12099fe0f43b1d7e297",
+    "measured_code_state": "Measured base commit plus uncommitted progressive patch; not a benchmark of the subsequently checked upstream commit.",
+    "upstream_checked_commit": "517f5189e3075c2b28a164f4b788bea387bfa4b2",
+    "source_sha256_recorded_at_measurement": {
+      "coexecution/cache.py": "d293985a82525b4589b2ea0641dc6382641c2724f08e47592e68897b609959b2",
+      "coexecution/groot_pointwise.py": "29e1b1157717b1bc66c736eaba2f2dfe67cd0ac357240304fb7a9a4818285574",
+      "coexecution/groot_optimization.py": "d8ce836f0ad56e480955cb57e983c83d6efdbabfd5bc42e76440ae3bd0552fcc",
+      "coexecution/queue_report.py": "686d7a496fab761883e8fea7c0620ea2c85333b5701ead1c18b81d26f8b8aa8b",
+      "coexecution/test_cache_gpu.py": "c24039a7a5b7aacc6f2601268173fe11083d03101d6ead2da9578c7ef7ddfdef",
+      "coexecution/workload.py": "44724b13de3b5770ed910b4c0177238bc3781999b746d4e253cfb8bf3da6b15d",
+      "coexecution/patching.py": "3670d648e526161aab26f2f1e6a646df8ad8fe9ddefc2d68183b97e8eded06b5",
+      "coexecution/floating_connections.py": "d06b1b30e5b13c35ede2abb85513ce910ea33bd9d148c0d041f8688af1cdc446",
+      "coexecution/quantization_connections.py": "7761c15b8e82396047064d95d1c802d01022fc2c7d0ec91968f1ddfb5a74f6b9",
+      "coexecution/run.py": "03b8a443c8aaad8eea0e378c689256aa4716bca5cb037b92b24bab385b5c4555",
+      "coexecution/profile_operators.py": "c117877718098e482a00bdb30ab7175917cb5c59a4e07ac262b343098abacda8",
+      "coexecution/floating_packing.py": "2a30be3ac33836900530715729a0303121dee0aacc3e3a5facf4be27671f7ce2",
+      "coexecution/groot_projections.py": "5bf69a04e8dcd0f9428c35cac8b01413b606ee10ecca22415879de2fe5a78dcd",
+      "coexecution/fusion_ab.py": "9c6517419d335cf88c31a910c281a971a061a8f4e4b83f7e468e725c340ac5d3",
+      "coexecution/fusion.py": "ccdbfc4db2d15e94fb15eb142848f3bf56b9148c60e68e8f1c18d23dc8d90cbc",
+      "coexecution/__init__.py": "970eaa8d1eca6ac13d0871742a7e2d96a7e81fb5e40662a889315b8194c5b943",
+      "coexecution/analyze_trace.py": "dda4a0883fac412bfe9c1e9a843a3d37e2b60e28fee2d54c2eaa778cf8837a72",
+      "coexecution/test_timeline.py": "7b085e7d7da18ea8463f225b6f6eb24af2e5b8a287c579de05cd17cedfe37fc4",
+      "coexecution/fusion_trace.py": "2bd8df4eb45dd97f4dd3c818420988fcc4f662ffd777cba1afee4e6758e5602d",
+      "coexecution/groot_graph.py": "fe067ed47080d863f8159b2e52118c153165661ad055fa813c089cc74f8e68f3",
+      "coexecution/audit_runtime_trace.py": "cfae09ebf6e88184be15f40514f190e860663ddce7d22297429d8929c151eea5",
+      "coexecution/test_fusion_gpu.py": "2642e23d19610bbd1118344b92d006f19385232114fce0e68f6eabcde5dec4d2",
+      "coexecution/test_attribution.py": "15dfd3a58017f3411e74ecc7bc31882518350ace51532ea7aa8f307901f83778",
+      "coexecution/groot_fusion.py": "99d2c6c1cb77ad64fdc46f625041aea264bf0183a0f78edb2de6f7fee537be5b",
+      "coexecution/preflight.py": "1c6810c875d867addf116a17b810bac056091529d72ad8c93cfae5a427866d65",
+      "coexecution/test_static_s1_gpu.py": "9a016c90986f24d09441d637b6c87692bcbc8ac6709c1d10b73788531380bea8",
+      "coexecution/periodic.py": "5db0f19a0ceafd39ca6109d9348004d66e11a0a1321c6a159fe2148e19ae18a9",
+      "coexecution/quantization.py": "a4682b5430bc1f0261167bb10c4b86929f38c4f87cf722a0ecead059fcedea8f",
+      "coexecution/operator_analysis.py": "95ae66083fdb0b438d887695791f00afac708ed0101d843211c447638349b3ad",
+      "coexecution/graph_dit.py": "970e72567db15b93680fd19d04ba27511e231dcc3ca61e8c2709304d80179a33",
+      "coexecution/fused_ops.py": "ca3f8aabc33af5f53703661cfecb233536f325bfc05de8476a7f9a3f506cbb47",
+      "coexecution/test_queue_report.py": "a3a349dd7b5b1ed2f7af44e2969e6028288499744de9e93ac7c81d6055cdfec3",
+      "coexecution/test_feature_usage.py": "d1018c273798b9495614d57a98fc0c4b7bcd4baba804e6fd59d1389b9e2ca7b8",
+      "coexecution/protocol_ab.py": "20148a73508420bebcce670f2e8fdc255672ee670e01d35068552990a8c858b8",
+      "coexecution/floating_quantization.py": "853032553d9fe3f06f4811bd68bdbef605b18a600e56e16eb169dfec6692d0e9",
+      "coexecution/static_s2.py": "a41116d9250c6202e3ad5a0678c244e76139a0c7a2f0b53474d7f0346ee2230e",
+      "coexecution/test_static_s2_gpu.py": "90e53ebef1959057aadb238a06e4f6127a13c85af774b55b1865d9e843e04e57",
+      "coexecution/static_s1.py": "2fb6db4e627e71c78c5ad16479436063ea74c2d9240881be701c13bb2cee8122",
+      "coexecution/runtime_ab.py": "867557282795001be3bc23108a90c292dca12d275e31e02988fd316a83aeccbd",
+      "coexecution/feature_usage.py": "fe784a1db67a3927d0b4a972f114aa02f6bf059f5e6a19104fa5d2336e0e2c1a",
+      "coexecution/optimization/capabilities.py": "242d116170f1156a318a158aeef4f217dfa293a3c259c4726ae0899d004e74de",
+      "coexecution/optimization/tactics.py": "7c6e82a7725d90b8fa41121948cb1a76ea3ec83ad4d7035090838d41401452c4",
+      "coexecution/optimization/progressive.py": "9ca758322776b77c2b751abd087f6f02d94d27e7bc482b4383f3f5c5dc261cdf",
+      "coexecution/optimization/session.py": "3585ce20e6e9b35da522cb4c99e0bdb82d724840b167b6a02eb3c8491cb1085b",
+      "coexecution/optimization/__init__.py": "a51bae2523e9161a95bb025ede4e4a44ab0736e4cc743590e13be1ed9c401db5",
+      "coexecution/optimization/config.py": "243a8ae2ab8c267132c89de13508c1304e6a81297e88d3e68403469fd985b718",
+      "coexecution/libero/loading.py": "36300de8b7545ffc3db0ea921193c9b8aec4e67ec90d1c75e67f28e15d7a387d",
+      "coexecution/libero/__init__.py": "b646c1caa8bcf84445c0cf33c6fce75f4e5e91c96b1250183e1c2b2f596376a2",
+      "coexecution/libero/service.py": "8dcfde4fa3e88d6d7b0a757128b8a10b1c3c060a526a15ae6d61cd859afab531",
+      "coexecution/libero/backend.py": "ba3b6f1db58626785a97247e8dd28191fc72621366540f76a90d142009250fa4",
+      "coexecution/optimization/groot/integer.py": "704944e863b6e28ac32158b1c6bee78b90e79c6060b7d5fc0316bbd267a9eac3",
+      "coexecution/optimization/groot/floating_connections.py": "988cdde7e6ae634f47a21abe36353bf054f974144e86087e865c437601ddda07",
+      "coexecution/optimization/groot/projections.py": "e5ac0e1ba2b93617d0c71e40a41db59510d5ef7ad52af2709957295275f9f2f2",
+      "coexecution/optimization/groot/__init__.py": "e5b310d83a4146ad84dadfb61eb5e4625f6e8efbc64f0534614ef0d029bf12f0",
+      "coexecution/optimization/groot/integer_connections.py": "5ebf8a58c376254c17c425131e728dbaad0870aba0a08597f6a1947ba11e7a9e",
+      "coexecution/optimization/groot/floating.py": "c9795b6d878d5b80d9ed27847f8f2c43c9fb20853a7d2aee27821007baf385de",
+      "coexecution/optimization/backends/__init__.py": "351dd228af72d097961fbf2c7dda993790d845e2c7c90846bd08c1c2fec1bcb6",
+      "coexecution/optimization/execution/cache.py": "1ede0d84f368c9c069db28a8de79a320a918503038d7e85ffdec2112d75de56c",
+      "coexecution/optimization/execution/__init__.py": "87aab01dd0aa7b31da1869dc50c4296f0d5ebd172728dda8087be64ff8121194",
+      "coexecution/optimization/execution/graph.py": "7960ca57b81609be1412f09df2cdabba5e6578b2b41c42036cabdf679497ef51",
+      "coexecution/optimization/backends/thor/__init__.py": "dd98f568fd9b86fe04bef97c2b691e89f7d31f1864d0eb8a931149b44461d836",
+      "coexecution/optimization/backends/thor/linear.py": "d037a5fbe20bf3adda3d50a28bb3017624728752a934c1a3b71ac9df2e98d290",
+      "coexecution/optimization/backends/thor/packing.py": "8aac780cf28944a8516386cffb1253d62312ed8ce59741a4241fd15e1e7ba8a0",
+      "coexecution/optimization/backends/integer/__init__.py": "93de59ae1e4c15340f10e03be48e4b2cde347108b07d298d7e3eee3c07926b98",
+      "coexecution/optimization/backends/integer/linear.py": "0044f9793a764018a163c39e22274452b5a1a648c3151325ff11a7fba2fdc6c5",
+      ".local/progressive_replay.py": "b394a2d20f51d0343886055fdcaab54affdccc1ee19767bb5e315756e62d8052",
+      ".local/replay_spatial_checkpoint.py": "941ab2705beef1867031c3bb033c01caccb54a0899a07168e9cdc36685283c1c",
+      ".local/replay_profile_report.py": "cf94aebb453138128019d010924cd93d4fd4ed2524a403bda0ef7e493064d22d"
+    },
+    "dependency_lock": "scripts/sources.lock.json",
+    "dependency_lock_sha256": "00630874f553360d38bec88bdc9119dc823d5e3d27dd9d65db5c378a71734a13"
+  },
+  "hardware": {
+    "gpu": "NVIDIA RTX 6000 Ada Generation",
+    "compute_capability": "8.9",
+    "multiprocessors": 142,
+    "total_memory_MB_as_recorded": 48519,
+    "l2_cache_MB_as_recorded": 96,
+    "gpu_visible_to_process": 1
+  },
+  "runtime": {
+    "torch": "2.9.0+cu128",
+    "cuda": "12.8",
+    "triton": "3.5.0",
+    "attention": {
+      "backbone": {
+        "main": "flash_attention_2",
+        "text": "flash_attention_2",
+        "vision": "flash_attention_2"
+      },
+      "action_head_processors": {
+        "AttnProcessor2_0": 32
+      }
+    }
+  },
+  "checkpoint": {
+    "label": "Spatial streaming checkpoint-500",
+    "runtime_path_parameter": "--checkpoint <CHECKPOINT_DIR>",
+    "sha256": {
+      "model-00001-of-00003.safetensors": "72d81b70745c24cee97b16fb663d5b7f9af0d314cfe41ad9f2677f9b13c48fda",
+      "model-00002-of-00003.safetensors": "abacf6848dbd1c799a9750525430bd8cd0da25c58b49914d9d5551c78cf0d78c",
+      "model-00003-of-00003.safetensors": "51ee4da92e62793b9d4a60ffe10f35c0d5c990e515c036da85e8eb85ceb060a9",
+      "config.json": "99a8827e8cec0c228d868603257e150586d5dc195448ed1cab670389e3fcfd69",
+      "processor_config.json": "ffaf5227069b70776675f34fbe3905a0081c7ff50738724424168623ffe01913",
+      "statistics.json": "830773f62b760ef7c36fa3ffb2eec45e358b24cb983d30f6e10aba3633a6a407",
+      "embodiment_id.json": "6f01100d50c52602f0c7c68304eea48f79a1f8c2426a960c04824c0ed4557869"
+    }
+  },
+  "external_integer_backend": {
+    "backend_id": "robotics_integer",
+    "backend_revision": "unknown",
+    "device_arch": "sm_89",
+    "quant_format": "mixed-w8a8-w4a4-symmetric-row-v1",
+    "runtime": {
+      "torch": "2.9.0+cu128",
+      "cuda": "12.8",
+      "triton": "3.5.0",
+      "device": "cuda:0",
+      "device_name": "NVIDIA RTX 6000 Ada Generation"
+    },
+    "source": {
+      "expected_revision": "239b4a3ef2268048571c9f508ad5700f98398c2f",
+      "url": "https://github.com/thu-ee-acts-lab/robotics-the-speedup-paradox.git",
+      "revision": "unknown",
+      "dirty": "unknown",
+      "module_tracked": "unknown",
+      "module_sha256": "bbf45987d8098e7e5289db6e2086d1ca322b08b3a928095bcda4a91d0573c5ce"
+    },
+    "validated_architectures": [
+      "sm_89"
+    ],
+    "runtime_arch_validated": true,
+    "architecture_policy": "Pinned integer loader; no additional device whitelist",
+    "binary": {
+      "status": "unknown",
+      "selected": null,
+      "loaded_candidates": [
+        {
+          "filename": "robotics_integer_ext.so",
+          "sha256": "b67741ca39143a786b9e42d75de14ed3e602fb5e3fa96f6b1c29ab7b0ca39cf7",
+          "newly_loaded": false
+        }
+      ],
+      "note": "Preloaded operators or ambiguous libraries cannot be attributed from torch.ops"
+    },
+    "required_operators": [
+      "gemm",
+      "gemm_biasless"
+    ]
+  },
+  "protocol": {
+    "id": "groot32-cosmos-role-order-v1",
+    "description": "GR00T32 adaptation of Cosmos role order; early B0-9, mid B10-19, late B20-31; 192 attention/FFN candidate Linear sites",
+    "reference": "https://github.com/thu-ee-acts-lab/robotics-the-speedup-paradox/blob/239b4a3ef2268048571c9f508ad5700f98398c2f/src/robotics_bench/optimizations/progressive.py",
+    "scope": "Synchronized local streaming plan call including existing backend bookkeeping; excludes RPC, simulator, scheduling and separate VLM update",
+    "fixed_precision": "VLM, norm/condition, noncandidate action projections and category projections W8A8 at all tiers; attention core remains floating",
+    "episode": {
+      "episode_index": 0,
+      "tasks": [
+        "pick up the black bowl next to the cookie box and place it on the plate"
+      ],
+      "length": 110,
+      "dataset_fps": 20
+    },
+    "episode_index": 0,
+    "start_frame": 20,
+    "seed": 1000,
+    "batch_size": 1,
+    "action_horizon": 40,
+    "plan_calls_per_replay": 6,
+    "dit_forward_calls_per_plan": 1,
+    "vlm_forward_calls_per_plan": 0,
+    "bootstrap_calls_per_replay": 1,
+    "separate_vision_updates_per_replay": 6,
+    "request_delays_ticks": [
+      1,
+      3,
+      5,
+      1,
+      3,
+      5
+    ],
+    "image_ages_ticks": [
+      0,
+      2,
+      5,
+      0,
+      2,
+      5
+    ],
+    "rounds": 3,
+    "replays_per_round_per_configuration": 5,
+    "timed_plans_per_configuration": 90,
+    "warmup_replays_per_configuration_selection": 3,
+    "configuration_orders": [
+      [
+        "t3",
+        "t1",
+        "t2",
+        "t8",
+        "t10",
+        "t4",
+        "t0",
+        "t6",
+        "t7",
+        "t5",
+        "bf16",
+        "t9"
+      ],
+      [
+        "t5",
+        "t4",
+        "t0",
+        "t8",
+        "t9",
+        "t10",
+        "bf16",
+        "t6",
+        "t7",
+        "t1",
+        "t2",
+        "t3"
+      ],
+      [
+        "t0",
+        "t8",
+        "t1",
+        "t7",
+        "t3",
+        "bf16",
+        "t6",
+        "t2",
+        "t4",
+        "t5",
+        "t9",
+        "t10"
+      ]
+    ],
+    "profile_replays_per_configuration": 1,
+    "profile_plan_calls_per_configuration": 6,
+    "baseline": "Matched fused full BF16",
+    "exclusions": "Installation, weight packing, compilation, graph capture and three warmup replays; traces separately collected outside latency samples",
+    "action_error_scope": "Flattened actions_0 through actions_5 versus matched full BF16; bootstrap excluded; native model output units",
+    "shape_tactics": "scripts/shape-tactics-candidate.json",
+    "shape_tactics_sha256": "6f74985f79574053f2a33ec67e53150e66b9e0f7018677b06681920e4fcab373"
+  },
+  "privacy": "No host IP, login name, absolute private workspace path, GPU UUID, credentials, checkpoint tensors or input observations are included in this metadata.",
+  "original_evidence_sha256": {
+    "trial-02/summary.json": "e18d80cf78bb3c178ae17419aa8322ae95e9ce0bb89a6988e8338df2cc3da502",
+    "trial-02/manifest.json": "4b116b4823238e28ff1cacfc85dc20f0a268cc17bbc127d3c1f7416c0ee9c933",
+    "trial-02/validation.json": "8754921530749076436768c95439c17c4fb99539a80afa0da12ee6b40d4b1603",
+    "trial-02/samples.jsonl": "2dc8baca31510564481038ec4ee2867fdd9f73ab96861df1e14af9a21a8cb368",
+    "trial-02/profiles.json": "47e41873252efb736b18bab9831d0a3d27fd509fdabc5c9d726a5d0ea14a1eb3",
+    "trial-02/weight-loading.json": "ea8462ce1fb5161e28a2547070c1a7915315f32097d1aec2ca40a21e18831d85",
+    "trial-02/diagnosis/20261013_162215_latency_causes.json": "93784e7deeea53adde4e720b1807d8370554c7238af840cbe1bd2ba1d39b9d1b",
+    "trial-02/bf16/trace.json.gz": "5ad013c54f28d2a0b2520d402870d2056206ca731e3196574de55923d717032d",
+    "trial-02/t0/trace.json.gz": "5f842510c6f7a396d314f0876dd0a87996c9632fc01e5f1604fd6b50f59b13db",
+    "trial-02/t1/trace.json.gz": "eeda50184008a298a720cd772aa8eafbbdcbe7aa0e46350e22afd0d27779bff8",
+    "trial-02/t2/trace.json.gz": "50b029bb8ec53b4fb281f7d04975cf68546779b1f4d75cbbcd3aab56d71ae750",
+    "trial-02/t3/trace.json.gz": "7f1ab72fcde948b37aa6d1f8b0b14657f3aa5d1d20238ad6748ae09c2d7abcd9",
+    "trial-02/t4/trace.json.gz": "eff69f33ea6dc99217b726af28382665d071220f1e56dd7dcb6a075ecb25e732",
+    "trial-02/t5/trace.json.gz": "c1540d5c4199335e415b89816767b347dd860e2a94c5176c36bc5e298b2a00fa",
+    "trial-02/t6/trace.json.gz": "1e30fafbb90136bca744d026073e671043e07a191b9eb89f453bc19b5a01098d",
+    "trial-02/t7/trace.json.gz": "d3e50e3e7d3026bf1c05173d6c74de6c4f3ab21f87678005f40bfb42a5cdbc9f",
+    "trial-02/t8/trace.json.gz": "80c1b32db10d1c01fac93b5839061a9ff90d3676ab2415a4428274de06c15248",
+    "trial-02/t9/trace.json.gz": "735f37e59f8de4962ee08798b02e2d5d6714c0bb3999b67a1424387fe71cf672",
+    "trial-02/t10/trace.json.gz": "ceb5205a4f815e4f86fe0c1cb177b171d6dee846e08a0da6667c96e934a97b2d"
+  },
+  "distributed_assets": [
+    {
+      "package_path": "scripts/progressive_replay.py",
+      "original_relative_path": ".local/progressive_replay.py",
+      "original_sha256": "b394a2d20f51d0343886055fdcaab54affdccc1ee19767bb5e315756e62d8052",
+      "distributed_sha256": "b394a2d20f51d0343886055fdcaab54affdccc1ee19767bb5e315756e62d8052",
+      "sanitization": []
+    },
+    {
+      "package_path": "scripts/replay_spatial_checkpoint.py",
+      "original_relative_path": ".local/replay_spatial_checkpoint.py",
+      "original_sha256": "941ab2705beef1867031c3bb033c01caccb54a0899a07168e9cdc36685283c1c",
+      "distributed_sha256": "941ab2705beef1867031c3bb033c01caccb54a0899a07168e9cdc36685283c1c",
+      "sanitization": []
+    },
+    {
+      "package_path": "scripts/replay_profile_report.py",
+      "original_relative_path": ".local/replay_profile_report.py",
+      "original_sha256": "cf94aebb453138128019d010924cd93d4fd4ed2524a403bda0ef7e493064d22d",
+      "distributed_sha256": "27ff043eb85b3097848bd7a97639228e949f2ccc2a926e0d1f71e04422e5b9ad",
+      "sanitization": [
+        "Replaced two machine-specific standalone rendering defaults with relative example locations; attribution function and measurement logic unchanged."
+      ]
+    },
+    {
+      "package_path": "scripts/shape-tactics-candidate.json",
+      "original_relative_path": ".local/shape-tactics-candidate.json",
+      "original_sha256": "6f74985f79574053f2a33ec67e53150e66b9e0f7018677b06681920e4fcab373",
+      "distributed_sha256": "6f74985f79574053f2a33ec67e53150e66b9e0f7018677b06681920e4fcab373",
+      "sanitization": []
+    },
+    {
+      "package_path": "scripts/progressive.patch",
+      "original_relative_path": ".local/progressive.patch",
+      "original_sha256": "ecd12b7c4b8e4bda049ab7f659d4508280b0bbcd808eb12099fe0f43b1d7e297",
+      "distributed_sha256": "ecd12b7c4b8e4bda049ab7f659d4508280b0bbcd808eb12099fe0f43b1d7e297",
+      "sanitization": []
+    },
+    {
+      "package_path": "evidence/full-contracts.log",
+      "original_relative_path": "evidence/full-contracts.log",
+      "original_sha256": "310b24dcb5796b4c45cf0e406eb33c2f8c31aa59398d6f6d1409a9708868459c",
+      "distributed_sha256": "37e7c3a03b657f1a999f9bf211fe6c349d95feaebb894687590ea891bfd7e707",
+      "sanitization": [
+        "Replaced host-specific absolute traceback paths with symbolic root placeholders; results and stack content retained."
+      ]
+    },
+    {
+      "package_path": "evidence/contracts.log",
+      "original_relative_path": "evidence/contracts.log",
+      "original_sha256": "45253e282f5d134936c51ee78fee86c7eecec1e86a5d413d73c10ced65077259",
+      "distributed_sha256": "798ac657cecea14935ca7f045401e7addb5379163ee26b0466f3c7a1c7267a97",
+      "sanitization": [
+        "Replaced host-specific absolute traceback paths with symbolic root placeholders; results and stack content retained."
+      ]
+    },
+    {
+      "package_path": "evidence/node-tests.log",
+      "original_relative_path": "evidence/node-tests.log",
+      "original_sha256": "1a0d3f2d469cb69486892ffd20c610850304f1d53150b3b1da52daf28fec7fdb",
+      "distributed_sha256": "4796a9ebf3a622ddfbb06be8c123cb7f81fa95cb550647d6683f1731e7f4a767",
+      "sanitization": [
+        "Replaced host-specific absolute traceback paths with symbolic root placeholders; results and stack content retained."
+      ]
+    },
+    {
+      "package_path": "evidence/gpu-tests.log",
+      "original_relative_path": "evidence/gpu-tests.log",
+      "original_sha256": "f2f2b8d35b60bd26f4ef41c3d4917ecd3b1ad20a308994d8b01610e63a04f63f",
+      "distributed_sha256": "480e28d08a0e809cb0bef428d53e0b1ec86d92213635c3f879022e4755d6af40",
+      "sanitization": [
+        "Replaced host-specific absolute traceback paths with symbolic root placeholders; results and stack content retained."
+      ]
+    },
+    {
+      "package_path": "evidence/base-gpu-test.log",
+      "original_relative_path": "evidence/base-gpu-test.log",
+      "original_sha256": "bc77d6a204552b57ec75650756d2ed93d14ddb1a62a0f1344e810e7b63a4c05a",
+      "distributed_sha256": "55402afc0d4258b921cb725cab27fc32a390d0107e1886646ccaac073e092427",
+      "sanitization": [
+        "Replaced host-specific absolute traceback paths with symbolic root placeholders; results and stack content retained."
+      ]
+    }
+  ],
+  "limitations": [
+    "One fixed episode and six plan calls repeatedly replayed; no closed-loop success or task-quality conclusion.",
+    "Ninety timings per configuration are repeated calls of the same six-request sequence, not independent tasks. p10/p90 are empirical sample quantiles, not confidence intervals.",
+    "GPU operation duration sum is the mean over six calls in one separate profiled replay per configuration; it cannot be subtracted from the unprofiled wall-time median to estimate CPU time.",
+    "All quantized tiers keep selected VLM Linear modules in W8A8, while the reference is full BF16; action deviations therefore include the VLM quantization effect and are not isolated DiT errors.",
+    "W4 coverage counts 192 candidate Linear sites, not parameters, FLOPs or GPU kernels. Attention core remains floating; T10 is not a fully INT4 model.",
+    "Unprofiled host-call timing includes CUDA-event instrumentation, stream synchronization, Backend bookkeeping and request-log I/O. It excludes separately timed VLM updates, RPC, simulator and scheduling.",
+    "Git revision/dirty state and selected native binary for the external integer backend are unknown; the expected revision and observed module/library hashes are retained separately.",
+    "The trace-based explanations are consistent with the code path but no independent ablation isolates each suspected cause; profiler submission timings do not causally account for all unprofiled wall-time differences.",
+    "T9 has the lowest pooled median, but round variation and overlapping sample ranges do not establish a stable best configuration.",
+    "The existing GPU suite has three dit_graph parameter failures; only its BF16 case was rerun and reproduced on the pristine base.",
+    "Dependencies, checkpoint assets and dataset are not bundled. A portable clean-environment rerun has not been performed. Device clocks/power/temperature time series were not recorded."
+  ]
+}
