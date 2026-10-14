@@ -1,0 +1,74 @@
+{
+  "inputs": {
+    "THOR/20261014_quality_complete/thor_observed3200_summary.csv": {
+      "sha256": "fd4883a26bcc444a0513af3b552dd0b1c03ef569e4bdaf775fd6facae45975d3",
+      "rows": 12
+    },
+    "THOR/20261014_quality_complete/thor_quality_modes_12.csv": {
+      "sha256": "589c75ace72b9b2d37bfc45031dd29c99d8ebe9bfcbf1663d78a3bd42e40efbc",
+      "rows": 12
+    },
+    "THOR/20261014_quality_complete/thor_clean_samples_360.csv": {
+      "sha256": "8f5e2297dd1106d474e2f2cf90154d067be65055a0c50df68c3629ff69d83a33",
+      "rows": 360
+    },
+    "THOR/20261014_quality_complete/thor_profiles_180.csv": {
+      "sha256": "6622a0556f694fc96ce2714866f51a884330b13ae84b5b89053fd434b6897f72",
+      "rows": 180
+    },
+    "THOR/20261014_quality_complete/thor_quality_episodes_360.csv": {
+      "sha256": "283a89d2caddc018c97780b3e0a326f2060db96eb1d3433a0d589e23c44e143d",
+      "rows": 360
+    },
+    "THOR/20261014_quality_complete/thor_quality_tasks_120.csv": {
+      "sha256": "9d46289e358fd621d4e942792f215ba39e4d005508c24eaa6ebea630980614e2",
+      "rows": 120
+    },
+    "AGX/20261014_011851_agx_quantization_scan_summary/数据/渐进量化结果.csv": {
+      "sha256": "0df6c470be05f8ecc68e8d654aa1d9a240aa499b069a69bb3e50e4125b57c996",
+      "rows": 11
+    },
+    "AGX/20261014_011851_agx_quantization_scan_summary/数据/实验配置与对照.csv": {
+      "sha256": "cfce6bdb519c1b6511b1216d841aecb2b7d0794260b09d36ee04b47301ee82aa",
+      "rows": 13
+    },
+    "AGX/20261014_011851_agx_quantization_scan_summary/数据/稳定延迟样本.csv": {
+      "sha256": "ac525cd4999d609f74f097c30aa558d81c3b8ab3590ab6fec9a669613754fb2e",
+      "rows": 288
+    },
+    "ADA6000/20261013_complete_inference/20261013_213700_ada_tiers.csv": {
+      "sha256": "7b31d4049a66ca0cd1843486ba5104210804d0eac683cdd280c40df96251a66b",
+      "rows": 13
+    },
+    "ADA6000/20261013_complete_inference/20261013_213700_ada_raw_samples.csv": {
+      "sha256": "ef04366465a9c6ff1faf7e75ab2549f1011896360180659af9fe44b38fe6b6ed",
+      "rows": 130
+    },
+    "THOR/20261014_quality_complete/thor_brief_report.txt": {
+      "sha256": "4a66a29be0fb2da27f5343b126187188ad7c13bc5aa7e759c94e62804378a46b"
+    },
+    "AGX/20261014_011851_agx_quantization_scan_summary/汇报.md": {
+      "sha256": "f9dbbc26ce700c677eaf671c2d13189817f381364f6032df3886eccba6f5e503"
+    },
+    "ADA6000/20261013_complete_inference/20261013_213700_ada_completed_results.txt": {
+      "sha256": "7be12527742661e84edb08779b130afbde8ad86fd1d377a1e099bc7f9a925e1d"
+    },
+    "ADA6000/20261013_complete_inference/20261013_213700_ada_independent_audit.txt": {
+      "sha256": "dca25d3cb16e54fcc0f8b096075acf1dbda16b6dd8ee4d4061cce5045e9670cb"
+    }
+  },
+  "checks": "PASS: raw timing statistics, sample/visit counts, 360 paired episodes, 120 task aggregates",
+  "plot_policy": "No new measurements, smoothing, inferred quality, or confidence intervals.",
+  "task_names": {
+    "0": "pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate",
+    "1": "pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate",
+    "2": "pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate",
+    "3": "pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate",
+    "4": "pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate",
+    "5": "pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate",
+    "6": "pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate",
+    "7": "pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate",
+    "8": "pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate",
+    "9": "pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate"
+  }
+}

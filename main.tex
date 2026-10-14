@@ -1,14 +1,264 @@
-\documentclass{article}
-\usepackage{graphicx} % Required for inserting images
-
-\title{mlsys-writeup}
-\author{Ivy Lee}
-\date{October 2026}
+% !TeX program = xelatex
+% In Overleaf: select XeLaTeX as the compiler.
+% Tables and vector figures are generated from the original CSV exports by
+% scripts/build_summary.py. No new GPU or closed-loop experiment was run.
+\documentclass[UTF8,a4paper,11pt,fontset=fandol]{ctexart}
+\usepackage[margin=18mm]{geometry}
+\usepackage{graphicx,booktabs,tabularx,array,amsmath,xcolor}
+\usepackage{caption,enumitem,fancyhdr}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{pdftitle={GR00T 渐进量化实验汇总},pdfauthor={Ivy Lee}}
+\urlstyle{same}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.14}
+\captionsetup{font=small,labelfont=bf,skip=4pt,hypcap=false}
+\setlist[enumerate]{leftmargin=*,itemsep=3pt,topsep=3pt}
+\ctexset{section={format=\Large\bfseries,beforeskip=5pt,afterskip=7pt},
+  subsection={format=\normalsize\bfseries,beforeskip=7pt,afterskip=3pt}}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small GR00T 渐进量化实验汇总}
+\fancyhead[R]{\small 2026-10-14 数据快照}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}
+\newcommand{\key}[1]{\textbf{#1}}
+\newcommand{\source}[1]{{\footnotesize\color{black!65}数据来源：#1\quad 文件索引见第\,\pageref{sec:sources}\,页。}}
+\newcommand{\reportfigure}[3]{%
+  \par\begingroup\centering
+  \includegraphics[width=\linewidth]{#1}
+  \par
+  \captionof{figure}{#2}\label{#3}
+  \par\endgroup\vspace{4pt}}
+\newcommand{\reporttable}[3]{%
+  \par\begingroup\centering\small
+  \renewcommand{\arraystretch}{1.08}
+  \captionof{table}{#2}\label{#3}
+  \input{#1}
+  \par\endgroup\vspace{4pt}}
 
 \begin{document}
+\thispagestyle{plain}
+{\huge\bfseries GR00T 渐进量化实验汇总}\par
+{\large Thor、AGX Orin 与 RTX 6000 Ada}\par
+{\small 整理：Ivy Lee\quad 数据截至 2026-10-14；仅整理已有实验，无新增测量。}
+\vspace{5pt}
 
-\maketitle
+\section{核心结论与可比性}
+\begin{enumerate}
+  \item \key{AGX 的性能收益最明显，但尚无闭环质量证据。}
+  候选投影全 W4A4 为 417.61\,ms；相对原始 BF16 加速 2.379 倍，
+  相对同辅助优化 BF16 加速 1.518 倍。两个分母必须分别报告。
+  \item \key{Ada 的量化增量收益很小。}
+  全 W4A4 为 46.079\,ms，相对同优化 BF16 的 46.517\,ms 仅减少 0.439\,ms（0.94\%）；
+  全 W8A8 反而更慢。单次有序扫描不足以证明稳定最优。
+  \item \key{Thor 已有性能与闭环结果，仍未证明质量等价。}
+  候选全 FP4 相对融合 BF16 加速 1.108 倍，但成功数由 19/30 降至 17/30。
+  T9 同为 19/30，逐回合仍有一次失去成功、一次新增成功。
+\end{enumerate}
 
-\section{Introduction}
+\subsection{为什么不能直接比较三台机器的延迟}
+\begin{center}\small
+\begin{tabularx}{\linewidth}{lXXX}
+\toprule
+维度 & Thor & RTX 6000 Ada & AGX Orin\\\midrule
+单次请求 & 新 VLM $\times1$；streaming DiT $\times1$ & 同 Thor 请求边界 & 串行官方 Flow：VLM $\times1$；DiT $\times4$\\
+量化范围 & 192 个 DiT Linear & 192 个 DiT Linear & 476 个候选投影，覆盖 VLM 和 DiT\\
+精度路径 & FP8 $\rightarrow$ FP4 & W8A8 $\rightarrow$ W4A4 & W8A8 $\rightarrow$ W4A4\\
+模型/输入 & Spatial checkpoint-500；固定观测 & 同 checkpoint，输入与 Thor 对齐 & 官方 libero\_spatial；task 0/3/7 三个观测\\
+质量证据 & 12 档共 360 回合初步闭环 & 固定输入动作偏差 & 三个固定输入动作偏差\\
+\bottomrule
+\end{tabularx}
+\end{center}
+“全 4-bit”只指各自的\key{候选层}全部采用 4-bit；不代表全模型量化。
+覆盖比例按候选层\key{数量}计，不是参数量或 FLOPs 比例。
+Ada 与 Thor 的输入和请求边界对齐，但整数/浮点量化格式、源码与实现不同，仍不是纯硬件对照。
+
+\subsection{端点数据：先固定加速比的分母}
+\reporttable{summary/endpoints.tex}{端点请求延迟（ms）与加速倍数；只在各自实验内解释}{tab:endpoints}
+\(S_{\rm total}=t_{\rm original\ BF16}/t_{\rm quant}\)，
+\(S_q=t_{\rm matched\ BF16}/t_{\rm quant}\)。
+同优化 BF16 保留量化配置共用的辅助执行优化，$S_q$ 衡量在此基础上换用量化配置的增量收益。
+Thor 仅有融合 BF16 对照，因此不填原始 BF16 与 $S_{\rm total}$。
+\source{T1、G1/G2、A1。}
+
+\clearpage
+\section{Thor：小幅加速，需要同时看闭环结果}
+\key{实验设置。}Thor SM110，Torch 2.10.0+cu130 / CUDA 13.0；
+32 个 DiT block 中 192 个候选 Linear 从 FP8 转为 FP4，VLM 与候选外层保持 BF16，保留融合和 DiT CUDA Graph。
+性能采样为三轮随机顺序；主图仅取\key{观测 EMC 3200\,MHz} 子集，并未锁频。
+
+\reportfigure{summary/thor_latency_quality.pdf}
+{Thor 性能与质量分别展示。左图为访问中位数的中位数，误差条为访问中位数 min--max；
+右图为每档相同 30 个 task/initial-state 对的描述性成功率。二者不是同一项实验的可相加指标。}
+{fig:thor}
+
+\reporttable{summary/thor_table.tex}
+{Thor 全部 12 档。$n/v$ 为纳入性能主图的调用数/访问数；$S_q$ 相对融合 BF16。
+失去/新增成功按相同初始状态与 BF16 配对；pp 表示百分点。}
+{tab:thor}
+
+\key{性能。}FP8 与 FP4 分别为 69.39、65.53\,ms；T7 本轮为 65.19\,ms，
+比全 FP4 的观测中位数略低。曲线非严格单调，各档没有重新充分调优，不能把最低观测点当作已验证最优。
+全 FP4 的独立 profile kernel 时长之和为 34.77\,ms（BF16 为 41.88\,ms），
+GEMM 族占比为 74.92\%（BF16 为 78.51\%）；profile 工作量不是请求墙钟延迟的分解。
+
+\key{质量。}每档为 LIBERO-Spatial 10 个任务 $\times$ 3 个固定初始状态；
+协议为 20\,Hz、视觉延迟 3 tick / 动作延迟 1 tick 的算法验证。
+FP8 比 BF16 少 4 次成功；FP4 少 2 次成功；T9 的总数相同但成功回合并不相同。
+每任务只有三个状态，\key{不能据此声称等价、非劣或 wall-clock 部署质量通过}。
+
+\source{T1/T2；360 条 clean 中纳入 247 条，180 份正式 profile 中纳入 122 份；
+另 36 份 dummy profile 排除。T3--T6 保留逐样本与逐回合记录。}
+
+\clearpage
+\section{AGX Orin：收益明显，质量验证仍缺失}
+\key{实验设置。}AGX Orin SM87，约 64\,GB 统一内存；MODE\_15W，
+GPU DVFS 未锁定，观测 306--408\,MHz。模型为官方 GR00T-N1.7-LIBERO 的 libero\_spatial；
+task 0/3/7 的固定真实观测，每次请求串行执行 VLM $\times1$、DiT $\times4$，含前后处理与动作解码。
+
+\reportfigure{summary/agx_latency_error.pdf}
+{AGX 的请求延迟与动作偏差。左图阴影为 12 条样本的 P25--P75；同优化 BF16 为 633.97\,ms，
+原始 BF16 为 993.51\,ms（数值见表，超出绘图区）。右图的相对 L2 是输出差异，不是成功率。}
+{fig:agx}
+
+\reporttable{summary/agx_table.tex}
+{AGX 两个 BF16 对照及 11 档量化。原始 BF16 有 144 个交错锚点；
+同优化 BF16 及每档量化各 12 个样本。分位数均来自原始调用样本。}
+{tab:agx}
+
+\key{性能收益来自两部分。}原始 BF16 到同优化 BF16 为 993.51 $\rightarrow$ 633.97\,ms，
+辅助优化本身加速 1.567 倍；此后全 W4A4 再加速 1.518 倍，合计 2.379 倍。
+共用优化包括 BF16 融合、原生视觉 RoPE，以及视觉/文本/DiT CUDA Graph。
+最低观测点为 T10，但正反扫描结果受测量窗口与 DVFS 影响，\key{不保证每个输入都达到 2.3 倍}。
+
+\key{量化覆盖与误差。}476 个候选投影按 Vision、text、视觉特征 transformer、DiT 等顺序累计切换；
+共享输入投影组整体切换，其余候选保持 W8A8，候选外与 attention QK/AV 保持 BF16。
+W4A4 用 $\alpha=0.5$ 逐通道激活平衡，仅 task 0 用于校准。
+全 W4A4 三个输入的相对 L2 为 0.7437/0.5724/0.4790，明显高于全 W8A8 的
+0.0210/0.0146/0.0195。\key{目前只支持性能结论，INT4 策略质量尚未验收}。
+
+\source{G1--G3。不含网络、控制队列与仿真推进；未测 rolling DiT 与异步 VLM 并发。}
+
+\clearpage
+\section{RTX 6000 Ada：完整调用的量化收益很小}
+\key{实验设置。}RTX 6000 Ada SM89，Torch 2.10.0+cu128 / CUDA 12.8 / cuDNN 91002；
+Spatial checkpoint-500，episode 0/frame 20、seed 42。
+仅量化 192 个 DiT Linear，VLM 与非候选模块保持 BF16，无校准或微调。
+每档先预热 3 次，再测 10 次；13 个配置共 130 条样本，只有一次顺序扫描。
+
+\reportfigure{summary/ada_latency_error.pdf}
+{Ada 的完整调用延迟与解码动作偏差。误差条为样本 P10--P90。
+MAE/RMSE 相对本轮同优化 BF16，比较 40$\times$7 连续动作（seed 42），不代表任务成功率。}
+{fig:ada}
+
+\reporttable{summary/ada_table.tex}
+{Ada 两个 BF16 对照与全部 11 档。GPU 工作量是另一次单调用 profile 的 kernel+transfer 时长之和，
+不能与墙钟延迟相加或相减求 CPU 时间。$S_q$ 相对同优化 BF16。}
+{tab:ada}
+
+\key{整体结果。}原始 BF16 到同优化 BF16 为 52.364 $\rightarrow$ 46.517\,ms（1.126 倍）；
+全 W8A8 为 47.876\,ms，比同优化 BF16 慢 1.359\,ms。
+全 W4A4 为 46.079\,ms，仅快 0.439\,ms（0.94\%，$S_q=1.010$）。
+因此，相对原始 BF16 的 1.136 倍不能全部归于量化。
+
+\key{起伏的证据与解释边界。}保存的独立审计显示：
+T5 $\rightarrow$ T6 墙钟中位数增加 1.878\,ms，但独立 profile GPU 工作量减少 0.069\,ms，
+\key{不支持用 W4 GPU kernel 变慢解释这次墙钟上升}。
+T7 $\rightarrow$ T8 则增加 64 个 DiT Graph kernel、GPU 工作量增加 0.354\,ms，
+可作为检查输入准备/分组成本的线索；具体因果仍需受控消融。
+
+\source{A1/A2；机制证据来自 A3 的既有审计。
+旧 Ada 约 10--11\,ms 图未在计时内执行新 VLM，且量化范围不同，未并入本报告。}
+
+\clearpage
+\section{如何解释结果，以及下一步先做什么}
+\subsection{性能降低不等于策略质量保持}
+Thor 是三组里唯一有闭环成功率的实验；AGX 的 relative L2 和 Ada 的 decoded MAE/RMSE
+只能诊断固定输入的输出变化，既不能互相换算，也不能替代闭环成功率。
+Thor 各任务的表现也不一致，不能只看汇总成功数。
+
+\reportfigure{summary/thor_task_heatmap.pdf}
+{Thor 全部 120 个配置/任务组合的原始成功计数，每格分母为相同三个固定初始状态。
+任务编号对应原始 LIBERO-Spatial task\_id；完整任务名保留在 T6 与生成清单中。}
+{fig:thor-tasks}
+
+\subsection{测量中必须保留的三个区别}
+\begin{enumerate}
+  \item \key{分位数和置信区间不同。}
+  AGX 用调用样本 P25--P75；Ada 用调用样本 P10--P90；Thor 先算每次访问的中位数，再算跨访问中位数及 min--max。
+  这些区间都不表示统计置信度。
+  \item \key{墙钟延迟和 GPU 工作量不同。}
+  曲线都以不带 profiler 的完整本地调用计时为准；GPU 工作量来自另一批 profile。
+  即使 GPU 工作量下降，也不能推断墙钟必然按同样幅度下降。
+  \item \key{一次调用和实际部署不同。}
+  当前延迟不含加载、编译、权重打包、Graph 捕获和预热；不是持续吞吐或机器人控制周期。
+  Thor 的固定延迟闭环不是按实测 wall-clock 时延驱动的部署验证。
+\end{enumerate}
+
+\subsection{建议优先级（整理者判断，不是既有实验结论）}
+\begin{enumerate}
+  \item \key{先补质量证据。}
+  AGX 全 W4A4 有较大固定输入动作偏差，应先做相同初始状态的闭环对照。
+  Thor 优先复测 T7/T9/FP4 与 BF16，并增加每任务初始状态数；T9 的 19/30 不能当作等价证据。
+  \item \key{再验证收益是否稳定。}
+  Ada 的 0.94\% 差异优先用随机顺序、多轮、多个观测复测；AGX 需在更可控的时钟/功耗条件下重复。
+  保留原始与同优化 BF16 两个对照。
+  \item \key{最后做针对性的系统消融。}
+  对 Ada T7/T8 检查共享输入分组、打包与复制成本，对 T5/T6 分别采集墙钟和同步执行证据；
+  跨平台结论先对齐模型、量化范围、请求边界和格式。
+\end{enumerate}
+
+\clearpage
+\section{数据索引与复现}\label{sec:sources}
+\key{原始数据全部保留。}正文列出全部配置，没有筛掉较慢档位；数值只为排版四舍五入。
+逐样本计时、逐任务与逐回合记录仍在原目录，完整精度可直接查 CSV。
+本文生成脚本重新核对计时统计、样本/访问数和 360 回合配对结果；这属于离线整理，不是新增模型实验。
+
+\subsection{三个数据目录}
+\begin{description}[leftmargin=12mm,style=nextline]
+  \item[T] \path{THOR/20261014_quality_complete/}
+  \item[G] \path{AGX/20261014_011851_agx_quantization_scan_summary/}数据/
+  \item[A] \path{ADA6000/20261013_complete_inference/}
+\end{description}
+A 目录文件统一带前缀 \path{20261013_213700_ada_}；下表用文件后缀简称。
+
+\begin{center}\footnotesize
+\begin{tabularx}{\linewidth}{lXrX}
+\toprule
+索引 & 文件（相对对应目录） & 行数 & 用途\\\midrule
+T1 & \path{thor_observed3200_summary.csv} & 12 & 性能中位数、访问范围、实际纳入样本数\\
+T2 & \path{thor_quality_modes_12.csv} & 12 & 每档成功率、BF16 配对得失\\
+T3 & \path{thor_clean_samples_360.csv} & 360 & clean 调用；主图纳入 247 条\\
+T4 & \path{thor_profiles_180.csv} & 180 & 独立正式 profile；主图纳入 122 份\\
+T5 & \path{thor_quality_episodes_360.csv} & 360 & 回合、初始状态指纹、配对结果\\
+T6 & \path{thor_quality_tasks_120.csv} & 120 & 任务名及每格成功数/3\\\midrule
+G1 & 渐进量化结果.csv & 11 & 每档延迟、分位数、加速比、三输入误差\\
+G2 & 实验配置与对照.csv & 13 & 原始/同优化 BF16 与逐项执行配置\\
+G3 & 稳定延迟样本.csv & 288 & 144 个原始锚点、12 个同优化 BF16、132 个量化调用\\\midrule
+A1 & \path{tiers.csv} & 13 & 延迟、分位数、profile 工作量与动作误差\\
+A2 & \path{raw_samples.csv} & 130 & 每档十次调用，含 VLM/DiT 调用次数\\
+A3 & \path{independent_audit.txt} & -- & 既有审计：W8A8 与 T6/T8 起伏证据及边界\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{原报告与复现边界}
+三份来源分别为 T 目录的 \path{thor_brief_report.txt}、AGX 汇总目录的 汇报.md、
+A 目录的 \path{20261013_213700_ada_completed_results.txt}。
+更早的 Thor 193/360 回合快照与 Ada 根目录旧计时曲线不作为本文结果。
+AGX 原始协议为正反序各一轮，每输入/配置/方向预热 3 次、计时 2 次；统计范围保留在 G2/G3。
+
+报告只提供已有输出与去私有路径的证据，不包含模型权重、观测张量或原始大 trace。
+AGX 的运行包含源码 HEAD 之外的工作区修改，不能只靠 HEAD 复现；
+Ada 的 CUTLASS 环境头文件有哈希，但 revision 未知，所选整数二进制归属未完全锁定。
+这些限制来自原报告/审计，不能将导出数据完整性等同于完整环境可复现。
+
+\subsection{重新生成本文图表}
+在项目目录执行 \texttt{python}\ \path{scripts/build_summary.py}，然后用 XeLaTeX 编译 \path{main.tex} 两次。
+生成的 \path{summary/} 包含四张矢量 PDF、四个完整数据表，以及输入文件 SHA256 清单
+\path{source_manifest.json}；图表不平滑、不强制单调、不补造质量值。
+Overleaf 直接读取已生成的图表，不需要运行 Python；编译器选择 \key{XeLaTeX}。
 
 \end{document}

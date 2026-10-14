@@ -1,0 +1,10 @@
+# Local build products; keep summary/*.pdf because they are source figures.
+/main.pdf
+/main.aux
+/main.log
+/main.out
+/main.toc
+/main.xdv
+/main.synctex.gz
+__pycache__/
+*.pyc
